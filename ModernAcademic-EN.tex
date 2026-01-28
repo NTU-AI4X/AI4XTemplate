@@ -1,0 +1,324 @@
+% ModernAcademic-EN Template Guide
+% A comprehensive guide and visual showcase of the template features.
+\documentclass[singlecolumn]{ModernAcademic-EN}
+
+% ============================================================================
+% REQUIRED PACKAGES (not included in the class)
+% ============================================================================
+\usepackage{lipsum}       % Placeholder text
+\usepackage{siunitx}      % Units and numbers
+\usepackage{amsfonts}     % Additional math fonts
+\usepackage{mathtools}    % Enhanced math support
+\usepackage{booktabs}     % Professional tables
+\usepackage{listings}     % Code listings
+\lstset{
+    basicstyle=\ttfamily\small,
+    columns=fullflexible,
+    keepspaces=true,
+    showstringspaces=false,
+    upquote=true,
+    frame=single,
+    backgroundcolor=\color{abstractbg},
+}
+\usepackage{algorithm}
+\usepackage{algpseudocode}
+\usepackage{tikz}
+\usetikzlibrary{positioning,arrows.meta}
+
+% Bibliography file
+% \bibliography{references}  % Used at end of document
+
+% ============================================================================
+% THEME CONFIGURATION
+% ============================================================================
+% \setthemecolor{RRGGBB} - Set the primary theme color (hex or RGB format)
+% Default: 1a2a6c (deep blue)
+% Examples:
+%   \setthemecolor{b91c1c}     % Red theme
+%   \setthemecolor{185,28,28}  % Same red in RGB format
+\setthemecolor{1a2a6c}
+
+% ============================================================================
+% TITLE AREA CONFIGURATION
+% ============================================================================
+% \settitlepreskip{length} - Space above the logo/title area
+% Default: 0pt
+\settitlepreskip{1ex}
+
+% \settitlelogogap{length} - Gap between logo and title
+% Default: 0.3em
+\settitlelogogap{0.8em}
+
+% \titlelogocontent{content} - Define logo content (image or TikZ)
+% Examples:
+%   \titlelogocontent{\includegraphics[height=1.5cm]{logo.png}}
+%   \titlelogocontent{\begin{tikzpicture}...\end{tikzpicture}}
+\titlelogocontent{\includegraphics[height=1.5cm]{assets/logo.png}}
+
+% ============================================================================
+% LOGO POSITION SWITCHES (all hidden by default)
+% ============================================================================
+% \showlogointitle   - Show logo centered above the title
+% \showlogoinheader  - Show logo in the first page header (right side)
+% \showlogoinabstract - Show logo in the abstract box (bottom-right corner)
+\showlogointitle
+\showlogoinheader
+\showlogoinabstract
+
+% ============================================================================
+% SOCIAL LINKS (shown in abstract box bottom-left)
+% ============================================================================
+% \addsociallink{icon}{text}{url}
+% Available icons: \faGithub, \faGlobe, \faTwitter, \faLinkedin, etc.
+\addsociallink{\faGithub}{Code}{https://github.com/user/repo}
+\addsociallink{\faGlobe}{Project}{https://example.com/project}
+
+% ============================================================================
+% DOCUMENT METADATA
+% ============================================================================
+\title{ModernAcademic-EN Template Guide}
+\author{Author A\textsuperscript{1}, Author B\textsuperscript{2}}
+\shorttitle{ModernAcademic-EN Guide}
+\shortauthor{A. Author et~al.}
+\affiliation{\textsuperscript{1}University A, \textsuperscript{2}Institute B}
+\email{author@example.org}
+\keywords{LaTeX template, academic paper, documentation}
+
+\abstract{This document demonstrates all features of the ModernAcademic-EN class. It serves as both a user guide showing available configuration options and a visual reference for the template's typesetting capabilities. The template supports flexible theme colors, customizable logo positions, social links, and professional academic formatting including theorems, figures, tables, algorithms, and bibliography management.}
+
+\begin{document}
+
+\maketitle
+
+% ============================================================================
+\section{Quick Start}
+% ============================================================================
+
+To use this template, create a new \texttt{.tex} file with the following minimal structure:
+
+\begin{lstlisting}[language=TeX,caption={Minimal document structure}]
+\documentclass[singlecolumn]{ModernAcademic-EN}
+
+\title{Your Paper Title}
+\author{Author Name}
+\abstract{Your abstract text...}
+
+\begin{document}
+\maketitle
+\section{Introduction}
+Your content here...
+\bibliography{references}
+\end{document}
+\end{lstlisting}
+
+\subsection{Class Options}
+The class supports two layout options:
+\begin{itemize}
+    \item \texttt{singlecolumn} (default) --- Standard single-column layout with 11pt font
+    \item \texttt{twocolumn} --- Two-column layout with 10pt font for conference papers
+\end{itemize}
+
+% ============================================================================
+\section{Theme Customization}
+\label{sec:theme}
+% ============================================================================
+
+\subsection{Primary Theme Color}
+Use \verb|\setthemecolor{color}| to change the primary accent color used for titles, section headings, and links. The color can be specified in hexadecimal or RGB format:
+
+\begin{lstlisting}[language=TeX]
+\setthemecolor{1a2a6c}      % Hex format (default blue)
+\setthemecolor{185,28,28}   % RGB format (red)
+\end{lstlisting}
+
+\subsection{Additional Color Settings}
+Fine-tune individual element colors:
+\begin{lstlisting}[language=TeX]
+\setlinkcolor{0000FF}   % Internal links
+\setcitecolor{2d5a27}   % Citation links
+\seturlcolor{5c3566}    % External URL links
+\end{lstlisting}
+
+% ============================================================================
+\section{Logo Configuration}
+\label{sec:logo}
+% ============================================================================
+
+The template supports displaying a logo in three independent positions. Each position can be enabled or disabled separately.
+
+\subsection{Defining Logo Content}
+\begin{lstlisting}[language=TeX]
+% Using an image file
+\titlelogocontent{\includegraphics[height=1.5cm]{logo.png}}
+
+% Using TikZ graphics
+\titlelogocontent{%
+  \begin{tikzpicture}
+    % Your TikZ code here
+  \end{tikzpicture}%
+}
+\end{lstlisting}
+
+\subsection{Logo Position Switches}
+\begin{table}[htbp]
+    \centering
+    \caption{Logo position commands}
+    \label{tab:logo-positions}
+    \begin{tabular}{lll}
+        \toprule
+        Command                    & Position                    & Default \\
+        \midrule
+        \verb|\showlogointitle|    & Centered above title        & Hidden  \\
+        \verb|\showlogoinheader|   & First page header (right)   & Hidden  \\
+        \verb|\showlogoinabstract| & Abstract box (bottom-right) & Hidden  \\
+        \bottomrule
+    \end{tabular}
+\end{table}
+
+% ============================================================================
+\section{Mathematical Typesetting}
+\label{sec:math}
+% ============================================================================
+
+The template loads \texttt{amsmath}, \texttt{amssymb}, and \texttt{amsthm} for comprehensive math support.
+
+\subsection{Equations}
+Inline math: $E = mc^2$, $\sum_{i=1}^{n} x_i$. Display equations with automatic numbering:
+
+\begin{equation}
+    \mathcal{L}(\theta) = \mathbb{E}_{x \sim p_{\text{data}}} \left[ \log p_\theta(x) \right]
+    \label{eq:likelihood}
+\end{equation}
+
+Aligned equations:
+\begin{align}
+    H(X)   & = -\sum_{x} p(x) \log p(x) \label{eq:entropy} \\
+    I(X;Y) & = H(X) - H(X|Y) \label{eq:mi}
+\end{align}
+
+Cross-reference: \cref{eq:entropy} shows the entropy definition.
+
+\subsection{Theorem Environments}
+The following environments are pre-defined:
+
+\begin{theorem}[Bayes' Theorem]
+    \label{thm:bayes}
+    For events $A$ and $B$ with $P(B) > 0$:
+    \[ P(A|B) = \frac{P(B|A) \cdot P(A)}{P(B)} \]
+\end{theorem}
+
+\begin{lemma}
+    \label{lem:example}
+    \lipsum[1][1-2]
+\end{lemma}
+
+\begin{definition}[Convex Function]
+    A function $f: \mathbb{R}^n \to \mathbb{R}$ is convex if for all $x, y$ and $\lambda \in [0,1]$:
+    \[ f(\lambda x + (1-\lambda)y) \leq \lambda f(x) + (1-\lambda) f(y) \]
+\end{definition}
+
+\begin{proof}
+    The proof follows directly from the definition. \lipsum[2][1]
+\end{proof}
+
+\begin{remark}
+    Additional theorem-like environments include \texttt{corollary}, \texttt{proposition}, and \texttt{example}.
+\end{remark}
+
+% ============================================================================
+\section{Figures and Tables}
+\label{sec:floats}
+% ============================================================================
+
+\subsection{Figures with Subfigures}
+\begin{figure}[htbp]
+    \centering
+    \begin{subfigure}{0.48\linewidth}
+        \centering
+        \begin{tikzpicture}
+            \fill[academicblue!20] (0,0) rectangle (3,2);
+            \node at (1.5,1) {Subfigure A};
+        \end{tikzpicture}
+        \caption{First subfigure}
+        \label{fig:sub-a}
+    \end{subfigure}\hfill
+    \begin{subfigure}{0.48\linewidth}
+        \centering
+        \begin{tikzpicture}
+            \fill[citegreen!20] (0,0) rectangle (3,2);
+            \node at (1.5,1) {Subfigure B};
+        \end{tikzpicture}
+        \caption{Second subfigure}
+        \label{fig:sub-b}
+    \end{subfigure}
+    \caption{Example figure with two subfigures using \texttt{subcaption} package.}
+    \label{fig:example}
+\end{figure}
+
+\subsection{Professional Tables}
+\begin{table}[htbp]
+    \centering
+    \caption{Example table using \texttt{booktabs} for professional formatting}
+    \label{tab:example}
+    \begin{tabular}{lccc}
+        \toprule
+        Method   & Precision     & Recall        & F1 Score      \\
+        \midrule
+        Baseline & 0.82          & 0.78          & 0.80          \\
+        Proposed & \textbf{0.91} & \textbf{0.88} & \textbf{0.89} \\
+        \bottomrule
+    \end{tabular}
+\end{table}
+
+% ============================================================================
+\section{Algorithms and Code}
+\label{sec:code}
+% ============================================================================
+
+\subsection{Pseudocode}
+\begin{algorithm}[htbp]
+    \caption{Example algorithm using \texttt{algpseudocode}}
+    \label{alg:example}
+    \begin{algorithmic}[1]
+        \Procedure{TrainModel}{$\mathcal{D}, \theta_0, \eta$}
+        \State $\theta \gets \theta_0$
+        \While{not converged}
+        \State $\mathcal{B} \gets$ \Call{SampleBatch}{$\mathcal{D}$}
+        \State $g \gets \nabla_\theta \mathcal{L}(\theta; \mathcal{B})$
+        \State $\theta \gets \theta - \eta \cdot g$
+        \EndWhile
+        \State \Return $\theta$
+        \EndProcedure
+    \end{algorithmic}
+\end{algorithm}
+
+\subsection{Code Listings}
+\begin{lstlisting}[language=Python,caption={Python code example}]
+def train_step(model, batch, optimizer):
+    loss = model.compute_loss(batch)
+    loss.backward()
+    optimizer.step()
+    return loss.item()
+\end{lstlisting}
+
+% ============================================================================
+\section{Citations and Bibliography}
+\label{sec:bib}
+% ============================================================================
+
+The template uses \texttt{natbib} for citation management. Citation examples: single cite \cite{shannon1948mathematical}, multiple cites \cite{balle2017endtoend, cheng2020learned}.
+
+To compile with bibliography:
+\begin{lstlisting}[language=bash,caption={Compilation commands}]
+pdflatex document.tex
+bibtex document
+pdflatex document.tex
+pdflatex document.tex
+\end{lstlisting}
+
+\section{Conclusion}
+This guide covered the main features of the ModernAcademic-EN template. For questions or contributions, please visit the project repository.
+
+\bibliography{references}
+
+\end{document}

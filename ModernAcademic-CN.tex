@@ -1,0 +1,324 @@
+% ModernAcademic-CN 模板使用指南
+% 模板功能说明与可视化展示
+\documentclass[singlecolumn]{ModernAcademic-CN}
+
+% ============================================================================
+% 必需宏包（类文件中未包含）
+% ============================================================================
+\usepackage{zhlipsum}     % 中文占位文本
+\usepackage{siunitx}      % 单位和数字
+\usepackage{amsfonts}     % 额外数学字体
+\usepackage{mathtools}    % 增强数学支持
+\usepackage{booktabs}     % 专业表格
+\usepackage{listings}     % 代码清单
+\lstset{
+    basicstyle=\ttfamily\small,
+    columns=fullflexible,
+    keepspaces=true,
+    showstringspaces=false,
+    upquote=true,
+    frame=single,
+    backgroundcolor=\color{abstractbg},
+}
+\usepackage{algorithm}
+\usepackage{algpseudocode}
+\usepackage{tikz}
+\usetikzlibrary{positioning,arrows.meta}
+
+% 参考文献文件
+% \bibliography{references}  % 在文档末尾使用
+
+% ============================================================================
+% 主题配置
+% ============================================================================
+% \setthemecolor{RRGGBB} - 设置主题色（十六进制或RGB格式）
+% 默认值：1a2a6c（深蓝色）
+% 示例：
+%   \setthemecolor{b91c1c}     % 红色主题
+%   \setthemecolor{185,28,28}  % RGB格式的红色
+\setthemecolor{1a2a6c}
+
+% ============================================================================
+% 标题区域配置
+% ============================================================================
+% \settitlepreskip{长度} - Logo/标题区域上方的间距
+% 默认值：0pt
+\settitlepreskip{1ex}
+
+% \settitlelogogap{长度} - Logo与标题之间的间距
+% 默认值：0.3em
+\settitlelogogap{0.8em}
+
+% \titlelogocontent{内容} - 定义Logo内容（图片或TikZ）
+% 示例：
+%   \titlelogocontent{\includegraphics[height=1.5cm]{logo.png}}
+%   \titlelogocontent{\begin{tikzpicture}...\end{tikzpicture}}
+\titlelogocontent{\includegraphics[height=1.5cm]{assets/logo.png}}
+
+% ============================================================================
+% Logo 位置开关（默认全部隐藏）
+% ============================================================================
+% \showlogointitle   - 在标题上方居中显示Logo
+% \showlogoinheader  - 在首页页眉右侧显示Logo
+% \showlogoinabstract - 在摘要框右下角显示Logo
+\showlogointitle
+\showlogoinheader
+\showlogoinabstract
+
+% ============================================================================
+% 社交链接（显示在摘要框左下角）
+% ============================================================================
+% \addsociallink{图标}{文字}{链接}
+% 可用图标：\faGithub、\faGlobe、\faTwitter、\faLinkedin 等
+\addsociallink{\faGithub}{代码仓库}{https://github.com/user/repo}
+\addsociallink{\faGlobe}{项目主页}{https://example.com/project}
+
+% ============================================================================
+% 文档元信息
+% ============================================================================
+\title{ModernAcademic-CN 模板使用指南}
+\author{作者甲\textsuperscript{1}，作者乙\textsuperscript{2}}
+\shorttitle{ModernAcademic-CN 指南}
+\shortauthor{作者甲\ 等}
+\affiliation{\textsuperscript{1}某大学，\textsuperscript{2}某研究所}
+\email{author@example.org}
+\keywords{LaTeX 模板、学术论文、中文排版}
+
+\abstract{本文档展示 ModernAcademic-CN 类的全部功能。它既是配置选项的用户指南，也是模板排版效果的可视化参考。模板支持灵活的主题颜色、可自定义的Logo位置、社交链接，以及专业的学术格式化功能，包括定理环境、图表、算法和参考文献管理。本模板基于 ctex 宏包构建，支持完整的中文排版，需要使用 XeLaTeX 编译。}
+
+\begin{document}
+
+\maketitle
+
+% ============================================================================
+\section{快速开始}
+% ============================================================================
+
+使用此模板，创建一个新的 \texttt{.tex} 文件，包含以下最小结构：
+
+\begin{lstlisting}[language=TeX,caption={最小文档结构}]
+\documentclass[singlecolumn]{ModernAcademic-CN}
+
+\title{您的论文标题}
+\author{作者姓名}
+\abstract{摘要内容...}
+
+\begin{document}
+\maketitle
+\section{引言}
+正文内容...
+\bibliography{references}
+\end{document}
+\end{lstlisting}
+
+\subsection{类选项}
+类文件支持两种布局选项：
+\begin{itemize}
+    \item \texttt{singlecolumn}（默认）——标准单栏布局，小四号字体
+    \item \texttt{twocolumn}——双栏布局，五号字体，适用于会议论文
+\end{itemize}
+
+\subsection{编译方式}
+\begin{lstlisting}[language=bash,caption={编译命令}]
+xelatex document.tex
+bibtex document
+xelatex document.tex
+xelatex document.tex
+\end{lstlisting}
+
+% ============================================================================
+\section{主题自定义}
+\label{sec:theme}
+% ============================================================================
+
+\subsection{主题色}
+使用 \verb|\setthemecolor{颜色}| 更改标题、章节标题和链接使用的主色调。颜色可以用十六进制或RGB格式指定：
+
+\begin{lstlisting}[language=TeX]
+\setthemecolor{1a2a6c}      % 十六进制格式（默认蓝色）
+\setthemecolor{185,28,28}   % RGB格式（红色）
+\end{lstlisting}
+
+\subsection{其他颜色设置}
+可以单独调整各元素的颜色：
+\begin{lstlisting}[language=TeX]
+\setlinkcolor{0000FF}   % 内部链接
+\setcitecolor{2d5a27}   % 引用链接
+\seturlcolor{5c3566}    % 外部URL链接
+\end{lstlisting}
+
+% ============================================================================
+\section{Logo 配置}
+\label{sec:logo}
+% ============================================================================
+
+模板支持在三个独立位置显示Logo，每个位置可以单独启用或禁用。
+
+\subsection{定义Logo内容}
+\begin{lstlisting}[language=TeX]
+% 使用图片文件
+\titlelogocontent{\includegraphics[height=1.5cm]{logo.png}}
+
+% 使用TikZ绘制
+\titlelogocontent{%
+  \begin{tikzpicture}
+    % TikZ代码
+  \end{tikzpicture}%
+}
+\end{lstlisting}
+
+\subsection{Logo位置开关}
+\begin{table}[htbp]
+    \centering
+    \caption{Logo位置命令}
+    \label{tab:logo-positions}
+    \begin{tabular}{lll}
+        \toprule
+        命令 & 位置 & 默认状态 \\
+        \midrule
+        \verb|\showlogointitle| & 标题上方居中 & 隐藏 \\
+        \verb|\showlogoinheader| & 首页页眉右侧 & 隐藏 \\
+        \verb|\showlogoinabstract| & 摘要框右下角 & 隐藏 \\
+        \bottomrule
+    \end{tabular}
+\end{table}
+
+% ============================================================================
+\section{数学排版}
+\label{sec:math}
+% ============================================================================
+
+模板加载了 \texttt{amsmath}、\texttt{amssymb} 和 \texttt{amsthm} 以提供完整的数学支持。
+
+\subsection{公式}
+行内公式：$E = mc^2$，$\sum_{i=1}^{n} x_i$。行间公式自动编号：
+
+\begin{equation}
+    \mathcal{L}(\theta) = \mathbb{E}_{x \sim p_{\text{data}}} \left[ \log p_\theta(x) \right]
+    \label{eq:likelihood}
+\end{equation}
+
+对齐公式：
+\begin{align}
+    H(X) &= -\sum_{x} p(x) \log p(x) \label{eq:entropy} \\
+    I(X;Y) &= H(X) - H(X|Y) \label{eq:mi}
+\end{align}
+
+交叉引用：\cref{eq:entropy}展示了熵的定义。
+
+\subsection{定理环境}
+以下环境已预定义：
+
+\begin{theorem}[贝叶斯定理]
+    \label{thm:bayes}
+    对于事件 $A$ 和 $B$，若 $P(B) > 0$：
+    \[ P(A|B) = \frac{P(B|A) \cdot P(A)}{P(B)} \]
+\end{theorem}
+
+\begin{lemma}
+    \label{lem:example}
+    这是一个示例引理，用于展示模板中引理环境的排版效果。
+\end{lemma}
+
+\begin{definition}[凸函数]
+    函数 $f: \mathbb{R}^n \to \mathbb{R}$ 是凸的，当且仅当对所有 $x, y$ 和 $\lambda \in [0,1]$：
+    \[ f(\lambda x + (1-\lambda)y) \leq \lambda f(x) + (1-\lambda) f(y) \]
+\end{definition}
+
+\begin{proof}
+    证明直接由定义得出。这里显示证明环境的排版效果。
+\end{proof}
+
+\begin{remark}
+    其他类定理环境包括 \texttt{corollary}（推论）、\texttt{proposition}（命题）和 \texttt{example}（例）。
+\end{remark}
+
+% ============================================================================
+\section{图表}
+\label{sec:floats}
+% ============================================================================
+
+\subsection{带子图的图形}
+\begin{figure}[htbp]
+    \centering
+    \begin{subfigure}{0.48\linewidth}
+        \centering
+        \begin{tikzpicture}
+            \fill[academicblue!20] (0,0) rectangle (3,2);
+            \node at (1.5,1) {子图 A};
+        \end{tikzpicture}
+        \caption{第一个子图}
+        \label{fig:sub-a}
+    \end{subfigure}\hfill
+    \begin{subfigure}{0.48\linewidth}
+        \centering
+        \begin{tikzpicture}
+            \fill[citegreen!20] (0,0) rectangle (3,2);
+            \node at (1.5,1) {子图 B};
+        \end{tikzpicture}
+        \caption{第二个子图}
+        \label{fig:sub-b}
+    \end{subfigure}
+    \caption{使用 \texttt{subcaption} 宏包的示例图形。}
+    \label{fig:example}
+\end{figure}
+
+\subsection{专业表格}
+\begin{table}[htbp]
+    \centering
+    \caption{使用 \texttt{booktabs} 的专业格式表格}
+    \label{tab:example}
+    \begin{tabular}{lccc}
+        \toprule
+        方法 & 精确率 & 召回率 & F1分数 \\
+        \midrule
+        基线方法 & 0.82 & 0.78 & 0.80 \\
+        本文方法 & \textbf{0.91} & \textbf{0.88} & \textbf{0.89} \\
+        \bottomrule
+    \end{tabular}
+\end{table}
+
+% ============================================================================
+\section{算法与代码}
+\label{sec:code}
+% ============================================================================
+
+\subsection{伪代码}
+\begin{algorithm}[htbp]
+    \caption{使用 \texttt{algpseudocode} 的示例算法}
+    \label{alg:example}
+    \begin{algorithmic}[1]
+        \Procedure{训练模型}{$\mathcal{D}, \theta_0, \eta$}
+        \State $\theta \gets \theta_0$
+        \While{未收敛}
+            \State $\mathcal{B} \gets$ \Call{采样批次}{$\mathcal{D}$}
+            \State $g \gets \nabla_\theta \mathcal{L}(\theta; \mathcal{B})$
+            \State $\theta \gets \theta - \eta \cdot g$
+        \EndWhile
+        \State \Return $\theta$
+        \EndProcedure
+    \end{algorithmic}
+\end{algorithm}
+
+\subsection{代码清单}
+\begin{lstlisting}[language=Python,caption={Python代码示例}]
+def train_step(model, batch, optimizer):
+    loss = model.compute_loss(batch)
+    loss.backward()
+    optimizer.step()
+    return loss.item()
+\end{lstlisting}
+
+% ============================================================================
+\section{引用与参考文献}
+\label{sec:bib}
+% ============================================================================
+
+模板使用 \texttt{natbib} 和 \texttt{gbt7714} 宏包，采用国标格式。引用示例：单个引用~\cite{shannon1948mathematical}，多个引用~\cite{balle2017endtoend, cheng2020learned}。
+
+\section{结论}
+本指南介绍了 ModernAcademic-CN 模板的主要功能。如有问题或建议，请访问项目仓库。
+
+\bibliography{references}
+
+\end{document}
