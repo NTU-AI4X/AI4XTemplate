@@ -136,6 +136,8 @@
 % --- Bibliography ---
 \RequirePackage[numbers,sort&compress]{natbib}
 \bibliographystyle{unsrtnat}
+\renewcommand{\bibfont}{\small\setstretch{1.0}}
+\setlength{\bibsep}{0.8ex plus 0.2ex minus 0.1ex}
 
 % --- Header and Footer ---
 \RequirePackage{fancyhdr}

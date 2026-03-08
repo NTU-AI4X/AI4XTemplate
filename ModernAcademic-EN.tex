@@ -22,8 +22,8 @@
 }
 \usepackage{algorithm}
 \usepackage{algpseudocode}
-\usepackage{tikz}
-\usetikzlibrary{positioning,arrows.meta}
+% \usepackage{tikz}
+% \usetikzlibrary{positioning,arrows.meta}
 
 % Bibliography file
 % \bibliography{references}  % Used at end of document
@@ -84,7 +84,10 @@
 \email{author@example.org}
 \keywords{LaTeX template, academic paper, documentation}
 
-\abstract{This document demonstrates all features of the ModernAcademic-EN class. It serves as both a user guide showing available configuration options and a visual reference for the template's typesetting capabilities. The template supports flexible theme colors, customizable logo positions, social links, and professional academic formatting including theorems, figures, tables, algorithms, and bibliography management.}
+\abstract{This document demonstrates all features of the ModernAcademic-EN class.
+It serves as both a user guide showing available configuration options and a visual reference for the template's typesetting capabilities.
+The template supports flexible theme colors, customizable logo positions, social links, and professional academic formatting including theorems, figures, tables, algorithms, and bibliography management.
+This template is built for English typesetting and requires pdfLaTeX to compile.}
 
 \begin{document}
 
@@ -107,6 +110,7 @@ To use this template, create a new \texttt{.tex} file with the following minimal
 \maketitle
 \section{Introduction}
 Your content here...
+\lipsum[1][1-2]
 \bibliography{references}
 \end{document}
 \end{lstlisting}
@@ -115,8 +119,16 @@ Your content here...
 The class supports two layout options:
 \begin{itemize}
     \item \texttt{singlecolumn} (default) --- Standard single-column layout with 11pt font
-    \item \texttt{twocolumn} --- Two-column layout with 10pt font for conference papers
+    \item \texttt{twocolumn} --- Two-column layout with 10pt font
 \end{itemize}
+
+\subsection{Compilation Methods}
+\begin{lstlisting}[language=bash,caption={Compilation commands}]
+pdflatex document.tex
+bibtex document
+pdflatex document.tex
+pdflatex document.tex
+\end{lstlisting}
 
 % ============================================================================
 \section{Theme Customization}
@@ -124,7 +136,8 @@ The class supports two layout options:
 % ============================================================================
 
 \subsection{Primary Theme Color}
-Use \verb|\setthemecolor{color}| to change the primary accent color used for titles, section headings, and links. The color can be specified in hexadecimal or RGB format:
+Use \verb|\setthemecolor{color}| to change the primary accent color used for titles, section headings, and links.
+The color can be specified in hexadecimal or RGB format:
 
 \begin{lstlisting}[language=TeX]
 \setthemecolor{1a2a6c}      % Hex format (default blue)
@@ -144,7 +157,8 @@ Fine-tune individual element colors:
 \label{sec:logo}
 % ============================================================================
 
-The template supports displaying a logo in three independent positions. Each position can be enabled or disabled separately.
+The template supports displaying a logo in three independent positions.
+Each position can be enabled or disabled separately.
 
 \subsection{Defining Logo Content}
 \begin{lstlisting}[language=TeX]
@@ -209,6 +223,7 @@ The following environments are pre-defined:
 
 \begin{lemma}
     \label{lem:example}
+    This is an example lemma to demonstrate the typesetting of the lemma environment.
     \lipsum[1][1-2]
 \end{lemma}
 
@@ -218,7 +233,9 @@ The following environments are pre-defined:
 \end{definition}
 
 \begin{proof}
-    The proof follows directly from the definition. \lipsum[2][1]
+    The proof follows directly from the definition.
+    This shows the typesetting of the proof environment.
+    \lipsum[2][1]
 \end{proof}
 
 \begin{remark}
@@ -306,19 +323,14 @@ def train_step(model, batch, optimizer):
 \label{sec:bib}
 % ============================================================================
 
-The template uses \texttt{natbib} for citation management. Citation examples: single cite \cite{shannon1948mathematical}, multiple cites \cite{balle2017endtoend, cheng2020learned}.
-
-To compile with bibliography:
-\begin{lstlisting}[language=bash,caption={Compilation commands}]
-pdflatex document.tex
-bibtex document
-pdflatex document.tex
-pdflatex document.tex
-\end{lstlisting}
+The template uses \texttt{natbib} for citation management.
+Citation examples: single cite \cite{shannon1948mathematical}, multiple cites \cite{balle2017endtoend, cheng2020learned}.
 
 \section{Conclusion}
-This guide covered the main features of the ModernAcademic-EN template. For questions or contributions, please visit the project repository.
+This guide covered the main features of the ModernAcademic-EN template.
+For questions or contributions, please visit the project repository.
 
+{\small
 \bibliography{references}
-
+}
 \end{document}

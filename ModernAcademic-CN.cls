@@ -23,9 +23,9 @@
 
 % 加载基础类 (ctexart 提供完整中文支持)
 \if@twocol
-  \LoadClass[a4paper,10pt,twocolumn,zihao=-4]{ctexart}
+  \LoadClass[a4paper,10pt,twocolumn]{ctexart}
 \else
-  \LoadClass[a4paper,zihao=-4]{ctexart}
+  \LoadClass[a4paper,11pt]{ctexart}
 \fi
 
 %% ============================================================================
@@ -142,6 +142,8 @@
 \RequirePackage{natbib}
 \RequirePackage{gbt7714}
 \bibliographystyle{gbt7714-numerical}
+\renewcommand{\bibfont}{\small\setstretch{1.0}}
+\setlength{\bibsep}{0.8ex plus 0.2ex minus 0.1ex}
 
 % --- 页眉页脚 ---
 \RequirePackage{fancyhdr}

@@ -22,8 +22,8 @@
 }
 \usepackage{algorithm}
 \usepackage{algpseudocode}
-\usepackage{tikz}
-\usetikzlibrary{positioning,arrows.meta}
+% \usepackage{tikz}
+% \usetikzlibrary{positioning,arrows.meta}
 
 % 参考文献文件
 % \bibliography{references}  % 在文档末尾使用
@@ -84,7 +84,10 @@
 \email{author@example.org}
 \keywords{LaTeX 模板、学术论文、中文排版}
 
-\abstract{本文档展示 ModernAcademic-CN 类的全部功能。它既是配置选项的用户指南，也是模板排版效果的可视化参考。模板支持灵活的主题颜色、可自定义的Logo位置、社交链接，以及专业的学术格式化功能，包括定理环境、图表、算法和参考文献管理。本模板基于 ctex 宏包构建，支持完整的中文排版，需要使用 XeLaTeX 编译。}
+\abstract{本文档展示 ModernAcademic-CN 类的全部功能。
+它既是配置选项的用户指南，也是模板排版效果的可视化参考。
+模板支持灵活的主题颜色、可自定义的Logo位置、社交链接，以及专业的学术格式化功能，包括定理环境、图表、算法和参考文献管理。
+本模板基于 ctex 宏包构建，支持完整的中文排版，需要使用 XeLaTeX 编译。}
 
 \begin{document}
 
@@ -107,6 +110,7 @@
 \maketitle
 \section{引言}
 正文内容...
+\zhlipsum[1]
 \bibliography{references}
 \end{document}
 \end{lstlisting}
@@ -114,8 +118,8 @@
 \subsection{类选项}
 类文件支持两种布局选项：
 \begin{itemize}
-    \item \texttt{singlecolumn}（默认）——标准单栏布局，小四号字体
-    \item \texttt{twocolumn}——双栏布局，五号字体，适用于会议论文
+    \item \texttt{singlecolumn}（默认）——标准单栏布局，11pt 字体
+    \item \texttt{twocolumn}——双栏布局，10pt 字体
 \end{itemize}
 
 \subsection{编译方式}
@@ -132,7 +136,8 @@ xelatex document.tex
 % ============================================================================
 
 \subsection{主题色}
-使用 \verb|\setthemecolor{颜色}| 更改标题、章节标题和链接使用的主色调。颜色可以用十六进制或RGB格式指定：
+使用 \verb|\setthemecolor{颜色}| 更改标题、章节标题和链接使用的主色调。
+颜色可以用十六进制或RGB格式指定：
 
 \begin{lstlisting}[language=TeX]
 \setthemecolor{1a2a6c}      % 十六进制格式（默认蓝色）
@@ -152,7 +157,8 @@ xelatex document.tex
 \label{sec:logo}
 % ============================================================================
 
-模板支持在三个独立位置显示Logo，每个位置可以单独启用或禁用。
+模板支持在三个独立位置显示Logo。
+每个位置可以单独启用或禁用。
 
 \subsection{定义Logo内容}
 \begin{lstlisting}[language=TeX]
@@ -174,11 +180,11 @@ xelatex document.tex
     \label{tab:logo-positions}
     \begin{tabular}{lll}
         \toprule
-        命令 & 位置 & 默认状态 \\
+        命令                         & 位置     & 默认状态 \\
         \midrule
-        \verb|\showlogointitle| & 标题上方居中 & 隐藏 \\
-        \verb|\showlogoinheader| & 首页页眉右侧 & 隐藏 \\
-        \verb|\showlogoinabstract| & 摘要框右下角 & 隐藏 \\
+        \verb|\showlogointitle|    & 标题上方居中 & 隐藏   \\
+        \verb|\showlogoinheader|   & 首页页眉右侧 & 隐藏   \\
+        \verb|\showlogoinabstract| & 摘要框右下角 & 隐藏   \\
         \bottomrule
     \end{tabular}
 \end{table}
@@ -191,7 +197,8 @@ xelatex document.tex
 模板加载了 \texttt{amsmath}、\texttt{amssymb} 和 \texttt{amsthm} 以提供完整的数学支持。
 
 \subsection{公式}
-行内公式：$E = mc^2$，$\sum_{i=1}^{n} x_i$。行间公式自动编号：
+行内公式：$E = mc^2$，$\sum_{i=1}^{n} x_i$。
+行间公式自动编号：
 
 \begin{equation}
     \mathcal{L}(\theta) = \mathbb{E}_{x \sim p_{\text{data}}} \left[ \log p_\theta(x) \right]
@@ -200,8 +207,8 @@ xelatex document.tex
 
 对齐公式：
 \begin{align}
-    H(X) &= -\sum_{x} p(x) \log p(x) \label{eq:entropy} \\
-    I(X;Y) &= H(X) - H(X|Y) \label{eq:mi}
+    H(X)   & = -\sum_{x} p(x) \log p(x) \label{eq:entropy} \\
+    I(X;Y) & = H(X) - H(X|Y) \label{eq:mi}
 \end{align}
 
 交叉引用：\cref{eq:entropy}展示了熵的定义。
@@ -218,6 +225,7 @@ xelatex document.tex
 \begin{lemma}
     \label{lem:example}
     这是一个示例引理，用于展示模板中引理环境的排版效果。
+    \zhlipsum[1]
 \end{lemma}
 
 \begin{definition}[凸函数]
@@ -226,7 +234,9 @@ xelatex document.tex
 \end{definition}
 
 \begin{proof}
-    证明直接由定义得出。这里显示证明环境的排版效果。
+    证明直接由定义得出。
+    这里显示证明环境的排版效果。
+    \zhlipsum[1]
 \end{proof}
 
 \begin{remark}
@@ -270,9 +280,9 @@ xelatex document.tex
     \label{tab:example}
     \begin{tabular}{lccc}
         \toprule
-        方法 & 精确率 & 召回率 & F1分数 \\
+        方法   & 精确率           & 召回率           & F1分数          \\
         \midrule
-        基线方法 & 0.82 & 0.78 & 0.80 \\
+        基线方法 & 0.82          & 0.78          & 0.80          \\
         本文方法 & \textbf{0.91} & \textbf{0.88} & \textbf{0.89} \\
         \bottomrule
     \end{tabular}
@@ -291,9 +301,9 @@ xelatex document.tex
         \Procedure{训练模型}{$\mathcal{D}, \theta_0, \eta$}
         \State $\theta \gets \theta_0$
         \While{未收敛}
-            \State $\mathcal{B} \gets$ \Call{采样批次}{$\mathcal{D}$}
-            \State $g \gets \nabla_\theta \mathcal{L}(\theta; \mathcal{B})$
-            \State $\theta \gets \theta - \eta \cdot g$
+        \State $\mathcal{B} \gets$ \Call{采样批次}{$\mathcal{D}$}
+        \State $g \gets \nabla_\theta \mathcal{L}(\theta; \mathcal{B})$
+        \State $\theta \gets \theta - \eta \cdot g$
         \EndWhile
         \State \Return $\theta$
         \EndProcedure
@@ -314,11 +324,14 @@ def train_step(model, batch, optimizer):
 \label{sec:bib}
 % ============================================================================
 
-模板使用 \texttt{natbib} 和 \texttt{gbt7714} 宏包，采用国标格式。引用示例：单个引用~\cite{shannon1948mathematical}，多个引用~\cite{balle2017endtoend, cheng2020learned}。
+模板使用 \texttt{natbib} 和 \texttt{gbt7714} 宏包，采用国标格式。
+引用示例：单个引用~\cite{shannon1948mathematical}，多个引用~\cite{balle2017endtoend, cheng2020learned}。
 
 \section{结论}
-本指南介绍了 ModernAcademic-CN 模板的主要功能。如有问题或建议，请访问项目仓库。
+本指南介绍了 ModernAcademic-CN 模板的主要功能。
+如有问题或建议，请访问项目仓库。
 
+{\small
 \bibliography{references}
-
+}
 \end{document}
