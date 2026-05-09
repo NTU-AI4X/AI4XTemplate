@@ -1,11 +1,11 @@
 %% ModernAcademic-EN.cls
 %% A modern, professional LaTeX class for academic papers (English version)
 %% Designed for pdfLaTeX compilation
-%% https://github.com/lartpang/ModernAcademic-LaTeX
+%% https://github.com/NTU-AI4X/AI4XTemplate
 %% License: MIT
 
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesClass{ModernAcademic-EN}[2026/01/28 v1.0 Modern Academic Paper Class (English)]
+\ProvidesClass{ModernAcademic-EN}[2026/05/09 v2.0 Modern Academic Paper Class (English)]
 
 %% ============================================================================
 %% 1. CLASS OPTIONS
@@ -29,7 +29,73 @@
 \fi
 
 %% ============================================================================
-%% 2. REQUIRED PACKAGES
+%% 2. TEMPLATE TYPOGRAPHY AND SPACING CONFIGURATION
+%% ============================================================================
+
+% Page layout
+\newcommand{\MA@page@top}{2.35cm}                % Top page margin.
+\newcommand{\MA@page@bottom}{2.85cm}             % Bottom page margin.
+\newcommand{\MA@page@left}{2.5cm}                % Left page margin.
+\newcommand{\MA@page@right}{2.5cm}               % Right page margin.
+\newcommand{\MA@page@headheight}{14pt}           % Fallback header box height when no header logo is shown.
+\newcommand{\MA@page@headsep}{0.5cm}             % Distance between header and text body.
+\newcommand{\MA@page@footskip}{1cm}              % Distance from text body to footer baseline.
+\newcommand{\MA@columnsep}{1.5em}                % Gap between columns in twocolumn mode.
+
+% Body text
+\newcommand{\MA@body@stretch}{1}               % Global line-spacing multiplier.
+\newcommand{\MA@body@parindent}{0pt}             % Paragraph first-line indentation.
+\newcommand{\MA@body@parskip}{0.3\baselineskip}  % Extra vertical space between paragraphs.
+
+% Lists
+\newcommand{\MA@list@leftmargin}{4ex}            % Default itemize/enumerate left indentation.
+
+% Header, captions, and bibliography
+\newcommand{\MA@header@font}{\small\itshape}     % Running header font for \shorttitle and \shortauthor.
+\newcommand{\MA@caption@font}{small}             % Figure/table caption body font size.
+\newcommand{\MA@subcaption@font}{footnotesize}   % Subfigure/subtable caption font size.
+\newcommand{\MA@caption@skip}{8pt}               % Space between float content and caption.
+\newcommand{\MA@bib@font}{\small}                % Bibliography entry font size.
+\newcommand{\MA@bib@stretch}{0.95}               % Line-spacing multiplier inside each bibliography entry.
+\newcommand{\MA@bib@sep}{0.15\baselineskip}      % Space between bibliography entries.
+
+% Abstract/title block
+\newcommand{\MA@abstractbox@left}{12pt}          % Abstract box left inner padding.
+\newcommand{\MA@abstractbox@right}{12pt}         % Abstract box right inner padding.
+\newcommand{\MA@abstractbox@top}{10pt}           % Abstract box top inner padding.
+\newcommand{\MA@abstractbox@bottom}{10pt}        % Abstract box bottom inner padding.
+\newcommand{\MA@abstractbox@font}{\small}        % Base font size inside the abstract box.
+\newcommand{\MA@abstractbox@beforeskip}{1em}     % Space before the abstract box.
+\newcommand{\MA@abstractbox@afterskip}{1.5em}    % Space after the abstract box.
+\newcommand{\MA@title@font}{\huge\bfseries\sffamily} % Paper title font.
+\newcommand{\MA@author@font}{\large}             % Author names font.
+\newcommand{\MA@affiliation@font}{\small\itshape} % Affiliation line font.
+\newcommand{\MA@email@font}{\small\ttfamily}     % Email line font.
+\newcommand{\MA@title@author@skip}{1.2em}        % Space between title and author block.
+\newcommand{\MA@author@affiliation@skip}{0.4em}  % Space between author names and affiliation.
+\newcommand{\MA@affiliation@email@skip}{0.2em}   % Space between affiliation and email.
+\newcommand{\MA@author@abstract@preskip}{0em}    % Space before divider between author block and abstract.
+\newcommand{\MA@author@abstract@postskip}{0em}   % Space after divider before abstract text.
+
+% Section headings
+\newcommand{\MA@section@scale}{1.3}             % Section title size multiplier relative to body text.
+\newcommand{\MA@subsection@scale}{1.2}          % Subsection title size multiplier relative to body text.
+\newcommand{\MA@subsubsection@scale}{1.1}       % Subsubsection title size multiplier relative to body text.
+\newcommand{\MA@section@font}{\normalfont\normalsize\scalefont{\MA@section@scale}\bfseries\sffamily} % Section title font.
+\newcommand{\MA@subsection@font}{\normalfont\normalsize\scalefont{\MA@subsection@scale}\bfseries\sffamily} % Subsection title font.
+\newcommand{\MA@subsubsection@font}{\normalfont\normalsize\scalefont{\MA@subsubsection@scale}\bfseries\sffamily} % Subsubsection title font.
+\newcommand{\MA@section@beforeskip}{2ex plus 1ex minus .2ex} % Space before section headings.
+\newcommand{\MA@section@afterskip}{1ex plus .2ex} % Space after section headings.
+\newcommand{\MA@subsection@beforeskip}{1.5ex plus 1ex minus .2ex} % Space before subsection headings.
+\newcommand{\MA@subsection@afterskip}{0.8ex plus .2ex} % Space after subsection headings.
+\newcommand{\MA@subsubsection@beforeskip}{1ex plus 0.5ex minus .2ex} % Space before subsubsection headings.
+\newcommand{\MA@subsubsection@afterskip}{0.5ex plus .2ex} % Space after subsubsection headings.
+\newcommand{\MA@section@needspace}{8\baselineskip}
+\newcommand{\MA@subsection@needspace}{5\baselineskip}
+\newcommand{\MA@subsubsection@needspace}{4\baselineskip}
+
+%% ============================================================================
+%% 3. REQUIRED PACKAGES
 %% ============================================================================
 
 % --- Encoding ---
@@ -42,30 +108,33 @@
 % --- Page Layout ---
 \RequirePackage[
   a4paper,
-  top=2.5cm,
-  bottom=2.5cm,
-  left=2.5cm,
-  right=2.5cm,
-  headheight=14pt,
-  headsep=0.5cm,
-  footskip=1cm
+  top=\MA@page@top,
+  bottom=\MA@page@bottom,
+  left=\MA@page@left,
+  right=\MA@page@right,
+  headheight=\MA@page@headheight,
+  headsep=\MA@page@headsep,
+  footskip=\MA@page@footskip
 ]{geometry}
 
 % --- Typography ---
 \RequirePackage{microtype}
 \RequirePackage{setspace}
+\RequirePackage{scalefnt}
 
-% --- Mathematics (load before newtxmath to avoid conflicts) ---
+% --- Colors (load before font packages that may use xcolor) ---
+\RequirePackage[table,xcdraw]{xcolor}
+
+% --- Mathematics (load before newpxmath to avoid conflicts) ---
 \RequirePackage{amsmath}
 \RequirePackage{amssymb}
 \RequirePackage{amsthm}
 
 % --- Fonts (pdfLaTeX compatible) ---
-\RequirePackage{libertinus}
-\RequirePackage{inconsolata}
-
-% --- Colors ---
-\RequirePackage[table,xcdraw]{xcolor}
+\RequirePackage{inter}
+\RequirePackage{newpxtext}
+\RequirePackage{newpxmath}
+\RequirePackage[varqu,varl]{inconsolata}
 
 % Default theme colors
 \definecolor{academicblue}{HTML}{1a2a6c}
@@ -96,9 +165,6 @@
 % --- Colored Boxes ---
 \RequirePackage[most]{tcolorbox}
 
-% --- Icons for social links ---
-\RequirePackage{fontawesome5}
-
 % --- Tables and Figures ---
 \RequirePackage{graphicx}
 \RequirePackage{booktabs}
@@ -109,14 +175,14 @@
 \RequirePackage{subcaption}
 
 \captionsetup{
-  font={small},
+  font={\MA@caption@font},
   labelfont={bf, color=academicblue},
   labelsep=period,
-  skip=8pt,
+  skip=\MA@caption@skip,
 }
 
 \captionsetup[sub]{
-  font={footnotesize},
+  font={\MA@subcaption@font},
   labelfont={bf},
 }
 
@@ -136,20 +202,23 @@
 % --- Bibliography ---
 \RequirePackage[numbers,sort&compress]{natbib}
 \bibliographystyle{unsrtnat}
-\renewcommand{\bibfont}{\small\setstretch{1.0}}
-\setlength{\bibsep}{0.8ex plus 0.2ex minus 0.1ex}
+\renewcommand{\bibfont}{\MA@bib@font\setstretch{\MA@bib@stretch}}
+\setlength{\bibsep}{\MA@bib@sep}
 
 % --- Header and Footer ---
 \RequirePackage{fancyhdr}
 
-% --- Abstract ---
-\RequirePackage{abstract}
-
 % --- Section Titles ---
 \RequirePackage{titlesec}
+\RequirePackage{needspace}
+\RequirePackage{etoolbox}
+
+% --- Lists ---
+\RequirePackage{enumitem}
+\setlist{nosep,leftmargin=\MA@list@leftmargin}
 
 %% ============================================================================
-%% 3. PAGE STYLE
+%% 4. PAGE STYLE
 %% ============================================================================
 
 \newcommand{\@shorttitle}{}
@@ -174,8 +243,8 @@
 
 \fancypagestyle{mainmatter}{%
   \fancyhf{}
-  \fancyhead[L]{\small\itshape\@shorttitle}
-  \fancyhead[R]{\small\itshape\@shortauthor}
+  \fancyhead[L]{\MA@header@font\@shorttitle}
+  \fancyhead[R]{\MA@header@font\@shortauthor}
   \fancyfoot[C]{\thepage}
   \renewcommand{\headrulewidth}{0.4pt}
   \renewcommand{\footrulewidth}{0pt}
@@ -184,57 +253,58 @@
 \pagestyle{mainmatter}
 
 %% ============================================================================
-%% 4. TITLE AND AUTHOR COMMANDS
+%% 5. TITLE AND AUTHOR COMMANDS
 %% ============================================================================
 
 \newcommand{\@affiliation}{\@empty}
 \newcommand{\@email}{\@empty}
-\newcommand{\@keywords}{\@empty}
 \newcommand{\@abstract}{\@empty}
 \newcommand{\@titlepreskip}{0pt}
 \newcommand{\@titlelogo}{\@empty}
 \newcommand{\@titlelogogap}{0.3em}
+\newsavebox{\MA@titlelogo@box}
+\newlength{\MA@titlelogo@headheight}
+\setlength{\MA@titlelogo@headheight}{\MA@page@headheight}
+
+\newcommand{\MA@measuretitlelogo}{%
+  \ifx\@titlelogo\@empty
+    \setlength{\MA@titlelogo@headheight}{\MA@page@headheight}%
+  \else
+    \sbox{\MA@titlelogo@box}{\@titlelogo}%
+    \setlength{\MA@titlelogo@headheight}{%
+      \dimexpr\ht\MA@titlelogo@box+\dp\MA@titlelogo@box+5pt\relax
+    }%
+    \ifdim\MA@titlelogo@headheight<\MA@page@headheight
+      \setlength{\MA@titlelogo@headheight}{\MA@page@headheight}%
+    \fi
+  \fi
+}
+
+\newcommand{\MA@syncfirstpageheadheight}{%
+  \if@logoinheader
+    \MA@measuretitlelogo
+    \setlength{\headheight}{\MA@titlelogo@headheight}%
+  \else
+    \setlength{\headheight}{\MA@page@headheight}%
+  \fi
+}
 
 % Setter for the gap between logo and title
 \newcommand{\settitlelogogap}[1]{\renewcommand{\@titlelogogap}{#1}}
 
-% Logo position toggles: three independent switches (all default to false)
-% Each position can be enabled independently, and multiple positions can be active simultaneously
+% Logo position toggles: title and first-page header are independent.
 \newif\if@logointitle
 \newif\if@logoinheader
-\newif\if@logoinabstract
 \@logointitlefalse
 \@logoinheaderfalse
-\@logoinabstractfalse
 
 % User commands to enable logo in specific positions
 \newcommand{\showlogointitle}{\@logointitletrue}
 \newcommand{\hidelogointitle}{\@logointitlefalse}
-\newcommand{\showlogoinheader}{\@logoinheadertrue}
-\newcommand{\hidelogoinheader}{\@logoinheaderfalse}
-\newcommand{\showlogoinabstract}{\@logoinabstracttrue}
-\newcommand{\hidelogoinabstract}{\@logoinabstractfalse}
+\newcommand{\showlogoinheader}{\@logoinheadertrue\MA@syncfirstpageheadheight}
+\newcommand{\hidelogoinheader}{\@logoinheaderfalse\MA@syncfirstpageheadheight}
 
-% Social links storage (list of {icon}{text}{url} triplets)
-\newcommand{\@sociallinks}{}
-% Add a social link: \addsociallink{\faGithub}{GitHub}{https://github.com/user/repo}
-\newcommand{\addsociallink}[3]{%
-  \g@addto@macro\@sociallinks{\@socialitem{#1}{#2}{#3}}%
-}
-% Internal: render a single social link item
-\newcommand{\@socialitem}[3]{%
-  \href{#3}{#1\,#2}\hspace{1em}%
-}
-% Clear all social links
-\newcommand{\clearsociallinks}{\renewcommand{\@sociallinks}{}}
-
-% Visibility toggle for keywords
-\newif\ifshowkeywords
-% By default do not show Keywords block. When user calls `\keywords{...}`
-% the macro below will set the content and enable the keywords display.
-\showkeywordsfalse
-
-% Control whether abstract footnotes are enabled (loads footnote package when true)
+% Control whether abstract-box footnotes are promoted to normal page footnotes.
 \newif\ifabstractfootnotes
 \abstractfootnotestrue
 \newcommand{\disableabstractfootnotes}{\abstractfootnotesfalse}
@@ -243,7 +313,6 @@
 \newcommand{\shortauthor}[1]{\renewcommand{\@shortauthor}{#1}}
 \newcommand{\affiliation}[1]{\renewcommand{\@affiliation}{#1}}
 \newcommand{\email}[1]{\renewcommand{\@email}{#1}}
-\newcommand{\keywords}[1]{\renewcommand{\@keywords}{#1}\showkeywordstrue}
 \renewcommand{\abstract}[1]{\renewcommand{\@abstract}{#1}}
 
 % Title preskip configuration (for logo/institution space above title)
@@ -251,113 +320,68 @@
 \newcommand{\settitlepreskip}[1]{\renewcommand{\@titlepreskip}{#1}}
 
 % Title logo content configuration (institution logo above title)
-% Usage: \titlelogocontent{\includegraphics[height=1.2cm]{logo.png}}
+% Usage: \titlelogocontent{\includegraphics[height=3em]{logo.png}}
 %        or \titlelogocontent{...TikZ code...}
-\newcommand{\titlelogocontent}[1]{\renewcommand{\@titlelogo}{#1}}
+\newcommand{\titlelogocontent}[1]{%
+  \renewcommand{\@titlelogo}{#1}%
+  \MA@syncfirstpageheadheight
+}
 
 %% ============================================================================
-%% 5. TITLE PAGE DESIGN
+%% 6. TITLE PAGE DESIGN
 %% ============================================================================
 
 % Base abstract box style
 \tcbset{
   abstractboxbase/.style={
-    enhanced,
-    colback=abstractbg,
-    colframe=abstractborder,
-    boxrule=0.5pt,
-    arc=4pt,
-    left=12pt,
-    right=12pt,
-    top=10pt,
-    bottom=10pt,
-    fontupper=\small,
-    before skip=1em,
-    after skip=1.5em,
-  }
+      enhanced,
+      colback=abstractbg,
+      colframe=abstractborder,
+      boxrule=0.5pt,
+      arc=4pt,
+      left=\MA@abstractbox@left,
+      right=\MA@abstractbox@right,
+      top=\MA@abstractbox@top,
+      bottom=\MA@abstractbox@bottom,
+      fontupper=\MA@abstractbox@font,
+      before skip=\MA@abstractbox@beforeskip,
+      after skip=\MA@abstractbox@afterskip,
+    }
 }
 
 % Abstract box without overlay
 \newtcolorbox{abstractbox}{abstractboxbase}
 
-% Abstract box with social links only (bottom-left)
-\newtcolorbox{abstractboxsocial}{
-  abstractboxbase,
-  overlay={
-    \node[anchor=south west, inner sep=0pt, xshift=12pt, yshift=8pt, font=\footnotesize]
-      at (frame.south west) {\@sociallinks};
-  }
+% By default, footnotes inside the abstract box are saved and emitted as normal
+% page footnotes. If disabled in the preamble, tcolorbox keeps them at the
+% bottom of the abstract box.
+\RequirePackage{footnote}
+\AtBeginDocument{%
+  \ifabstractfootnotes
+    \makesavenoteenv{abstractbox}%
+  \fi
 }
-
-% Abstract box with logo only (bottom-right)
-\newtcolorbox{abstractboxlogo}{
-  abstractboxbase,
-  overlay={
-    \node[anchor=south east, inner sep=0pt, xshift=-12pt, yshift=8pt]
-      at (frame.south east) {\@titlelogo};
-  }
-}
-
-% Abstract box with both social links (bottom-left) and logo (bottom-right)
-\newtcolorbox{abstractboxboth}{
-  abstractboxbase,
-  overlay={
-    \node[anchor=south west, inner sep=0pt, xshift=12pt, yshift=8pt, font=\footnotesize]
-      at (frame.south west) {\@sociallinks};
-    \node[anchor=south east, inner sep=0pt, xshift=-12pt, yshift=8pt]
-      at (frame.south east) {\@titlelogo};
-  }
-}
-
-% Optionally allow footnotes inside the abstract box to be typeset as normal page footnotes
-% Load the `footnote` package and enable saving only when abstractfootnotes is true
-\ifabstractfootnotes
-  \RequirePackage{footnote}
-  \makesavenoteenv{abstractbox}
-  \makesavenoteenv{abstractboxsocial}
-  \makesavenoteenv{abstractboxlogo}
-  \makesavenoteenv{abstractboxboth}
-\fi
 
 % Internal command to render abstract box content
 \newcommand{\@abstractboxcontent}{%
   \begin{center}
-    {\large\@author}%
+    {\MA@author@font\@author}%
     \ifx\@affiliation\@empty\else
-      \\[0.4em]
-      {\small\itshape\@affiliation}%
+      \\[\MA@author@affiliation@skip]
+      {\MA@affiliation@font\@affiliation}%
     \fi
     \ifx\@email\@empty\else
-      \\[0.2em]
-      {\small\ttfamily\@email}%
+      \\[\MA@affiliation@email@skip]
+      {\MA@email@font\@email}%
     \fi
   \end{center}
 
   \ifx\@abstract\@empty\else
-    \vspace{0.5em}
+    \vspace{\MA@author@abstract@preskip}
     {\centering\textcolor{abstractborder}{\rule{0.3\textwidth}{0.4pt}}\par}
-    \vspace{0.5em}
+    \vspace{\MA@author@abstract@postskip}
 
-    \noindent\textbf{\sffamily\color{academicblue}Abstract.}\quad
-    \@abstract
-
-    \ifshowkeywords
-      \ifx\@keywords\@empty\else
-        \vspace{0.6em}
-
-        \noindent\textbf{\sffamily\color{academicblue}Keywords:}\quad\@keywords
-      \fi
-    \fi
-  \fi
-
-  % Add vertical space if social links or abstract-logo is present
-  \ifx\@sociallinks\@empty\else
-    \vspace{1.2em}
-  \fi
-  \if@logoinabstract
-    \ifx\@titlelogo\@empty\else
-      \vspace{1.2em}
-    \fi
+    \noindent\@abstract
   \fi
 }
 
@@ -378,36 +402,11 @@
     \fi
   \fi
   \begin{center}
-    {\LARGE\bfseries\sffamily\color{academicblue}\@title\par}
-    \vspace{1.2em}
+    {\MA@title@font\color{academicblue}\@title\par}
+    \vspace{\MA@title@author@skip}
   \end{center}
 
-  % Select appropriate abstract box based on configuration
-  \if@logoinabstract
-    % Logo enabled in abstract box
-    \ifx\@titlelogo\@empty
-      % No logo defined
-      \ifx\@sociallinks\@empty
-        \begin{abstractbox}\@abstractboxcontent\end{abstractbox}
-      \else
-        \begin{abstractboxsocial}\@abstractboxcontent\end{abstractboxsocial}
-      \fi
-    \else
-      % Logo defined
-      \ifx\@sociallinks\@empty
-        \begin{abstractboxlogo}\@abstractboxcontent\end{abstractboxlogo}
-      \else
-        \begin{abstractboxboth}\@abstractboxcontent\end{abstractboxboth}
-      \fi
-    \fi
-  \else
-    % Logo not in abstract box
-    \ifx\@sociallinks\@empty
-      \begin{abstractbox}\@abstractboxcontent\end{abstractbox}
-    \else
-      \begin{abstractboxsocial}\@abstractboxcontent\end{abstractboxsocial}
-    \fi
-  \fi
+  \begin{abstractbox}\@abstractboxcontent\end{abstractbox}
 }
 
 % Helper to select first page style based on logo position
@@ -438,27 +437,31 @@
 \fi
 
 %% ============================================================================
-%% 6. SECTION FORMATTING
+%% 7. SECTION FORMATTING
 %% ============================================================================
 
 \titleformat{\section}
-{\normalfont\large\bfseries\sffamily\color{academicblue}}
+{\MA@section@font\color{academicblue}}
 {\thesection}{1em}{}
 
 \titleformat{\subsection}
-{\normalfont\normalsize\bfseries\sffamily}
+{\MA@subsection@font}
 {\thesubsection}{1em}{}
 
 \titleformat{\subsubsection}
-{\normalfont\normalsize\itshape}
+{\MA@subsubsection@font}
 {\thesubsubsection}{1em}{}
 
-\titlespacing*{\section}{0pt}{2ex plus 1ex minus .2ex}{1ex plus .2ex}
-\titlespacing*{\subsection}{0pt}{1.5ex plus 1ex minus .2ex}{0.8ex plus .2ex}
-\titlespacing*{\subsubsection}{0pt}{1ex plus 0.5ex minus .2ex}{0.5ex plus .2ex}
+\titlespacing*{\section}{0pt}{\MA@section@beforeskip}{\MA@section@afterskip}
+\titlespacing*{\subsection}{0pt}{\MA@subsection@beforeskip}{\MA@subsection@afterskip}
+\titlespacing*{\subsubsection}{0pt}{\MA@subsubsection@beforeskip}{\MA@subsubsection@afterskip}
+
+\pretocmd{\section}{\Needspace{\MA@section@needspace}}{}{}
+\pretocmd{\subsection}{\Needspace{\MA@subsection@needspace}}{}{}
+\pretocmd{\subsubsection}{\Needspace{\MA@subsubsection@needspace}}{}{}
 
 %% ============================================================================
-%% 7. THEOREM ENVIRONMENTS
+%% 8. THEOREM ENVIRONMENTS
 %% ============================================================================
 
 \theoremstyle{plain}
@@ -475,12 +478,15 @@
 \newtheorem*{remark}{Remark}
 
 %% ============================================================================
-%% 8. UTILITY SETTINGS
+%% 9. UTILITY SETTINGS
 %% ============================================================================
 
-\setstretch{1.15}
-\setlength{\parindent}{1.5em}
-\setlength{\parskip}{0.3ex plus 0.1ex minus 0.1ex}
+\setstretch{\MA@body@stretch}
+\setlength{\parindent}{\MA@body@parindent}
+\setlength{\parskip}{\MA@body@parskip}
+\clubpenalty=10000
+\widowpenalty=10000
+\displaywidowpenalty=10000
 
 \renewcommand{\topfraction}{0.9}
 \renewcommand{\bottomfraction}{0.8}
@@ -488,7 +494,7 @@
 \renewcommand{\floatpagefraction}{0.8}
 
 \if@twocol
-  \setlength{\columnsep}{1.5em}
+  \setlength{\columnsep}{\MA@columnsep}
 \fi
 
 \endinput

@@ -1,93 +1,66 @@
-% ModernAcademic-CN 模板使用指南
-% 模板功能说明与可视化展示
+% ModernAcademic-CN Template Showcase
+% A feature-complete demonstration for the current ModernAcademic-CN.cls.
 \documentclass[singlecolumn]{ModernAcademic-CN}
 
 % ============================================================================
-% 必需宏包（类文件中未包含）
+% OPTIONAL PACKAGES USED ONLY BY THIS DEMONSTRATION DOCUMENT
 % ============================================================================
-\usepackage{zhlipsum}     % 中文占位文本
-\usepackage{siunitx}      % 单位和数字
-\usepackage{amsfonts}     % 额外数学字体
-\usepackage{mathtools}    % 增强数学支持
-\usepackage{booktabs}     % 专业表格
-\usepackage{listings}     % 代码清单
-\lstset{
-    basicstyle=\ttfamily\small,
-    columns=fullflexible,
-    keepspaces=true,
-    showstringspaces=false,
-    upquote=true,
-    frame=single,
-    backgroundcolor=\color{abstractbg},
-}
+\usepackage{zhlipsum}
+\usepackage{siunitx}
+\usepackage{mathtools}
+\usepackage{listings}
 \usepackage{algorithm}
 \usepackage{algpseudocode}
-% \usepackage{tikz}
-% \usetikzlibrary{positioning,arrows.meta}
 
-% 参考文献文件
-% \bibliography{references}  % 在文档末尾使用
+\lstset{
+  basicstyle=\ttfamily\small,
+  columns=fullflexible,
+  keepspaces=true,
+  showstringspaces=false,
+  upquote=true,
+  frame=single,
+  backgroundcolor=\color{abstractbg},
+  rulecolor=\color{abstractborder},
+  commentstyle=\ttfamily\color{citegreen},
+  captionpos=b,
+}
 
 % ============================================================================
-% 主题配置
+% TEMPLATE CONFIGURATION INTERFACES FROM ModernAcademic-CN.cls
 % ============================================================================
-% \setthemecolor{RRGGBB} - 设置主题色（十六进制或RGB格式）
-% 默认值：1a2a6c（深蓝色）
-% 示例：
-%   \setthemecolor{b91c1c}     % 红色主题
-%   \setthemecolor{185,28,28}  % RGB格式的红色
+
+% Primary accent color. Accepts HTML hex without # or comma-separated RGB.
 \setthemecolor{1a2a6c}
 
-% ============================================================================
-% 标题区域配置
-% ============================================================================
-% \settitlepreskip{长度} - Logo/标题区域上方的间距
-% 默认值：0pt
+% Functional link colors.
+\setlinkcolor{1a2a6c}
+\setcitecolor{2d5a27}
+\seturlcolor{5c3566}
+
+% Title area spacing and logo content.
 \settitlepreskip{1ex}
-
-% \settitlelogogap{长度} - Logo与标题之间的间距
-% 默认值：0.3em
 \settitlelogogap{0.8em}
+\titlelogocontent{\includegraphics[height=3em]{assets/logo.png}}
 
-% \titlelogocontent{内容} - 定义Logo内容（图片或TikZ）
-% 示例：
-%   \titlelogocontent{\includegraphics[height=1.5cm]{logo.png}}
-%   \titlelogocontent{\begin{tikzpicture}...\end{tikzpicture}}
-\titlelogocontent{\includegraphics[height=1.5cm]{assets/logo.png}}
-
-% ============================================================================
-% Logo 位置开关（默认全部隐藏）
-% ============================================================================
-% \showlogointitle   - 在标题上方居中显示Logo
-% \showlogoinheader  - 在首页页眉右侧显示Logo
-% \showlogoinabstract - 在摘要框右下角显示Logo
-\showlogointitle
+% Logo placement switches are independent. Both are hidden by default.
 \showlogoinheader
-\showlogoinabstract
+\showlogointitle
 
 % ============================================================================
-% 社交链接（显示在摘要框左下角）
+% DOCUMENT METADATA
 % ============================================================================
-% \addsociallink{图标}{文字}{链接}
-% 可用图标：\faGithub、\faGlobe、\faTwitter、\faLinkedin 等
-\addsociallink{\faGithub}{代码仓库}{https://github.com/user/repo}
-\addsociallink{\faGlobe}{项目主页}{https://example.com/project}
+\title{ModernAcademic-CN 模板功能展示}
+\author{作者甲\textsuperscript{1}，作者乙\textsuperscript{2}，作者丙\textsuperscript{1}}
+\shorttitle{ModernAcademic-CN 功能展示}
+\shortauthor{作者甲等}
+\affiliation{\textsuperscript{1}示例大学计算机科学系\\
+\textsuperscript{2}应用排版研究所}
+\email{alice@example.edu; bob@example.org}
+\abstract{本文档展示 v2 版 \texttt{ModernAcademic-CN.cls} 提供的公开功能接口，包括标题元信息、Logo 位置、主题颜色、页眉短标题、摘要框、交叉引用、数学公式、定理环境、图表标题、子图、长表格、算法、代码清单以及基于 \texttt{natbib} 与 \texttt{gbt7714} 的参考文献管理。正文使用 \texttt{zhlipsum} 随机文本填充版面空间，用于观察段落间距、浮动体、分页、页眉和参考文献排版效果。\footnote{默认模式会把摘要框中的脚注提升为普通页面脚注。}
 
-% ============================================================================
-% 文档元信息
-% ============================================================================
-\title{ModernAcademic-CN 模板使用指南}
-\author{作者甲\textsuperscript{1}，作者乙\textsuperscript{2}}
-\shorttitle{ModernAcademic-CN 指南}
-\shortauthor{作者甲\ 等}
-\affiliation{\textsuperscript{1}某大学，\textsuperscript{2}某研究所}
-\email{author@example.org}
-\keywords{LaTeX 模板、学术论文、中文排版}
-
-\abstract{本文档展示 ModernAcademic-CN 类的全部功能。
-它既是配置选项的用户指南，也是模板排版效果的可视化参考。
-模板支持灵活的主题颜色、可自定义的Logo位置、社交链接，以及专业的学术格式化功能，包括定理环境、图表、算法和参考文献管理。
-本模板基于 ctex 宏包构建，支持完整的中文排版，需要使用 XeLaTeX 编译。}
+\medskip
+\noindent\textbf{关键词：} 学术模板，中文排版，LaTeX 类文件，占位文本。\\
+\noindent\textbf{项目地址：} \url{https://github.com/NTU-AI4X/AI4XTemplate}}
 
 \begin{document}
 
@@ -95,243 +68,339 @@
 
 % ============================================================================
 \section{快速开始}
+\label{sec:quick-start}
 % ============================================================================
 
-使用此模板，创建一个新的 \texttt{.tex} 文件，包含以下最小结构：
+该类文件面向 Xe\LaTeX 编译，适合作为中文学术论文或技术报告模板。一个最小文档通常包含类声明、文档元信息、\verb|\maketitle| 以及普通正文内容。
 
-\begin{lstlisting}[language=TeX,caption={最小文档结构}]
+\begin{lstlisting}[language=TeX,caption={最小单栏文档结构},label={lst:minimal}]
 \documentclass[singlecolumn]{ModernAcademic-CN}
 
-\title{您的论文标题}
+\title{论文标题}
 \author{作者姓名}
-\abstract{摘要内容...}
+\shorttitle{短标题}
+\shortauthor{作者}
+\affiliation{机构名称}
+\email{author@example.org}
+\abstract{摘要内容。}
 
 \begin{document}
 \maketitle
 \section{引言}
-正文内容...
 \zhlipsum[1]
 \bibliography{references}
 \end{document}
 \end{lstlisting}
 
 \subsection{类选项}
-类文件支持两种布局选项：
+\label{subsec:class-options}
+
 \begin{itemize}
-    \item \texttt{singlecolumn}（默认）——标准单栏布局，11pt 字体
-    \item \texttt{twocolumn}——双栏布局，10pt 字体
+  \item \texttt{singlecolumn}：默认单栏版式，使用 11 pt 基准字号。
+  \item \texttt{twocolumn}：紧凑双栏版式，使用 10 pt 基准字号，并采用类文件定义的栏间距。
+  \item 类文件未处理的标准选项会继续传递给底层 \texttt{ctexart} 类。
 \end{itemize}
 
+\zhlipsum[1]
+
 \subsection{编译方式}
-\begin{lstlisting}[language=bash,caption={编译命令}]
-xelatex document.tex
-bibtex document
-xelatex document.tex
-xelatex document.tex
+
+中文版本基于 \texttt{ctexart}，建议使用 Xe\LaTeX 编译。使用参考文献时需要运行 BibTeX。
+
+\begin{lstlisting}[language=bash,caption={典型编译流程}]
+xelatex ModernAcademic-CN.tex
+bibtex ModernAcademic-CN
+xelatex ModernAcademic-CN.tex
+xelatex ModernAcademic-CN.tex
 \end{lstlisting}
 
+\zhlipsum[2]
+
 % ============================================================================
-\section{主题自定义}
+\section{标题、摘要与页眉}
+\label{sec:title}
+% ============================================================================
+
+标题区域由类文件提供的元信息命令控制，包括标题、作者、机构、邮箱、摘要、短标题与短作者名等内容。短标题和短作者名会出现在首页之后的页眉中。
+
+\subsection{Logo 位置}
+
+Logo 内容只需通过 \verb|\titlelogocontent| 定义一次。\verb|\showlogointitle| 和 \verb|\showlogoinheader| 分别控制同一份 Logo 内容是否显示在标题上方和首页页眉右侧。启用首页页眉 Logo 时，类文件会测量 Logo 实际高度，并只在需要时从紧凑的默认页眉高度自动抬高。
+
+\begin{table}[htbp]
+  \centering
+  \caption{标题与 Logo 相关命令}
+  \label{tab:title-commands}
+  \begin{tabular}{lll}
+    \toprule
+    命令 & 用途 & 当前示例 \\
+    \midrule
+    \verb|\settitlepreskip| & 标题或 Logo 上方间距 & \verb|1ex| \\
+    \verb|\settitlelogogap| & Logo 与标题之间间距 & \verb|0.8em| \\
+    \verb|\titlelogocontent| & 可复用的 Logo 内容 & \verb|assets/logo.png|，高度 \verb|3em| \\
+    \verb|\showlogointitle| & 在标题上方显示 Logo & 已启用 \\
+    \verb|\showlogoinheader| & 在首页页眉显示 Logo & 已启用 \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+\zhlipsum[3]
+
+\subsection{摘要脚注}
+
+摘要框脚注默认会被提升为普通页面脚注。在默认模式下，写在 \verb|\abstract| 中的 \verb|\footnote| 会从 \texttt{tcolorbox} 标题块中收集出来，并排版到常规页面脚注区域；本示例摘要末尾的脚注展示的就是这种效果。
+
+如果希望摘要注释保留在摘要框内部，可在导言区、\verb|\begin{document}| 之前使用下列命令：
+
+\begin{lstlisting}[language=TeX]
+\disableabstractfootnotes
+\end{lstlisting}
+
+关闭提升后，摘要中的脚注会留在摘要框底部，而不会移动到页面脚注区。该设置只改变摘要框内脚注的处理方式，不影响正文中的普通脚注。
+
+\zhlipsum[4]
+
+% ============================================================================
+\section{主题与超链接}
 \label{sec:theme}
 % ============================================================================
 
-\subsection{主题色}
-使用 \verb|\setthemecolor{颜色}| 更改标题、章节标题和链接使用的主色调。
-颜色可以用十六进制或RGB格式指定：
+类文件定义了主色 \texttt{academicblue}，并为链接、引用、URL、图表标题和章节标题设置了功能色。全局强调色由 \verb|\setthemecolor| 设置，内部链接、引用链接和外部 URL 可分别调整。
 
-\begin{lstlisting}[language=TeX]
-\setthemecolor{1a2a6c}      % 十六进制格式（默认蓝色）
-\setthemecolor{185,28,28}   % RGB格式（红色）
+\begin{lstlisting}[language=TeX,caption={主题颜色接口},label={lst:theme}]
+\setthemecolor{1a2a6c}      % 不带 # 的 HTML 十六进制颜色
+\setthemecolor{185,28,28}   % RGB 三元组
+\setlinkcolor{1a2a6c}
+\setcitecolor{2d5a27}
+\seturlcolor{5c3566}
 \end{lstlisting}
 
-\subsection{其他颜色设置}
-可以单独调整各元素的颜色：
-\begin{lstlisting}[language=TeX]
-\setlinkcolor{0000FF}   % 内部链接
-\setcitecolor{2d5a27}   % 引用链接
-\seturlcolor{5c3566}    % 外部URL链接
-\end{lstlisting}
+交叉引用系统由 \texttt{hyperref} 和 \texttt{cleveref} 共同提供。例如 \cref{sec:math}、\cref{fig:subfigures}、\cref{tab:booktabs} 和 \cref{alg:example} 都由 \verb|\cref| 自动生成引用名称。
+
+\zhlipsum[5]
 
 % ============================================================================
-\section{Logo 配置}
-\label{sec:logo}
+\section{列表与段落间距}
+\label{sec:lists}
 % ============================================================================
 
-模板支持在三个独立位置显示Logo。
-每个位置可以单独启用或禁用。
+类文件全局设置了段落间距和列表缩进。下面的示例展示了由 \texttt{enumitem} 控制的紧凑列表间距。
 
-\subsection{定义Logo内容}
-\begin{lstlisting}[language=TeX]
-% 使用图片文件
-\titlelogocontent{\includegraphics[height=1.5cm]{logo.png}}
+\begin{enumerate}
+  \item 第一条列举用于展示较长文本在列表中的自动换行效果。
+  \item 第二条列举包含对 \cref{lst:minimal} 的交叉引用。
+  \item 第三条列举展示无需额外局部选项即可保持紧凑间距。
+\end{enumerate}
 
-% 使用TikZ绘制
-\titlelogocontent{%
-  \begin{tikzpicture}
-    % TikZ代码
-  \end{tikzpicture}%
-}
-\end{lstlisting}
+\begin{description}
+  \item[主色] 用于标题、章节标题、链接和图表标签。
+  \item[摘要框] 使用 \texttt{tcolorbox} 绘制，并采用类文件定义的内边距。
+  \item[运行页眉] 由 \texttt{fancyhdr} 根据短标题和短作者名生成。
+\end{description}
 
-\subsection{Logo位置开关}
-\begin{table}[htbp]
-    \centering
-    \caption{Logo位置命令}
-    \label{tab:logo-positions}
-    \begin{tabular}{lll}
-        \toprule
-        命令                         & 位置     & 默认状态 \\
-        \midrule
-        \verb|\showlogointitle|    & 标题上方居中 & 隐藏   \\
-        \verb|\showlogoinheader|   & 首页页眉右侧 & 隐藏   \\
-        \verb|\showlogoinabstract| & 摘要框右下角 & 隐藏   \\
-        \bottomrule
-    \end{tabular}
-\end{table}
+\zhlipsum[6]
 
 % ============================================================================
 \section{数学排版}
 \label{sec:math}
 % ============================================================================
 
-模板加载了 \texttt{amsmath}、\texttt{amssymb} 和 \texttt{amsthm} 以提供完整的数学支持。
+类文件加载了 \texttt{amsmath}、\texttt{amssymb} 和 \texttt{amsthm}，并配置了常用定理类环境。作者仍可在文档中按需加载额外数学宏包。
 
 \subsection{公式}
-行内公式：$E = mc^2$，$\sum_{i=1}^{n} x_i$。
-行间公式自动编号：
+
+行内公式如 $E=mc^2$、$\sum_{i=1}^{n}x_i$ 和 $\mathbb{E}[X]$ 会遵循当前字体配置。行间公式按常规方式编号：
 
 \begin{equation}
-    \mathcal{L}(\theta) = \mathbb{E}_{x \sim p_{\text{data}}} \left[ \log p_\theta(x) \right]
-    \label{eq:likelihood}
+  \mathcal{L}(\theta)
+  = \mathbb{E}_{x \sim p_{\mathrm{data}}}
+    \left[-\log p_{\theta}(x)\right].
+  \label{eq:loss}
 \end{equation}
 
-对齐公式：
 \begin{align}
-    H(X)   & = -\sum_{x} p(x) \log p(x) \label{eq:entropy} \\
-    I(X;Y) & = H(X) - H(X|Y) \label{eq:mi}
+  H(X)   &= -\sum_x p(x)\log p(x), \label{eq:entropy}\\
+  I(X;Y) &= H(X) - H(X\mid Y). \label{eq:mutual-information}
 \end{align}
 
-交叉引用：\cref{eq:entropy}展示了熵的定义。
+\Cref{eq:loss,eq:entropy,eq:mutual-information} 展示了公式交叉引用和自动名称。
+
+\zhlipsum[7]
 
 \subsection{定理环境}
-以下环境已预定义：
-
-\begin{theorem}[贝叶斯定理]
-    \label{thm:bayes}
-    对于事件 $A$ 和 $B$，若 $P(B) > 0$：
-    \[ P(A|B) = \frac{P(B|A) \cdot P(A)}{P(B)} \]
-\end{theorem}
-
-\begin{lemma}
-    \label{lem:example}
-    这是一个示例引理，用于展示模板中引理环境的排版效果。
-    \zhlipsum[1]
-\end{lemma}
 
 \begin{definition}[凸函数]
-    函数 $f: \mathbb{R}^n \to \mathbb{R}$ 是凸的，当且仅当对所有 $x, y$ 和 $\lambda \in [0,1]$：
-    \[ f(\lambda x + (1-\lambda)y) \leq \lambda f(x) + (1-\lambda) f(y) \]
+  函数 $f:\mathbb{R}^n\to\mathbb{R}$ 称为凸函数，如果对所有 $x,y\in\mathbb{R}^n$ 与 $\lambda\in[0,1]$，都有
+  \[
+    f(\lambda x + (1-\lambda)y)
+    \leq \lambda f(x) + (1-\lambda)f(y).
+  \]
+  \label{def:convex}
 \end{definition}
 
+\begin{theorem}[Jensen 不等式]
+  设 $f$ 为凸函数，$X$ 为可积随机变量，则
+  \[
+    f(\mathbb{E}X) \leq \mathbb{E}f(X).
+  \]
+  \label{thm:jensen}
+\end{theorem}
+
 \begin{proof}
-    证明直接由定义得出。
-    这里显示证明环境的排版效果。
-    \zhlipsum[1]
+  由凸函数的支撑超平面刻画和 \cref{def:convex} 可得结论；对两侧取期望即可完成证明。\zhlipsum[8]
 \end{proof}
 
+\begin{lemma}
+  若非负数列 $(a_n)$ 可求和，则 $a_n\to0$。
+  \label{lem:summable}
+\end{lemma}
+
+\begin{proposition}
+  \cref{thm:jensen,lem:summable} 的引用名称由 \textnormal{\texttt{cleveref}} 自动生成。
+\end{proposition}
+
+\begin{corollary}
+  任意有限非负数列在补零延拓后满足 \cref{lem:summable} 的结论。
+\end{corollary}
+
+\begin{example}
+  二次函数 $f(x)=x^\top x$ 是一个标准凸函数示例。
+\end{example}
+
 \begin{remark}
-    其他类定理环境包括 \texttt{corollary}（推论）、\texttt{proposition}（命题）和 \texttt{example}（例）。
+  类文件提供编号的定理、引理、推论、命题、定义和例环境，以及不编号的注环境。
 \end{remark}
 
+\zhlipsum[9]
+
 % ============================================================================
-\section{图表}
-\label{sec:floats}
+\section{图与标题}
+\label{sec:figures}
 % ============================================================================
 
-\subsection{带子图的图形}
+图形使用类文件统一配置的标题样式：标签加粗并使用主题色、句点分隔符以及紧凑的标题间距。子图由 \texttt{subcaption} 支持。
+
 \begin{figure}[htbp]
+  \centering
+  \begin{subfigure}{0.47\linewidth}
     \centering
-    \begin{subfigure}{0.48\linewidth}
-        \centering
-        \begin{tikzpicture}
-            \fill[academicblue!20] (0,0) rectangle (3,2);
-            \node at (1.5,1) {子图 A};
-        \end{tikzpicture}
-        \caption{第一个子图}
-        \label{fig:sub-a}
-    \end{subfigure}\hfill
-    \begin{subfigure}{0.48\linewidth}
-        \centering
-        \begin{tikzpicture}
-            \fill[citegreen!20] (0,0) rectangle (3,2);
-            \node at (1.5,1) {子图 B};
-        \end{tikzpicture}
-        \caption{第二个子图}
-        \label{fig:sub-b}
-    \end{subfigure}
-    \caption{使用 \texttt{subcaption} 宏包的示例图形。}
-    \label{fig:example}
+    \fcolorbox{academicblue}{academicblue!8}{%
+      \parbox[c][2.5cm][c]{0.82\linewidth}{\centering 功能面板 A\\用于展示子图标题与颜色。}%
+    }
+    \caption{第一个子图}
+    \label{fig:panel-a}
+  \end{subfigure}\hfill
+  \begin{subfigure}{0.47\linewidth}
+    \centering
+    \fcolorbox{citegreen}{citegreen!8}{%
+      \parbox[c][2.5cm][c]{0.82\linewidth}{\centering 功能面板 B\\用于展示并列图形布局。}%
+    }
+    \caption{第二个子图}
+    \label{fig:panel-b}
+  \end{subfigure}
+  \caption{仅使用标准盒子和类文件颜色绘制的子图示例。}
+  \label{fig:subfigures}
 \end{figure}
 
-\subsection{专业表格}
+\Cref{fig:panel-a,fig:panel-b} 是子图引用，\cref{fig:subfigures} 引用整个图。
+
+\zhlipsum[10]
+
+% ============================================================================
+\section{表格}
+\label{sec:tables}
+% ============================================================================
+
+类文件加载了 \texttt{booktabs}、\texttt{longtable}、\texttt{array} 和 \texttt{multirow}。本节展示一个紧凑浮动表和一个支持跨页的长表格。
+
 \begin{table}[htbp]
-    \centering
-    \caption{使用 \texttt{booktabs} 的专业格式表格}
-    \label{tab:example}
-    \begin{tabular}{lccc}
-        \toprule
-        方法   & 精确率           & 召回率           & F1分数          \\
-        \midrule
-        基线方法 & 0.82          & 0.78          & 0.80          \\
-        本文方法 & \textbf{0.91} & \textbf{0.88} & \textbf{0.89} \\
-        \bottomrule
-    \end{tabular}
+  \centering
+  \caption{使用 \texttt{booktabs} 的紧凑表格}
+  \label{tab:booktabs}
+  \begin{tabular}{lS[table-format=1.2]S[table-format=1.2]S[table-format=1.2]}
+    \toprule
+    方法 & {精确率} & {召回率} & {F1 分数} \\
+    \midrule
+    基线方法 & 0.82 & 0.78 & 0.80 \\
+    校准方法 & 0.87 & 0.84 & 0.85 \\
+    本文方法 & 0.91 & 0.88 & 0.89 \\
+    \bottomrule
+  \end{tabular}
 \end{table}
 
+\begin{longtable}{p{0.25\linewidth}p{0.65\linewidth}}
+  \caption{使用类文件已加载宏包的长表格}
+  \label{tab:longtable}\\
+  \toprule
+  功能 & 展示目的 \\
+  \midrule
+  \endfirsthead
+  \toprule
+  功能 & 展示目的 \\
+  \midrule
+  \endhead
+  页面布局 & 展示类文件管理的页边距、页眉高度和页脚距离。 \\
+  正文排版 & 展示段落间距、零缩进和微排版效果。 \\
+  图表标题 & 展示彩色标签和一致的标题间距。 \\
+  参考文献 & 展示紧凑的 \texttt{natbib} 与国标格式参考文献。 \\
+  页眉 & 展示后续页面中的短标题和短作者名。 \\
+  \bottomrule
+\end{longtable}
+
+\zhlipsum[11]
+
 % ============================================================================
-\section{算法与代码}
-\label{sec:code}
+\section{算法与代码清单}
+\label{sec:algorithms}
 % ============================================================================
 
-\subsection{伪代码}
+类文件不强制绑定算法或代码宏包。本示例在文档导言区加载常见算法与代码清单宏包，方便作者按需选择工具。
+
 \begin{algorithm}[htbp]
-    \caption{使用 \texttt{algpseudocode} 的示例算法}
-    \label{alg:example}
-    \begin{algorithmic}[1]
-        \Procedure{训练模型}{$\mathcal{D}, \theta_0, \eta$}
-        \State $\theta \gets \theta_0$
-        \While{未收敛}
-        \State $\mathcal{B} \gets$ \Call{采样批次}{$\mathcal{D}$}
-        \State $g \gets \nabla_\theta \mathcal{L}(\theta; \mathcal{B})$
-        \State $\theta \gets \theta - \eta \cdot g$
-        \EndWhile
-        \State \Return $\theta$
-        \EndProcedure
-    \end{algorithmic}
+  \caption{模板感知的实验流程}
+  \label{alg:example}
+  \begin{algorithmic}[1]
+    \Procedure{RunStudy}{$\mathcal{D}, \Theta, K$}
+      \For{$k \gets 1$ to $K$}
+        \State $\theta_k \gets$ \Call{Initialize}{$\Theta$}
+        \State $\ell_k \gets$ \Call{TrainAndEvaluate}{$\mathcal{D}, \theta_k$}
+      \EndFor
+      \State \Return $\arg\min_k \ell_k$
+    \EndProcedure
+  \end{algorithmic}
 \end{algorithm}
 
-\subsection{代码清单}
-\begin{lstlisting}[language=Python,caption={Python代码示例}]
-def train_step(model, batch, optimizer):
-    loss = model.compute_loss(batch)
-    loss.backward()
-    optimizer.step()
-    return loss.item()
+\begin{lstlisting}[language=Python,caption={带有类文件颜色主题的 Python 清单},label={lst:python}]
+def summarize(scores):
+    total = sum(scores)
+    mean = total / len(scores)
+    return {"count": len(scores), "mean": mean}
 \end{lstlisting}
+
+\Cref{alg:example} 与 \cref{lst:python} 展示了普通浮动体和代码清单在类文件版式中的排版效果。
+
+这里保留少量正文，用于观察算法、代码清单和后续章节标题之间的垂直间距。
 
 % ============================================================================
 \section{引用与参考文献}
-\label{sec:bib}
+\label{sec:bibliography}
 % ============================================================================
 
-模板使用 \texttt{natbib} 和 \texttt{gbt7714} 宏包，采用国标格式。
-引用示例：单个引用~\cite{shannon1948mathematical}，多个引用~\cite{balle2017endtoend, cheng2020learned}。
+中文版本使用 \texttt{natbib} 与 \texttt{gbt7714} 管理参考文献。示例包括单篇引用 \cite{shannon1948mathematical}、压缩编号引用 \cite{wallace1992jpeg,sullivan2012hevc,vvc2021standard}，以及学习式压缩相关文献 \cite{balle2017endtoend,minnen2018joint,cheng2020learned}。率失真理论可参见 \citet{berger1971rate}。
 
+这里使用少量正文保留文献章节的版面空间，避免示例文档因占位文本过密而产生不必要的页脚重叠。
+
+% ============================================================================
 \section{结论}
-本指南介绍了 ModernAcademic-CN 模板的主要功能。
-如有问题或建议，请访问项目仓库。
+\label{sec:conclusion}
+% ============================================================================
+
+本文档作为 \texttt{ModernAcademic-CN.cls} 的可视化测试样例，尽量保持与英文版示例相同的接口和结构，同时使用中文占位文本展示分页、页眉、浮动体、图表标题和参考文献的整体效果。
+
+\zhlipsum[14]
 
 {\small
 \bibliography{references}
 }
+
 \end{document}

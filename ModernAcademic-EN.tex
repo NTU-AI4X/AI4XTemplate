@@ -1,93 +1,66 @@
-% ModernAcademic-EN Template Guide
-% A comprehensive guide and visual showcase of the template features.
+% ModernAcademic-EN Template Showcase
+% A feature-complete demonstration for the current ModernAcademic-EN.cls.
 \documentclass[singlecolumn]{ModernAcademic-EN}
 
 % ============================================================================
-% REQUIRED PACKAGES (not included in the class)
+% OPTIONAL PACKAGES USED ONLY BY THIS DEMONSTRATION DOCUMENT
 % ============================================================================
-\usepackage{lipsum}       % Placeholder text
-\usepackage{siunitx}      % Units and numbers
-\usepackage{amsfonts}     % Additional math fonts
-\usepackage{mathtools}    % Enhanced math support
-\usepackage{booktabs}     % Professional tables
-\usepackage{listings}     % Code listings
-\lstset{
-    basicstyle=\ttfamily\small,
-    columns=fullflexible,
-    keepspaces=true,
-    showstringspaces=false,
-    upquote=true,
-    frame=single,
-    backgroundcolor=\color{abstractbg},
-}
+\usepackage{lipsum}
+\usepackage{siunitx}
+\usepackage{mathtools}
+\usepackage{listings}
 \usepackage{algorithm}
 \usepackage{algpseudocode}
-% \usepackage{tikz}
-% \usetikzlibrary{positioning,arrows.meta}
 
-% Bibliography file
-% \bibliography{references}  % Used at end of document
+\lstset{
+  basicstyle=\ttfamily\small,
+  columns=fullflexible,
+  keepspaces=true,
+  showstringspaces=false,
+  upquote=true,
+  frame=single,
+  backgroundcolor=\color{abstractbg},
+  rulecolor=\color{abstractborder},
+  commentstyle=\ttfamily\color{citegreen},
+  captionpos=b,
+}
 
 % ============================================================================
-% THEME CONFIGURATION
+% TEMPLATE CONFIGURATION INTERFACES FROM ModernAcademic-EN.cls
 % ============================================================================
-% \setthemecolor{RRGGBB} - Set the primary theme color (hex or RGB format)
-% Default: 1a2a6c (deep blue)
-% Examples:
-%   \setthemecolor{b91c1c}     % Red theme
-%   \setthemecolor{185,28,28}  % Same red in RGB format
+
+% Primary accent color. Accepts HTML hex without # or comma-separated RGB.
 \setthemecolor{1a2a6c}
 
-% ============================================================================
-% TITLE AREA CONFIGURATION
-% ============================================================================
-% \settitlepreskip{length} - Space above the logo/title area
-% Default: 0pt
+% Functional link colors.
+\setlinkcolor{1a2a6c}
+\setcitecolor{2d5a27}
+\seturlcolor{5c3566}
+
+% Title area spacing and logo content.
 \settitlepreskip{1ex}
-
-% \settitlelogogap{length} - Gap between logo and title
-% Default: 0.3em
 \settitlelogogap{0.8em}
+\titlelogocontent{\includegraphics[height=3em]{assets/logo.png}}
 
-% \titlelogocontent{content} - Define logo content (image or TikZ)
-% Examples:
-%   \titlelogocontent{\includegraphics[height=1.5cm]{logo.png}}
-%   \titlelogocontent{\begin{tikzpicture}...\end{tikzpicture}}
-\titlelogocontent{\includegraphics[height=1.5cm]{assets/logo.png}}
-
-% ============================================================================
-% LOGO POSITION SWITCHES (all hidden by default)
-% ============================================================================
-% \showlogointitle   - Show logo centered above the title
-% \showlogoinheader  - Show logo in the first page header (right side)
-% \showlogoinabstract - Show logo in the abstract box (bottom-right corner)
-\showlogointitle
+% Logo placement switches are independent. Both are hidden by default.
 \showlogoinheader
-\showlogoinabstract
-
-% ============================================================================
-% SOCIAL LINKS (shown in abstract box bottom-left)
-% ============================================================================
-% \addsociallink{icon}{text}{url}
-% Available icons: \faGithub, \faGlobe, \faTwitter, \faLinkedin, etc.
-\addsociallink{\faGithub}{Code}{https://github.com/user/repo}
-\addsociallink{\faGlobe}{Project}{https://example.com/project}
+\showlogointitle
 
 % ============================================================================
 % DOCUMENT METADATA
 % ============================================================================
-\title{ModernAcademic-EN Template Guide}
-\author{Author A\textsuperscript{1}, Author B\textsuperscript{2}}
-\shorttitle{ModernAcademic-EN Guide}
-\shortauthor{A. Author et~al.}
-\affiliation{\textsuperscript{1}University A, \textsuperscript{2}Institute B}
-\email{author@example.org}
-\keywords{LaTeX template, academic paper, documentation}
+\title{ModernAcademic-EN Template Showcase}
+\author{Alice Example\textsuperscript{1}, Bob Researcher\textsuperscript{2}, and Carol Writer\textsuperscript{1}}
+\shorttitle{ModernAcademic-EN Showcase}
+\shortauthor{Example et~al.}
+\affiliation{\textsuperscript{1}Department of Computer Science, Example University\\
+\textsuperscript{2}Institute for Applied Typesetting}
+\email{alice@example.edu; bob@example.org}
+\abstract{This document demonstrates the public features provided by the v2 \texttt{ModernAcademic-EN.cls} file. It shows title metadata, logo placement, theme colors, running headers, the abstract box, cross-references, mathematical material, theorem environments, captions, subfigures, tables, algorithms, code listings, and \texttt{natbib} citations. The body deliberately uses \texttt{lipsum} placeholder text to fill realistic page space and to make spacing, paragraphs, floats, and page headers easy to inspect.\footnote{By default, abstract-box footnotes are promoted to normal page footnotes.}
 
-\abstract{This document demonstrates all features of the ModernAcademic-EN class.
-It serves as both a user guide showing available configuration options and a visual reference for the template's typesetting capabilities.
-The template supports flexible theme colors, customizable logo positions, social links, and professional academic formatting including theorems, figures, tables, algorithms, and bibliography management.
-This template is built for English typesetting and requires pdfLaTeX to compile.}
+\medskip
+\noindent\textbf{Keywords:} academic template, LaTeX class, sample paper, placeholder text.\\
+\noindent\textbf{Repository:} \url{https://github.com/NTU-AI4X/AI4XTemplate}}
 
 \begin{document}
 
@@ -95,242 +68,339 @@ This template is built for English typesetting and requires pdfLaTeX to compile.
 
 % ============================================================================
 \section{Quick Start}
+\label{sec:quick-start}
 % ============================================================================
 
-To use this template, create a new \texttt{.tex} file with the following minimal structure:
+The class is designed as a compact academic-paper template for pdf\LaTeX. A minimal document needs a class declaration, document metadata, \verb|\maketitle|, and normal article content.
 
-\begin{lstlisting}[language=TeX,caption={Minimal document structure}]
+\begin{lstlisting}[language=TeX,caption={Minimal single-column document},label={lst:minimal}]
 \documentclass[singlecolumn]{ModernAcademic-EN}
 
 \title{Your Paper Title}
 \author{Author Name}
-\abstract{Your abstract text...}
+\shorttitle{Short Title}
+\shortauthor{Author}
+\affiliation{Institution Name}
+\email{author@example.org}
+\abstract{A concise abstract.}
 
 \begin{document}
 \maketitle
 \section{Introduction}
-Your content here...
-\lipsum[1][1-2]
+\lipsum[1]
 \bibliography{references}
 \end{document}
 \end{lstlisting}
 
 \subsection{Class Options}
-The class supports two layout options:
+\label{subsec:class-options}
+
 \begin{itemize}
-    \item \texttt{singlecolumn} (default) --- Standard single-column layout with 11pt font
-    \item \texttt{twocolumn} --- Two-column layout with 10pt font
+  \item \texttt{singlecolumn}: the default article layout, using an 11 pt base font.
+  \item \texttt{twocolumn}: a compact two-column layout, using a 10 pt base font and the class-defined column separation.
+  \item Standard \texttt{article} options not handled by the class are passed through to the base class.
 \end{itemize}
 
-\subsection{Compilation Methods}
-\begin{lstlisting}[language=bash,caption={Compilation commands}]
-pdflatex document.tex
-bibtex document
-pdflatex document.tex
-pdflatex document.tex
+\lipsum[1][1-5]
+
+\subsection{Compilation}
+
+The English template is configured for pdf\LaTeX. A bibliography run is needed when references are used.
+
+\begin{lstlisting}[language=bash,caption={Typical compilation sequence}]
+pdflatex ModernAcademic-EN.tex
+bibtex ModernAcademic-EN
+pdflatex ModernAcademic-EN.tex
+pdflatex ModernAcademic-EN.tex
 \end{lstlisting}
 
+\lipsum[2][1-4]
+
 % ============================================================================
-\section{Theme Customization}
+\section{Title, Abstract, and Running Headers}
+\label{sec:title}
+% ============================================================================
+
+The title area is controlled by metadata commands supplied by the class: \verb|\title|, \verb|\author|, \verb|\affiliation|, \verb|\email|, \verb|\abstract|, \verb|\shorttitle|, and \verb|\shortauthor|. The short title and short author strings appear in the running header after the first page.
+
+\subsection{Logo Placement}
+
+Logo content is provided once through \verb|\titlelogocontent|. The commands \verb|\showlogointitle| and \verb|\showlogoinheader| then independently choose whether the same content appears above the title or in the first-page header. When the first-page header logo is enabled, the class measures the logo and raises the header height from its compact fallback only as needed.
+
+\begin{table}[htbp]
+  \centering
+  \caption{Title and logo commands exposed by the class.}
+  \label{tab:title-commands}
+  \begin{tabular}{lll}
+    \toprule
+    Command & Purpose & Current example \\
+    \midrule
+    \verb|\settitlepreskip| & Space before title/logo area & \verb|1ex| \\
+    \verb|\settitlelogogap| & Gap between logo and title & \verb|0.8em| \\
+    \verb|\titlelogocontent| & Reusable logo content & \verb|assets/logo.png| at \verb|3em| \\
+    \verb|\showlogointitle| & Show logo above title & Enabled \\
+    \verb|\showlogoinheader| & Show logo in first-page header & Enabled \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+\lipsum[3]
+
+\subsection{Abstract Footnotes}
+
+Abstract-box footnotes are promoted to normal page footnotes by default. In that mode, a \verb|\footnote| written inside \verb|\abstract| is collected from the \texttt{tcolorbox} title block and typeset in the regular page footnote area; the note in this sample abstract demonstrates that behavior.
+
+If the document should keep abstract notes visually inside the abstract box, use the following command in the preamble before \verb|\begin{document}|:
+
+\begin{lstlisting}[language=TeX]
+\disableabstractfootnotes
+\end{lstlisting}
+
+After disabling promotion, footnotes written in the abstract remain at the bottom of the abstract box. This changes only the abstract box behavior; ordinary body footnotes still use the normal page footnote area.
+
+\lipsum[4][1-5]
+
+% ============================================================================
+\section{Theme and Hyperlinks}
 \label{sec:theme}
 % ============================================================================
 
-\subsection{Primary Theme Color}
-Use \verb|\setthemecolor{color}| to change the primary accent color used for titles, section headings, and links.
-The color can be specified in hexadecimal or RGB format:
+The class defines a primary color named \texttt{academicblue} and functional colors for links, citations, URLs, captions, and section headings. The global accent is set with \verb|\setthemecolor|, while internal links, citations, and URLs can be adjusted separately.
 
-\begin{lstlisting}[language=TeX]
-\setthemecolor{1a2a6c}      % Hex format (default blue)
-\setthemecolor{185,28,28}   % RGB format (red)
+\begin{lstlisting}[language=TeX,caption={Theme color interfaces},label={lst:theme}]
+\setthemecolor{1a2a6c}      % HTML hex without #
+\setthemecolor{185,28,28}   % RGB triplet
+\setlinkcolor{1a2a6c}
+\setcitecolor{2d5a27}
+\seturlcolor{5c3566}
 \end{lstlisting}
 
-\subsection{Additional Color Settings}
-Fine-tune individual element colors:
-\begin{lstlisting}[language=TeX]
-\setlinkcolor{0000FF}   % Internal links
-\setcitecolor{2d5a27}   % Citation links
-\seturlcolor{5c3566}    % External URL links
-\end{lstlisting}
+The cross-reference system combines \texttt{hyperref} and \texttt{cleveref}; for example, \cref{sec:math}, \cref{fig:subfigures}, \cref{tab:booktabs}, and \cref{alg:example} are generated with \verb|\cref|.
+
+\lipsum[5]
 
 % ============================================================================
-\section{Logo Configuration}
-\label{sec:logo}
+\section{Lists and Paragraph Spacing}
+\label{sec:lists}
 % ============================================================================
 
-The template supports displaying a logo in three independent positions.
-Each position can be enabled or disabled separately.
+The class configures paragraph spacing and list indentation globally. The examples below show compact item spacing from \texttt{enumitem}.
 
-\subsection{Defining Logo Content}
-\begin{lstlisting}[language=TeX]
-% Using an image file
-\titlelogocontent{\includegraphics[height=1.5cm]{logo.png}}
+\begin{enumerate}
+  \item The first enumerated item introduces a claim and leaves enough text to show line wrapping.
+  \item The second item contains a cross-reference to \cref{lst:minimal}.
+  \item The third item demonstrates that the list spacing remains compact without additional local options.
+\end{enumerate}
 
-% Using TikZ graphics
-\titlelogocontent{%
-  \begin{tikzpicture}
-    % Your TikZ code here
-  \end{tikzpicture}%
-}
-\end{lstlisting}
+\begin{description}
+  \item[Primary color] Used for the title, section headings, links, and caption labels.
+  \item[Abstract box] Rendered with \texttt{tcolorbox} and class-defined padding.
+  \item[Running header] Built with \texttt{fancyhdr} from the short title and short author.
+\end{description}
 
-\subsection{Logo Position Switches}
-\begin{table}[htbp]
-    \centering
-    \caption{Logo position commands}
-    \label{tab:logo-positions}
-    \begin{tabular}{lll}
-        \toprule
-        Command                    & Position                    & Default \\
-        \midrule
-        \verb|\showlogointitle|    & Centered above title        & Hidden  \\
-        \verb|\showlogoinheader|   & First page header (right)   & Hidden  \\
-        \verb|\showlogoinabstract| & Abstract box (bottom-right) & Hidden  \\
-        \bottomrule
-    \end{tabular}
-\end{table}
+\lipsum[6-7]
 
 % ============================================================================
 \section{Mathematical Typesetting}
 \label{sec:math}
 % ============================================================================
 
-The template loads \texttt{amsmath}, \texttt{amssymb}, and \texttt{amsthm} for comprehensive math support.
+The class loads \texttt{amsmath}, \texttt{amssymb}, and \texttt{amsthm}, then configures theorem-like environments. Additional math packages can still be loaded by the document when needed.
 
 \subsection{Equations}
-Inline math: $E = mc^2$, $\sum_{i=1}^{n} x_i$. Display equations with automatic numbering:
+
+Inline mathematics such as $E = mc^2$, $\sum_{i=1}^{n} x_i$, and $\mathbb{E}[X]$ follows the document font choices. Displayed equations are numbered in the usual way:
 
 \begin{equation}
-    \mathcal{L}(\theta) = \mathbb{E}_{x \sim p_{\text{data}}} \left[ \log p_\theta(x) \right]
-    \label{eq:likelihood}
+  \mathcal{L}(\theta)
+  = \mathbb{E}_{x \sim p_{\mathrm{data}}}
+    \left[-\log p_{\theta}(x)\right].
+  \label{eq:loss}
 \end{equation}
 
-Aligned equations:
 \begin{align}
-    H(X)   & = -\sum_{x} p(x) \log p(x) \label{eq:entropy} \\
-    I(X;Y) & = H(X) - H(X|Y) \label{eq:mi}
+  H(X)   &= -\sum_x p(x)\log p(x), \label{eq:entropy}\\
+  I(X;Y) &= H(X) - H(X\mid Y). \label{eq:mutual-information}
 \end{align}
 
-Cross-reference: \cref{eq:entropy} shows the entropy definition.
+\Cref{eq:loss,eq:entropy,eq:mutual-information} demonstrate equation references and automatic label names.
+
+\lipsum[8][1-4]
 
 \subsection{Theorem Environments}
-The following environments are pre-defined:
 
-\begin{theorem}[Bayes' Theorem]
-    \label{thm:bayes}
-    For events $A$ and $B$ with $P(B) > 0$:
-    \[ P(A|B) = \frac{P(B|A) \cdot P(A)}{P(B)} \]
-\end{theorem}
-
-\begin{lemma}
-    \label{lem:example}
-    This is an example lemma to demonstrate the typesetting of the lemma environment.
-    \lipsum[1][1-2]
-\end{lemma}
-
-\begin{definition}[Convex Function]
-    A function $f: \mathbb{R}^n \to \mathbb{R}$ is convex if for all $x, y$ and $\lambda \in [0,1]$:
-    \[ f(\lambda x + (1-\lambda)y) \leq \lambda f(x) + (1-\lambda) f(y) \]
+\begin{definition}[Convex function]
+  A function $f:\mathbb{R}^n\to\mathbb{R}$ is convex if, for all $x,y\in\mathbb{R}^n$ and $\lambda\in[0,1]$,
+  \[
+    f(\lambda x + (1-\lambda)y)
+    \leq \lambda f(x) + (1-\lambda)f(y).
+  \]
+  \label{def:convex}
 \end{definition}
 
+\begin{theorem}[Jensen's inequality]
+  Let $f$ be convex and let $X$ be an integrable random variable. Then
+  \[
+    f(\mathbb{E}X) \leq \mathbb{E}f(X).
+  \]
+  \label{thm:jensen}
+\end{theorem}
+
 \begin{proof}
-    The proof follows directly from the definition.
-    This shows the typesetting of the proof environment.
-    \lipsum[2][1]
+  The statement follows by applying the supporting-hyperplane characterization of convex functions to \cref{def:convex} and then taking expectations. \lipsum[9][1-2]
 \end{proof}
 
+\begin{lemma}
+  If a sequence $(a_n)$ is nonnegative and summable, then $a_n\to0$.
+  \label{lem:summable}
+\end{lemma}
+
+\begin{proposition}
+  The cross-reference names for \cref{thm:jensen,lem:summable} are produced by \textnormal{\texttt{cleveref}}.
+\end{proposition}
+
+\begin{corollary}
+  Any finite nonnegative sequence satisfies the conclusion of \cref{lem:summable} after extension by zeros.
+\end{corollary}
+
+\begin{example}
+  The quadratic function $f(x)=x^\top x$ is a standard convex function.
+\end{example}
+
 \begin{remark}
-    Additional theorem-like environments include \texttt{corollary}, \texttt{proposition}, and \texttt{example}.
+  The class provides numbered theorem, lemma, corollary, proposition, definition, and example environments, plus an unnumbered remark environment.
 \end{remark}
 
+\lipsum[10]
+
 % ============================================================================
-\section{Figures and Tables}
-\label{sec:floats}
+\section{Figures and Captions}
+\label{sec:figures}
 % ============================================================================
 
-\subsection{Figures with Subfigures}
+Figures use the class caption setup: bold colored labels, period separators, and compact spacing. Subfigures are supported through \texttt{subcaption}.
+
 \begin{figure}[htbp]
+  \centering
+  \begin{subfigure}{0.47\linewidth}
     \centering
-    \begin{subfigure}{0.48\linewidth}
-        \centering
-        \begin{tikzpicture}
-            \fill[academicblue!20] (0,0) rectangle (3,2);
-            \node at (1.5,1) {Subfigure A};
-        \end{tikzpicture}
-        \caption{First subfigure}
-        \label{fig:sub-a}
-    \end{subfigure}\hfill
-    \begin{subfigure}{0.48\linewidth}
-        \centering
-        \begin{tikzpicture}
-            \fill[citegreen!20] (0,0) rectangle (3,2);
-            \node at (1.5,1) {Subfigure B};
-        \end{tikzpicture}
-        \caption{Second subfigure}
-        \label{fig:sub-b}
-    \end{subfigure}
-    \caption{Example figure with two subfigures using \texttt{subcaption} package.}
-    \label{fig:example}
+    \fcolorbox{academicblue}{academicblue!8}{%
+      \parbox[c][2.5cm][c]{0.82\linewidth}{\centering Feature Panel A\\\lipsum[11][1][1-5]}%
+    }
+    \caption{First panel}
+    \label{fig:panel-a}
+  \end{subfigure}\hfill
+  \begin{subfigure}{0.47\linewidth}
+    \centering
+    \fcolorbox{citegreen}{citegreen!8}{%
+      \parbox[c][2.5cm][c]{0.82\linewidth}{\centering Feature Panel B\\\lipsum[12][1][1-5]}%
+    }
+    \caption{Second panel}
+    \label{fig:panel-b}
+  \end{subfigure}
+  \caption{A subfigure example using only standard boxes and class colors.}
+  \label{fig:subfigures}
 \end{figure}
 
-\subsection{Professional Tables}
+\Cref{fig:panel-a,fig:panel-b} are subfigure references, while \cref{fig:subfigures} refers to the whole figure.
+
+\lipsum[13-14]
+
+% ============================================================================
+\section{Tables}
+\label{sec:tables}
+% ============================================================================
+
+The class loads \texttt{booktabs}, \texttt{longtable}, \texttt{array}, and \texttt{multirow}. This section shows both a compact floating table and a multipage-capable long table.
+
 \begin{table}[htbp]
-    \centering
-    \caption{Example table using \texttt{booktabs} for professional formatting}
-    \label{tab:example}
-    \begin{tabular}{lccc}
-        \toprule
-        Method   & Precision     & Recall        & F1 Score      \\
-        \midrule
-        Baseline & 0.82          & 0.78          & 0.80          \\
-        Proposed & \textbf{0.91} & \textbf{0.88} & \textbf{0.89} \\
-        \bottomrule
-    \end{tabular}
+  \centering
+  \caption{A compact table using \texttt{booktabs}.}
+  \label{tab:booktabs}
+  \begin{tabular}{lS[table-format=1.2]S[table-format=1.2]S[table-format=1.2]}
+    \toprule
+    Method & {Precision} & {Recall} & {F1 Score} \\
+    \midrule
+    Baseline & 0.82 & 0.78 & 0.80 \\
+    Calibrated & 0.87 & 0.84 & 0.85 \\
+    Proposed & 0.91 & 0.88 & 0.89 \\
+    \bottomrule
+  \end{tabular}
 \end{table}
 
+\begin{longtable}{p{0.25\linewidth}p{0.65\linewidth}}
+  \caption{A long table using packages loaded by the class.}
+  \label{tab:longtable}\\
+  \toprule
+  Feature & Demonstration purpose \\
+  \midrule
+  \endfirsthead
+  \toprule
+  Feature & Demonstration purpose \\
+  \midrule
+  \endhead
+  Geometry & Shows class-managed margins, header height, and footer spacing. \\
+  Typography & Shows paragraph spacing, zero indentation, and microtypographic improvements. \\
+  Captions & Shows colored labels and consistent caption spacing. \\
+  Bibliography & Shows compact \texttt{natbib} references with sorted numeric citations. \\
+  Header & Shows the short title and short author on later pages. \\
+  \bottomrule
+\end{longtable}
+
+\lipsum[15]
+
 % ============================================================================
-\section{Algorithms and Code}
-\label{sec:code}
+\section{Algorithms and Code Listings}
+\label{sec:algorithms}
 % ============================================================================
 
-\subsection{Pseudocode}
+The class does not force an algorithm or code package. This example loads \texttt{algorithm}, \texttt{algpseudocode}, and \texttt{listings} in the document preamble so authors can choose their preferred tools.
+
 \begin{algorithm}[htbp]
-    \caption{Example algorithm using \texttt{algpseudocode}}
-    \label{alg:example}
-    \begin{algorithmic}[1]
-        \Procedure{TrainModel}{$\mathcal{D}, \theta_0, \eta$}
-        \State $\theta \gets \theta_0$
-        \While{not converged}
-        \State $\mathcal{B} \gets$ \Call{SampleBatch}{$\mathcal{D}$}
-        \State $g \gets \nabla_\theta \mathcal{L}(\theta; \mathcal{B})$
-        \State $\theta \gets \theta - \eta \cdot g$
-        \EndWhile
-        \State \Return $\theta$
-        \EndProcedure
-    \end{algorithmic}
+  \caption{Template-aware experiment loop}
+  \label{alg:example}
+  \begin{algorithmic}[1]
+    \Procedure{RunStudy}{$\mathcal{D}, \Theta, K$}
+      \For{$k \gets 1$ to $K$}
+        \State $\theta_k \gets$ \Call{Initialize}{$\Theta$}
+        \State $\ell_k \gets$ \Call{TrainAndEvaluate}{$\mathcal{D}, \theta_k$}
+      \EndFor
+      \State \Return $\arg\min_k \ell_k$
+    \EndProcedure
+  \end{algorithmic}
 \end{algorithm}
 
-\subsection{Code Listings}
-\begin{lstlisting}[language=Python,caption={Python code example}]
-def train_step(model, batch, optimizer):
-    loss = model.compute_loss(batch)
-    loss.backward()
-    optimizer.step()
-    return loss.item()
+\begin{lstlisting}[language=Python,caption={Small Python listing with the class color theme},label={lst:python}]
+def summarize(scores):
+    total = sum(scores)
+    mean = total / len(scores)
+    return {"count": len(scores), "mean": mean}
 \end{lstlisting}
+
+The algorithm in \cref{alg:example} and the code in \cref{lst:python} are ordinary floats/listings placed inside the class layout.
+
+This short paragraph leaves enough text to inspect the vertical spacing between the listing and the next section heading without forcing an overloaded page.
 
 % ============================================================================
 \section{Citations and Bibliography}
-\label{sec:bib}
+\label{sec:bibliography}
 % ============================================================================
 
-The template uses \texttt{natbib} for citation management.
-Citation examples: single cite \cite{shannon1948mathematical}, multiple cites \cite{balle2017endtoend, cheng2020learned}.
+The class loads \texttt{natbib} with numeric, sorted, and compressed citations, and uses the \texttt{unsrtnat} bibliography style. Examples include a single citation \cite{shannon1948mathematical}, a compressed group \cite{wallace1992jpeg,sullivan2012hevc,vvc2021standard}, and learned compression references \cite{balle2017endtoend,minnen2018joint,cheng2020learned}. Rate-distortion theory is represented by \citet{berger1971rate}.
 
+\lipsum[18-19]
+
+% ============================================================================
 \section{Conclusion}
-This guide covered the main features of the ModernAcademic-EN template.
-For questions or contributions, please visit the project repository.
+\label{sec:conclusion}
+% ============================================================================
+
+This document is intended to be a living visual test for \texttt{ModernAcademic-EN.cls}. It keeps the example content close to the class file's actual public interface while using \texttt{lipsum} text to expose spacing, page breaks, float behavior, headers, captions, and bibliography formatting across several pages.
+
+\lipsum[20]
 
 {\small
 \bibliography{references}
 }
+
 \end{document}
