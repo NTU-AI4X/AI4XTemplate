@@ -1,0 +1,943 @@
+%% beamerthemeModernAcademicBase.sty
+%% Shared Beamer theme foundation for ModernAcademic presentation templates.
+%% License: MIT
+
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{beamerthemeModernAcademicBase}[2026/05/18 v1.0 ModernAcademic Beamer Base Theme]
+
+\RequirePackage{iftex}
+\RequirePackage{xstring}
+\RequirePackage{etoolbox}
+\RequirePackage{xparse}
+\RequirePackage{tikz}
+\RequirePackage{graphicx}
+\RequirePackage{xcolor}
+
+\makeatletter
+
+%% ============================================================================
+%% 1. THEME TYPOGRAPHY AND SPACING CONFIGURATION
+%% ============================================================================
+
+% Internal storage. Use the public layout presets and setters below instead of
+% editing these macros directly.
+\newcommand{\MA@slide@leftmargin}{}
+\newcommand{\MA@slide@rightmargin}{}
+\newcommand{\MA@titlepreskip}{}
+\newcommand{\MA@titlelogogap}{1.2em}
+\newcommand{\MA@titlebar@height}{}
+\newcommand{\MA@titlebar@topskip}{}
+\newcommand{\MA@titlebar@ruledepth}{}
+\newcommand{\MA@frametitle@height}{}
+\newcommand{\MA@frametitle@depth}{}
+\newcommand{\MA@frametitle@compactheight}{}
+\newcommand{\MA@frametitle@compactdepth}{}
+\newcommand{\MA@frametitle@subtitleextra}{1.5ex}
+\newcommand{\MA@frametitle@outertopskip}{}
+\newcommand{\MA@frametitle@topskip}{}
+\newcommand{\MA@footline@height}{}
+\newcommand{\MA@footline@depth}{}
+\newcommand{\MA@block@radius}{3pt}
+\newcommand{\MA@abstract@label}{Abstract}
+\newcommand{\MA@section@label}{Section}
+
+\newcommand{\MA@titlepage@headerratio}{0.12}
+\newcommand{\MA@titlepage@bodyratio}{0.78}
+\newcommand{\MA@titlepage@footerratio}{0.10}
+\newcommand{\MA@titlepage@headerleftmargin}{9mm}
+\newcommand{\MA@titlepage@headerrightmargin}{9mm}
+\newcommand{\MA@titlepage@bodyleftmargin}{9mm}
+\newcommand{\MA@titlepage@bodyrightmargin}{9mm}
+\newcommand{\MA@titlepage@footerleftmargin}{9mm}
+\newcommand{\MA@titlepage@footerrightmargin}{9mm}
+\newcommand{\MA@sectionpage@headerratio}{0.12}
+\newcommand{\MA@sectionpage@bodyratio}{0.78}
+\newcommand{\MA@sectionpage@footerratio}{0.10}
+\newcommand{\MA@sectionpage@headerleftmargin}{9mm}
+\newcommand{\MA@sectionpage@headerrightmargin}{9mm}
+\newcommand{\MA@sectionpage@bodyleftmargin}{9mm}
+\newcommand{\MA@sectionpage@bodyrightmargin}{9mm}
+\newcommand{\MA@sectionpage@footerleftmargin}{9mm}
+\newcommand{\MA@sectionpage@footerrightmargin}{9mm}
+\newcommand{\MA@contentpage@headerratio}{0.09}
+\newcommand{\MA@contentpage@bodyratio}{0.83}
+\newcommand{\MA@contentpage@footerratio}{0.08}
+\newcommand{\MA@contentpage@headerleftmargin}{9mm}
+\newcommand{\MA@contentpage@headerrightmargin}{9mm}
+\newcommand{\MA@contentpage@bodyleftmargin}{9mm}
+\newcommand{\MA@contentpage@bodyrightmargin}{9mm}
+\newcommand{\MA@contentpage@footerleftmargin}{9mm}
+\newcommand{\MA@contentpage@footerrightmargin}{9mm}
+\newcommand{\MA@tailpage@headerratio}{0.12}
+\newcommand{\MA@tailpage@bodyratio}{0.78}
+\newcommand{\MA@tailpage@footerratio}{0.10}
+\newcommand{\MA@tailpage@headerleftmargin}{9mm}
+\newcommand{\MA@tailpage@headerrightmargin}{9mm}
+\newcommand{\MA@tailpage@bodyleftmargin}{9mm}
+\newcommand{\MA@tailpage@bodyrightmargin}{9mm}
+\newcommand{\MA@tailpage@footerleftmargin}{9mm}
+\newcommand{\MA@tailpage@footerrightmargin}{9mm}
+
+\newlength{\MA@layout@headerheight}
+\newlength{\MA@layout@bodyheight}
+\newlength{\MA@layout@footerheight}
+\newlength{\MA@layout@contentwidth}
+\newlength{\MA@footline@usedheight}
+\newlength{\MA@footline@useddepth}
+\newlength{\MA@sectionrulex}
+\newlength{\MA@sectiontextx}
+\newlength{\MA@sectiontextwidth}
+\newlength{\MA@sectionliney}
+\newlength{\MA@sectiontitlewidth}
+
+%% ============================================================================
+%% 2. COLORS AND PUBLIC CONFIGURATION INTERFACE
+%% ============================================================================
+
+\definecolor{academicblue}{HTML}{1a2a6c}
+\definecolor{linkblue}{HTML}{1a2a6c}
+\definecolor{citegreen}{HTML}{2d5a27}
+\definecolor{urlpurple}{HTML}{5c3566}
+\definecolor{abstractbg}{HTML}{f8f9fa}
+\definecolor{abstractborder}{HTML}{e9ecef}
+\definecolor{MA@canvas}{HTML}{fbfcfe}
+\definecolor{MA@ink}{HTML}{182033}
+\definecolor{MA@muted}{HTML}{65758b}
+\definecolor{MA@softline}{HTML}{dfe6ef}
+\definecolor{MA@panel}{HTML}{ffffff}
+
+\newcommand{\MA@applybeamercolors}{%
+  \setbeamercolor{normal text}{fg=MA@ink,bg=MA@panel}%
+  \setbeamercolor{structure}{fg=academicblue}%
+  \setbeamercolor{title}{fg=academicblue,bg=}%
+  \setbeamercolor{subtitle}{fg=MA@muted,bg=}%
+  \setbeamercolor{author}{fg=MA@ink,bg=}%
+  \setbeamercolor{institute}{fg=MA@muted,bg=}%
+  \setbeamercolor{date}{fg=MA@muted,bg=}%
+  \setbeamercolor{frametitle}{fg=academicblue,bg=MA@canvas}%
+  \setbeamercolor{framesubtitle}{fg=MA@muted,bg=MA@canvas}%
+  \setbeamercolor{headline}{fg=MA@muted,bg=MA@canvas}%
+  \setbeamercolor{footline}{fg=MA@muted,bg=MA@canvas}%
+  \setbeamercolor{page number in head/foot}{fg=academicblue,bg=MA@canvas}%
+  \setbeamercolor{block title}{fg=white,bg=academicblue}%
+  \setbeamercolor{block body}{fg=MA@ink,bg=academicblue!5}%
+  \setbeamercolor{block title alerted}{fg=white,bg=red!70!black}%
+  \setbeamercolor{block body alerted}{fg=MA@ink,bg=red!6}%
+  \setbeamercolor{block title example}{fg=white,bg=citegreen}%
+  \setbeamercolor{block body example}{fg=MA@ink,bg=citegreen!7}%
+  \setbeamercolor{caption name}{fg=academicblue}%
+  \setbeamercolor{bibliography entry author}{fg=academicblue}%
+  \hypersetup{%
+    colorlinks=true,
+    linkcolor=linkblue,
+    citecolor=citegreen,
+    urlcolor=urlpurple
+  }%
+}
+
+% Usage: \setthemecolor{b91c1c} (hex) or \setthemecolor{185,28,28} (RGB)
+\newcommand{\setthemecolor}[1]{%
+  \IfSubStr{#1}{,}{%
+    \definecolor{academicblue}{RGB}{#1}%
+    \definecolor{linkblue}{RGB}{#1}%
+  }{%
+    \definecolor{academicblue}{HTML}{#1}%
+    \definecolor{linkblue}{HTML}{#1}%
+  }%
+  \MA@applybeamercolors
+}
+
+\newcommand{\setlinkcolor}[1]{%
+  \definecolor{linkblue}{HTML}{#1}%
+  \MA@applybeamercolors
+}
+\newcommand{\setcitecolor}[1]{%
+  \definecolor{citegreen}{HTML}{#1}%
+  \MA@applybeamercolors
+}
+\newcommand{\seturlcolor}[1]{%
+  \definecolor{urlpurple}{HTML}{#1}%
+  \MA@applybeamercolors
+}
+
+%% ============================================================================
+%% 2.1 PUBLIC LAYOUT CONFIGURATION INTERFACE
+%% ============================================================================
+
+% Slide margins.
+\newcommand{\setslidemargins}[2]{%
+  \renewcommand{\MA@slide@leftmargin}{#1}%
+  \renewcommand{\MA@slide@rightmargin}{#2}%
+  \setbeamersize{text margin left=\MA@slide@leftmargin,text margin right=\MA@slide@rightmargin}%
+}
+
+% Title-slide header and title block spacing.
+\newcommand{\settitleheaderheight}[1]{\renewcommand{\MA@titlebar@height}{#1}}
+\newcommand{\settitleheadertopskip}[1]{\renewcommand{\MA@titlebar@topskip}{#1}}
+\newcommand{\settitleheaderruledepth}[1]{\renewcommand{\MA@titlebar@ruledepth}{#1}}
+\newcommand{\settitlecontentpreskip}[1]{\renewcommand{\MA@titlepreskip}{#1}}
+\newcommand{\settitleheaderruledistance}[1]{\settitleheaderruledepth{#1}}
+\newcommand{\settitlecontenttopspace}[1]{\settitlecontentpreskip{#1}}
+\newcommand{\settitlepageheaderlayout}[4]{%
+  \settitleheaderheight{#1}%
+  \settitleheadertopskip{#2}%
+  \settitleheaderruledistance{#3}%
+  \settitlecontenttopspace{#4}%
+}
+\newcommand{\settitleheaderlayout}[4]{%
+  \settitlepageheaderlayout{#1}{#2}{#3}{#4}%
+}
+
+% Content-slide header layout.
+\newcommand{\setcontentheaderwithlogoheight}[1]{\renewcommand{\MA@frametitle@height}{#1}}
+\newcommand{\setcontentheaderwithlogobottomspace}[1]{\renewcommand{\MA@frametitle@depth}{#1}}
+\newcommand{\setcontentheaderwithoutlogoheight}[1]{\renewcommand{\MA@frametitle@compactheight}{#1}}
+\newcommand{\setcontentheaderwithoutlogobottomspace}[1]{\renewcommand{\MA@frametitle@compactdepth}{#1}}
+\newcommand{\setcontentheadersubtitlebottomspace}[1]{\renewcommand{\MA@frametitle@subtitleextra}{#1}}
+\newcommand{\setcontentheadertopmargin}[1]{\renewcommand{\MA@frametitle@outertopskip}{#1}}
+\newcommand{\setcontentheadertexttopspace}[1]{\renewcommand{\MA@frametitle@topskip}{#1}}
+\newcommand{\setcontentheaderlayout}[7]{%
+  \setcontentheaderwithlogoheight{#1}%
+  \setcontentheaderwithlogobottomspace{#2}%
+  \setcontentheaderwithoutlogoheight{#3}%
+  \setcontentheaderwithoutlogobottomspace{#4}%
+  \setcontentheadersubtitlebottomspace{#5}%
+  \setcontentheadertopmargin{#6}%
+  \setcontentheadertexttopspace{#7}%
+}
+
+% Compatibility aliases for earlier versions. In these names, "depth" means the
+% bottom space reserved below the TeX box baseline.
+\newcommand{\setframeheaderheight}[1]{\setcontentheaderwithlogoheight{#1}}
+\newcommand{\setframeheaderdepth}[1]{\setcontentheaderwithlogobottomspace{#1}}
+\newcommand{\setframeheadercompactheight}[1]{\setcontentheaderwithoutlogoheight{#1}}
+\newcommand{\setframeheadercompactdepth}[1]{\setcontentheaderwithoutlogobottomspace{#1}}
+\newcommand{\setframeheadersubtitleextra}[1]{\setcontentheadersubtitlebottomspace{#1}}
+\newcommand{\setframeheaderoutertopskip}[1]{\setcontentheadertopmargin{#1}}
+\newcommand{\setframeheadertopskip}[1]{\setcontentheadertexttopspace{#1}}
+\newcommand{\setframeheaderlayout}[7]{\setcontentheaderlayout{#1}{#2}{#3}{#4}{#5}{#6}{#7}}
+
+% Footer layout.
+\newcommand{\setfooterheight}[1]{\renewcommand{\MA@footline@height}{#1}}
+\newcommand{\setfooterbottomspace}[1]{\renewcommand{\MA@footline@depth}{#1}}
+\newcommand{\setfooterlayout}[2]{%
+  \setfooterheight{#1}%
+  \setfooterbottomspace{#2}%
+}
+\newcommand{\setfooterdepth}[1]{\setfooterbottomspace{#1}}
+
+%% Page-type region layout.
+%% Ratios are relative to the full slide height and should normally sum to 1.
+\newif\ifMA@titlepage@header
+\newif\ifMA@titlepage@footer
+\newif\ifMA@sectionpage@header
+\newif\ifMA@sectionpage@footer
+\newif\ifMA@contentpage@header
+\newif\ifMA@contentpage@footer
+\newif\ifMA@tailpage@header
+\newif\ifMA@tailpage@footer
+\MA@titlepage@headerfalse
+\MA@titlepage@footerfalse
+\MA@sectionpage@headerfalse
+\MA@sectionpage@footerfalse
+\MA@contentpage@headertrue
+\MA@contentpage@footertrue
+\MA@tailpage@headerfalse
+\MA@tailpage@footerfalse
+
+\newcommand{\MA@setlayoutregions}[3]{%
+  \setlength{\MA@layout@headerheight}{#1\paperheight}%
+  \setlength{\MA@layout@bodyheight}{#2\paperheight}%
+  \setlength{\MA@layout@footerheight}{#3\paperheight}%
+}
+\newcommand{\MA@setlayoutcontentwidth}[2]{%
+  \setlength{\MA@layout@contentwidth}{\dimexpr\paperwidth-#1-#2\relax}%
+}
+
+\newcommand{\settitlepageregions}[3]{%
+  \renewcommand{\MA@titlepage@headerratio}{#1}%
+  \renewcommand{\MA@titlepage@bodyratio}{#2}%
+  \renewcommand{\MA@titlepage@footerratio}{#3}%
+}
+\newcommand{\settitlepageheadermargins}[2]{%
+  \renewcommand{\MA@titlepage@headerleftmargin}{#1}%
+  \renewcommand{\MA@titlepage@headerrightmargin}{#2}%
+}
+\newcommand{\settitlepagebodymargins}[2]{%
+  \renewcommand{\MA@titlepage@bodyleftmargin}{#1}%
+  \renewcommand{\MA@titlepage@bodyrightmargin}{#2}%
+}
+\newcommand{\settitlepagefootermargins}[2]{%
+  \renewcommand{\MA@titlepage@footerleftmargin}{#1}%
+  \renewcommand{\MA@titlepage@footerrightmargin}{#2}%
+}
+\newcommand{\settitlepagemargins}[2]{%
+  \settitlepageheadermargins{#1}{#2}%
+  \settitlepagebodymargins{#1}{#2}%
+  \settitlepagefootermargins{#1}{#2}%
+}
+\newcommand{\settitlepagelayout}[5]{%
+  \settitlepageregions{#1}{#2}{#3}%
+  \settitlepagemargins{#4}{#5}%
+}
+\newcommand{\settitlepageregionlayout}[9]{%
+  \settitlepageregions{#1}{#2}{#3}%
+  \settitlepageheadermargins{#4}{#5}%
+  \settitlepagebodymargins{#6}{#7}%
+  \settitlepagefootermargins{#8}{#9}%
+}
+\newcommand{\showtitlepageheader}{\MA@titlepage@headertrue}
+\newcommand{\hidetitlepageheader}{\MA@titlepage@headerfalse}
+\newcommand{\showtitlepagefooter}{\MA@titlepage@footertrue}
+\newcommand{\hidetitlepagefooter}{\MA@titlepage@footerfalse}
+
+\newcommand{\setsectionpageregions}[3]{%
+  \renewcommand{\MA@sectionpage@headerratio}{#1}%
+  \renewcommand{\MA@sectionpage@bodyratio}{#2}%
+  \renewcommand{\MA@sectionpage@footerratio}{#3}%
+}
+\newcommand{\setsectionpageheadermargins}[2]{%
+  \renewcommand{\MA@sectionpage@headerleftmargin}{#1}%
+  \renewcommand{\MA@sectionpage@headerrightmargin}{#2}%
+}
+\newcommand{\setsectionpagebodymargins}[2]{%
+  \renewcommand{\MA@sectionpage@bodyleftmargin}{#1}%
+  \renewcommand{\MA@sectionpage@bodyrightmargin}{#2}%
+}
+\newcommand{\setsectionpagefootermargins}[2]{%
+  \renewcommand{\MA@sectionpage@footerleftmargin}{#1}%
+  \renewcommand{\MA@sectionpage@footerrightmargin}{#2}%
+}
+\newcommand{\setsectionpagemargins}[2]{%
+  \setsectionpageheadermargins{#1}{#2}%
+  \setsectionpagebodymargins{#1}{#2}%
+  \setsectionpagefootermargins{#1}{#2}%
+}
+\newcommand{\setsectionpagelayout}[5]{%
+  \setsectionpageregions{#1}{#2}{#3}%
+  \setsectionpagemargins{#4}{#5}%
+}
+\newcommand{\setsectionpageregionlayout}[9]{%
+  \setsectionpageregions{#1}{#2}{#3}%
+  \setsectionpageheadermargins{#4}{#5}%
+  \setsectionpagebodymargins{#6}{#7}%
+  \setsectionpagefootermargins{#8}{#9}%
+}
+\newcommand{\showsectionpageheader}{\MA@sectionpage@headertrue}
+\newcommand{\hidesectionpageheader}{\MA@sectionpage@headerfalse}
+\newcommand{\showsectionpagefooter}{\MA@sectionpage@footertrue}
+\newcommand{\hidesectionpagefooter}{\MA@sectionpage@footerfalse}
+
+\newcommand{\setcontentpageregions}[3]{%
+  \renewcommand{\MA@contentpage@headerratio}{#1}%
+  \renewcommand{\MA@contentpage@bodyratio}{#2}%
+  \renewcommand{\MA@contentpage@footerratio}{#3}%
+}
+\newcommand{\setcontentpageheadermargins}[2]{%
+  \renewcommand{\MA@contentpage@headerleftmargin}{#1}%
+  \renewcommand{\MA@contentpage@headerrightmargin}{#2}%
+}
+\newcommand{\setcontentpagebodymargins}[2]{%
+  \renewcommand{\MA@contentpage@bodyleftmargin}{#1}%
+  \renewcommand{\MA@contentpage@bodyrightmargin}{#2}%
+  \setslidemargins{#1}{#2}%
+}
+\newcommand{\setcontentpagefootermargins}[2]{%
+  \renewcommand{\MA@contentpage@footerleftmargin}{#1}%
+  \renewcommand{\MA@contentpage@footerrightmargin}{#2}%
+}
+\newcommand{\setcontentpagemargins}[2]{%
+  \setcontentpageheadermargins{#1}{#2}%
+  \setcontentpagebodymargins{#1}{#2}%
+  \setcontentpagefootermargins{#1}{#2}%
+}
+\newcommand{\setcontentpagelayout}[5]{%
+  \setcontentpageregions{#1}{#2}{#3}%
+  \setcontentpagemargins{#4}{#5}%
+}
+\newcommand{\setcontentpageregionlayout}[9]{%
+  \setcontentpageregions{#1}{#2}{#3}%
+  \setcontentpageheadermargins{#4}{#5}%
+  \setcontentpagebodymargins{#6}{#7}%
+  \setcontentpagefootermargins{#8}{#9}%
+}
+\newcommand{\showcontentpageheader}{\MA@contentpage@headertrue}
+\newcommand{\hidecontentpageheader}{\MA@contentpage@headerfalse}
+\newcommand{\showcontentpagefooter}{\MA@contentpage@footertrue}
+\newcommand{\hidecontentpagefooter}{\MA@contentpage@footerfalse}
+
+\newcommand{\settailpageregions}[3]{%
+  \renewcommand{\MA@tailpage@headerratio}{#1}%
+  \renewcommand{\MA@tailpage@bodyratio}{#2}%
+  \renewcommand{\MA@tailpage@footerratio}{#3}%
+}
+\newcommand{\settailpageheadermargins}[2]{%
+  \renewcommand{\MA@tailpage@headerleftmargin}{#1}%
+  \renewcommand{\MA@tailpage@headerrightmargin}{#2}%
+}
+\newcommand{\settailpagebodymargins}[2]{%
+  \renewcommand{\MA@tailpage@bodyleftmargin}{#1}%
+  \renewcommand{\MA@tailpage@bodyrightmargin}{#2}%
+}
+\newcommand{\settailpagefootermargins}[2]{%
+  \renewcommand{\MA@tailpage@footerleftmargin}{#1}%
+  \renewcommand{\MA@tailpage@footerrightmargin}{#2}%
+}
+\newcommand{\settailpagemargins}[2]{%
+  \settailpageheadermargins{#1}{#2}%
+  \settailpagebodymargins{#1}{#2}%
+  \settailpagefootermargins{#1}{#2}%
+}
+\newcommand{\settailpagelayout}[5]{%
+  \settailpageregions{#1}{#2}{#3}%
+  \settailpagemargins{#4}{#5}%
+}
+\newcommand{\settailpageregionlayout}[9]{%
+  \settailpageregions{#1}{#2}{#3}%
+  \settailpageheadermargins{#4}{#5}%
+  \settailpagebodymargins{#6}{#7}%
+  \settailpagefootermargins{#8}{#9}%
+}
+\newcommand{\showtailpageheader}{\MA@tailpage@headertrue}
+\newcommand{\hidetailpageheader}{\MA@tailpage@headerfalse}
+\newcommand{\showtailpagefooter}{\MA@tailpage@footertrue}
+\newcommand{\hidetailpagefooter}{\MA@tailpage@footerfalse}
+
+% Layout presets.
+% standard: balanced academic-team style; good default for talks and reports.
+% compact: shorter header/footer; keeps more vertical space for normal slides.
+% dense: minimum chrome; useful for equations, tables, and content-heavy decks.
+% spacious: larger margins and breathing room; suited to keynote-style decks.
+\newcommand{\modernacademiclayoutstandard}{%
+  \setslidemargins{9mm}{9mm}%
+  \settitlepagelayout{0}{1}{0}{9mm}{9mm}%
+  \setsectionpagelayout{0.12}{0.78}{0.10}{9mm}{9mm}%
+  \setcontentpagelayout{0.09}{0.83}{0.08}{9mm}{9mm}%
+  \settailpagelayout{0.12}{0.78}{0.10}{9mm}{9mm}%
+  \settitlepageheaderlayout{2.4em}{0pt}{12mm}{0.16\paperheight}%
+  \setcontentheaderlayout{7.2mm}{2.0mm}{7.4mm}{2.0mm}{2.4mm}{1.2mm}{3.4mm}%
+  \setfooterlayout{3.4ex}{1.2ex}%
+}
+\newcommand{\modernacademiclayoutcompact}{%
+  \setslidemargins{8mm}{8mm}%
+  \settitlepagelayout{0}{1}{0}{8mm}{8mm}%
+  \setsectionpagelayout{0.10}{0.82}{0.08}{8mm}{8mm}%
+  \setcontentpagelayout{0.08}{0.85}{0.07}{8mm}{8mm}%
+  \settailpagelayout{0.10}{0.82}{0.08}{8mm}{8mm}%
+  \settitlepageheaderlayout{2.2em}{0pt}{10mm}{0.13\paperheight}%
+  \setcontentheaderlayout{6.4mm}{1.6mm}{6.6mm}{1.6mm}{2.0mm}{0.9mm}{2.8mm}%
+  \setfooterlayout{3.0ex}{0.9ex}%
+}
+\newcommand{\modernacademiclayoutdense}{%
+  \setslidemargins{6mm}{6mm}%
+  \settitlepagelayout{0}{1}{0}{6mm}{6mm}%
+  \setsectionpagelayout{0.09}{0.85}{0.06}{6mm}{6mm}%
+  \setcontentpagelayout{0.07}{0.87}{0.06}{6mm}{6mm}%
+  \settailpagelayout{0.09}{0.85}{0.06}{6mm}{6mm}%
+  \settitlepageheaderlayout{2.0em}{0pt}{8mm}{0.11\paperheight}%
+  \setcontentheaderlayout{5.8mm}{1.3mm}{6.0mm}{1.3mm}{1.7mm}{0.6mm}{2.4mm}%
+  \setfooterlayout{2.7ex}{0.7ex}%
+}
+\newcommand{\modernacademiclayoutspacious}{%
+  \setslidemargins{11mm}{11mm}%
+  \settitlepagelayout{0}{1}{0}{11mm}{11mm}%
+  \setsectionpagelayout{0.14}{0.76}{0.10}{11mm}{11mm}%
+  \setcontentpagelayout{0.11}{0.80}{0.09}{11mm}{11mm}%
+  \settailpagelayout{0.14}{0.76}{0.10}{11mm}{11mm}%
+  \settitlepageheaderlayout{2.8em}{0pt}{15mm}{0.18\paperheight}%
+  \setcontentheaderlayout{8.6mm}{2.4mm}{8.8mm}{2.4mm}{3.0mm}{1.4mm}{3.8mm}%
+  \setfooterlayout{3.8ex}{1.4ex}%
+}
+\newcommand{\usemodernacademiclayout}[1]{%
+  \IfStrEqCase{#1}{%
+    {standard}{\modernacademiclayoutstandard}%
+    {compact}{\modernacademiclayoutcompact}%
+    {dense}{\modernacademiclayoutdense}%
+    {spacious}{\modernacademiclayoutspacious}%
+  }[\PackageWarning{beamerthemeModernAcademicBase}{Unknown layout preset `#1'. Keeping the current layout.}]%
+}
+\newcommand{\usebeamerlayoutpreset}[1]{\usemodernacademiclayout{#1}}
+
+\usemodernacademiclayout{standard}
+
+%% ============================================================================
+%% 3. TITLE, LOGO, AND METADATA COMMANDS
+%% ============================================================================
+
+\newcommand{\MA@shorttitle}{}
+\newcommand{\MA@shortauthor}{}
+\newcommand{\MA@affiliation}{}
+\newcommand{\MA@email}{}
+\newcommand{\MA@abstract}{}
+\newcommand{\MA@templatename}{ModernAcademic\\Beamer Theme}
+\newcommand{\MA@teamname}{}
+\newcommand{\MA@titlelogo}{}
+\newlength{\MA@frametitle@usedheight}
+\newlength{\MA@frametitle@useddepth}
+\newlength{\MA@frametitle@textwidth}
+\newlength{\MA@frametitle@boxareaheight}
+
+\newif\ifMA@logointitle
+\newif\ifMA@logoinheader
+\newif\ifMA@sectionframe
+\MA@logointitlefalse
+\MA@logoinheaderfalse
+\MA@sectionframetrue
+
+\newcommand{\shorttitle}[1]{\renewcommand{\MA@shorttitle}{#1}}
+\newcommand{\shortauthor}[1]{\renewcommand{\MA@shortauthor}{#1}}
+\newcommand{\affiliation}[1]{%
+  \renewcommand{\MA@affiliation}{#1}%
+  \institute{#1}%
+}
+\newcommand{\email}[1]{\renewcommand{\MA@email}{#1}}
+\renewcommand{\abstract}[1]{\renewcommand{\MA@abstract}{#1}}
+\newcommand{\templatename}[1]{\renewcommand{\MA@templatename}{#1}}
+\newcommand{\teamname}[1]{\renewcommand{\MA@teamname}{#1}}
+
+\newcommand{\settitlepreskip}[1]{\settitlecontentpreskip{#1}}
+\newcommand{\settitlelogogap}[1]{\renewcommand{\MA@titlelogogap}{#1}}
+\newcommand{\settitlebartopskip}[1]{\settitleheadertopskip{#1}}
+\newcommand{\setabstractname}[1]{\renewcommand{\MA@abstract@label}{#1}}
+\newcommand{\setsectionname}[1]{\renewcommand{\MA@section@label}{#1}}
+\newcommand{\titlelogocontent}[1]{\renewcommand{\MA@titlelogo}{#1}}
+\newcommand{\showlogointitle}{\MA@logointitletrue}
+\newcommand{\hidelogointitle}{\MA@logointitlefalse}
+\newcommand{\showlogoinheader}{\MA@logoinheadertrue}
+\newcommand{\hidelogoinheader}{\MA@logoinheaderfalse}
+\newcommand{\showsectionframes}{\MA@sectionframetrue}
+\newcommand{\hidesectionframes}{\MA@sectionframefalse}
+
+\newcommand{\MA@syncframetitledimensions}{%
+  \ifMA@logoinheader
+    \ifx\MA@titlelogo\@empty
+      \setlength{\MA@frametitle@usedheight}{\MA@frametitle@compactheight}%
+      \setlength{\MA@frametitle@useddepth}{\MA@frametitle@compactdepth}%
+      \setlength{\MA@frametitle@textwidth}{\dimexpr\paperwidth-\MA@contentpage@headerleftmargin-\MA@contentpage@headerrightmargin\relax}%
+    \else
+      \setlength{\MA@frametitle@usedheight}{\MA@frametitle@height}%
+      \setlength{\MA@frametitle@useddepth}{\MA@frametitle@depth}%
+      \setlength{\MA@frametitle@textwidth}{0.68\paperwidth}%
+    \fi
+  \else
+    \setlength{\MA@frametitle@usedheight}{\MA@frametitle@compactheight}%
+    \setlength{\MA@frametitle@useddepth}{\MA@frametitle@compactdepth}%
+    \setlength{\MA@frametitle@textwidth}{\dimexpr\paperwidth-\MA@contentpage@headerleftmargin-\MA@contentpage@headerrightmargin\relax}%
+  \fi
+}
+
+\newcommand{\headerlogo}[1]{#1}
+\newcommand{\MA@header@before}{}
+\newcommand{\MA@header@after}{}
+\newcommand{\MA@header@logo}{}
+\newcommand{\MA@header@test}{}
+\newcommand{\MA@header@nologomarker}{MA@internal@noheaderlogo}
+\newcommand{\MA@header@nologovalue}{\MA@header@nologomarker}
+\newif\ifMA@header@haslogo
+\long\def\MA@stripacademicheadertrail#1\headerlogo#2\MA@stop{%
+  \renewcommand{\MA@header@after}{#1}%
+}
+\long\def\MA@splitacademicheader#1\headerlogo#2#3\MA@stop{%
+  \renewcommand{\MA@header@before}{#1}%
+  \renewcommand{\MA@header@logo}{#2}%
+  \renewcommand{\MA@header@test}{#2}%
+  \ifx\MA@header@test\MA@header@nologovalue
+    \MA@header@haslogofalse
+    \renewcommand{\MA@header@logo}{}%
+    \renewcommand{\MA@header@after}{}%
+  \else
+    \MA@header@haslogotrue
+    \MA@stripacademicheadertrail#3\MA@stop
+  \fi
+}
+\newcommand{\MA@renderacademicheader}[1]{%
+  \MA@splitacademicheader#1\headerlogo{\MA@header@nologomarker}\MA@stop
+  \MA@setlayoutcontentwidth{\MA@contentpage@headerleftmargin}{\MA@contentpage@headerrightmargin}%
+  \vbox to \MA@frametitle@boxareaheight{%
+    \vskip\MA@frametitle@topskip
+    \hbox to \paperwidth{%
+      \hspace*{\MA@contentpage@headerleftmargin}%
+      \ifMA@header@haslogo
+        \ifblank{\MA@header@before}{%
+          \begin{minipage}[c][\dimexpr\MA@frametitle@boxareaheight-\MA@frametitle@topskip\relax][c]{0.26\MA@layout@contentwidth}
+            \raggedright
+            \MA@header@logo
+          \end{minipage}%
+          \hfill
+          \begin{minipage}[c][\dimexpr\MA@frametitle@boxareaheight-\MA@frametitle@topskip\relax][c]{0.68\MA@layout@contentwidth}
+            \raggedleft
+            \MA@header@after
+          \end{minipage}%
+        }{%
+          \begin{minipage}[c][\dimexpr\MA@frametitle@boxareaheight-\MA@frametitle@topskip\relax][c]{0.68\MA@layout@contentwidth}
+            \raggedright
+            \MA@header@before
+          \end{minipage}%
+          \hfill
+          \begin{minipage}[c][\dimexpr\MA@frametitle@boxareaheight-\MA@frametitle@topskip\relax][c]{0.26\MA@layout@contentwidth}
+            \raggedleft
+            \MA@header@logo
+          \end{minipage}%
+        }%
+      \else
+        \begin{minipage}[c][\dimexpr\MA@frametitle@boxareaheight-\MA@frametitle@topskip\relax][c]{\MA@layout@contentwidth}
+          \raggedright
+          \MA@header@before
+        \end{minipage}%
+      \fi
+      \hspace*{\MA@contentpage@headerrightmargin}%
+    }%
+    \vfil
+  }%
+}
+\NewDocumentEnvironment{academicheader}{+b}{\MA@renderacademicheader{#1}}{}
+\NewDocumentEnvironment{academicbody}{+b}{%
+  \MA@setlayoutregions{\MA@contentpage@headerratio}{\MA@contentpage@bodyratio}{\MA@contentpage@footerratio}%
+  \MA@setlayoutcontentwidth{\MA@contentpage@bodyleftmargin}{\MA@contentpage@bodyrightmargin}%
+  \begin{minipage}[t][\MA@layout@bodyheight][t]{\MA@layout@contentwidth}
+    #1%
+  \end{minipage}%
+}{}
+\NewDocumentEnvironment{academicfooter}{+b}{%
+  \MA@setlayoutcontentwidth{\MA@contentpage@footerleftmargin}{\MA@contentpage@footerrightmargin}%
+  \hbox to \paperwidth{%
+    \hspace*{\MA@contentpage@footerleftmargin}%
+    \begin{minipage}[c][\MA@layout@footerheight][c]{\MA@layout@contentwidth}
+      #1%
+    \end{minipage}%
+    \hspace*{\MA@contentpage@footerrightmargin}%
+  }%
+}{}
+
+\newcommand{\MA@displaytitle}{%
+  \ifx\MA@shorttitle\@empty
+    \insertshorttitle
+  \else
+    \MA@shorttitle
+  \fi
+}
+\newcommand{\MA@displayauthor}{%
+  \ifx\MA@shortauthor\@empty
+    \insertshortauthor
+  \else
+    \MA@shortauthor
+  \fi
+}
+
+%% ============================================================================
+%% 4. BEAMER STYLE
+%% ============================================================================
+
+\mode<presentation>
+
+\usefonttheme{professionalfonts}
+\setbeamersize{text margin left=\MA@slide@leftmargin,text margin right=\MA@slide@rightmargin}
+\beamertemplatenavigationsymbolsempty
+\MA@applybeamercolors
+
+\setbeamerfont{title}{family=\sffamily,series=\bfseries,size=\LARGE}
+\setbeamerfont{subtitle}{family=\sffamily,series=\mdseries,size=\normalsize}
+\setbeamerfont{author}{family=\sffamily,series=\mdseries,size=\small}
+\setbeamerfont{institute}{family=\sffamily,series=\mdseries,size=\footnotesize}
+\setbeamerfont{date}{family=\sffamily,series=\mdseries,size=\footnotesize}
+\setbeamerfont{frametitle}{family=\sffamily,series=\bfseries,size=\large}
+\setbeamerfont{framesubtitle}{family=\sffamily,series=\mdseries,size=\scriptsize}
+\setbeamerfont{footline}{family=\sffamily,size=\scriptsize}
+\setbeamerfont{block title}{family=\sffamily,series=\bfseries,size=\normalsize}
+\setbeamerfont{block body}{size=\small}
+\setbeamerfont{caption}{size=\scriptsize}
+
+\setbeamertemplate{itemize item}{%
+  \raise0.18ex\hbox{\color{academicblue}\rule{0.62ex}{0.62ex}}%
+}
+\setbeamertemplate{itemize subitem}{%
+  \raise0.22ex\hbox{\color{academicblue!70}\rule{0.48ex}{0.48ex}}%
+}
+\setbeamertemplate{enumerate item}{%
+  \usebeamercolor[fg]{structure}\insertenumlabel.%
+}
+\setbeamertemplate{caption}[numbered]
+\setbeamertemplate{blocks}[rounded][shadow=false]
+\setbeamertemplate{theorems}[numbered]
+
+%% ============================================================================
+%% 5. TITLE PAGE, FRAME TITLE, FOOTLINE, AND SECTION PAGES
+%% ============================================================================
+
+\setbeamertemplate{title page}{%
+  \MA@setlayoutregions{\MA@titlepage@headerratio}{\MA@titlepage@bodyratio}{\MA@titlepage@footerratio}%
+  \MA@setlayoutcontentwidth{\MA@titlepage@headerleftmargin}{\MA@titlepage@headerrightmargin}%
+  \begin{tikzpicture}[remember picture,overlay]
+    \fill[MA@canvas] (current page.south west) rectangle (current page.north east);
+    \fill[academicblue] (current page.north west) rectangle ([xshift=3.2mm]current page.south west);
+    \ifMA@titlepage@header
+      \draw[academicblue!22,line width=0.6pt]
+        ([xshift=\MA@titlepage@headerleftmargin,yshift=-\MA@layout@headerheight]current page.north west) --
+        ([xshift=-\MA@titlepage@headerrightmargin,yshift=-\MA@layout@headerheight]current page.north east);
+    \fi
+    \ifMA@titlepage@footer
+      \MA@setlayoutcontentwidth{\MA@titlepage@footerleftmargin}{\MA@titlepage@footerrightmargin}%
+      \draw[MA@softline,line width=0.45pt]
+        ([xshift=\MA@titlepage@footerleftmargin,yshift=\MA@layout@footerheight]current page.south west) --
+        ([xshift=-\MA@titlepage@footerrightmargin,yshift=\MA@layout@footerheight]current page.south east);
+      \node[anchor=south west,inner sep=0pt]
+        at ([xshift=\MA@titlepage@footerleftmargin]current page.south west) {%
+          \begin{minipage}[c][\MA@layout@footerheight][c]{\MA@layout@contentwidth}
+            {\usebeamerfont{footline}\color{MA@muted}\MA@displayauthor\hfill\MA@displaytitle\par}%
+          \end{minipage}%
+        };
+    \fi
+    \ifMA@logointitle
+      \ifx\MA@titlelogo\@empty\else
+        \node[anchor=south east,inner sep=0pt]
+          at ([xshift=-\MA@titlepage@bodyrightmargin,yshift=\dimexpr\MA@layout@footerheight+\MA@titlepage@bodyrightmargin\relax]current page.south east) {%
+            \MA@titlelogo%
+          };
+      \fi
+    \fi
+  \end{tikzpicture}%
+  \vspace*{\MA@layout@headerheight}%
+  \MA@setlayoutcontentwidth{\MA@titlepage@bodyleftmargin}{\MA@titlepage@bodyrightmargin}%
+  \hspace*{\MA@titlepage@bodyleftmargin}%
+  \begin{minipage}[c][\MA@layout@bodyheight][c]{\MA@layout@contentwidth}
+    \raggedright
+    {\usebeamerfont{title}\usebeamercolor[fg]{title}\inserttitle\par}
+    \ifx\insertsubtitle\@empty\else
+      \vspace{0.45em}
+      {\usebeamerfont{subtitle}\usebeamercolor[fg]{subtitle}\insertsubtitle\par}
+    \fi
+    \vspace{1.5em}
+    {\usebeamerfont{author}\usebeamercolor[fg]{author}\insertauthor\par}
+    \ifx\insertinstitute\@empty\else
+      \vspace{0.35em}
+      {\usebeamerfont{institute}\usebeamercolor[fg]{institute}\insertinstitute\par}
+    \fi
+    \ifx\MA@email\@empty\else
+      \vspace{0.25em}
+      {\usebeamerfont{institute}\color{MA@muted}\texttt{\MA@email}\par}
+    \fi
+    \ifx\insertdate\@empty\else
+      \vspace{0.75em}
+      {\usebeamerfont{date}\usebeamercolor[fg]{date}\insertdate\par}
+    \fi
+  \end{minipage}%
+}
+
+\setbeamertemplate{frametitle}{%
+  \ifMA@contentpage@header
+    \MA@setlayoutregions{\MA@contentpage@headerratio}{\MA@contentpage@bodyratio}{\MA@contentpage@footerratio}%
+    \MA@syncframetitledimensions
+    \setlength{\MA@frametitle@boxareaheight}{\dimexpr\MA@layout@headerheight-\MA@frametitle@outertopskip\relax}%
+    \ifdim\MA@frametitle@boxareaheight<2mm
+      \setlength{\MA@frametitle@boxareaheight}{\MA@layout@headerheight}%
+    \fi
+    \nointerlineskip
+    \vspace*{\MA@frametitle@outertopskip}%
+    \begin{beamercolorbox}[
+        wd=\paperwidth,
+        ht=\dimexpr\MA@frametitle@boxareaheight-\MA@frametitle@subtitleextra\relax,
+        dp=\MA@frametitle@subtitleextra
+      ]{frametitle}
+      \ifMA@logoinheader
+        \ifx\MA@titlelogo\@empty
+          \begin{academicheader}
+            {\usebeamerfont{frametitle}\usebeamercolor[fg]{frametitle}\insertframetitle\par}%
+            \ifx\insertframesubtitle\@empty\else
+              \vspace{0.15em}%
+              {\usebeamerfont{framesubtitle}\usebeamercolor[fg]{framesubtitle}\insertframesubtitle\par}%
+            \fi
+          \end{academicheader}%
+        \else
+          \begin{academicheader}
+            {\usebeamerfont{frametitle}\usebeamercolor[fg]{frametitle}\insertframetitle\par}%
+            \ifx\insertframesubtitle\@empty\else
+              \vspace{0.15em}%
+              {\usebeamerfont{framesubtitle}\usebeamercolor[fg]{framesubtitle}\insertframesubtitle\par}%
+            \fi
+            \headerlogo{\raisebox{-0.25\height}{\MA@titlelogo}}%
+          \end{academicheader}%
+        \fi
+      \else
+        \begin{academicheader}
+          {\usebeamerfont{frametitle}\usebeamercolor[fg]{frametitle}\insertframetitle\par}%
+          \ifx\insertframesubtitle\@empty\else
+            \vspace{0.15em}%
+            {\usebeamerfont{framesubtitle}\usebeamercolor[fg]{framesubtitle}\insertframesubtitle\par}%
+          \fi
+        \end{academicheader}%
+      \fi
+    \end{beamercolorbox}%
+    \begin{tikzpicture}[remember picture,overlay]
+      \draw[academicblue!18,line width=0.5pt]
+        ([xshift=\MA@contentpage@headerleftmargin,yshift=-\MA@layout@headerheight]current page.north west) --
+        ([xshift=-\MA@contentpage@headerrightmargin,yshift=-\MA@layout@headerheight]current page.north east);
+    \end{tikzpicture}%
+  \fi
+}
+
+\newenvironment{academicframe}[2][]{%
+  \begin{frame}[environment=academicframe]%
+  \frametitle{#2}%
+  \ifstrempty{#1}{}{\framesubtitle{#1}}%
+}{%
+  \end{frame}%
+}
+\newenvironment{modernacademicframe}[2][]{%
+  \begin{frame}[environment=modernacademicframe]%
+  \frametitle{#2}%
+  \ifstrempty{#1}{}{\framesubtitle{#1}}%
+}{%
+  \end{frame}%
+}
+
+\setbeamertemplate{footline}{%
+  \ifMA@contentpage@footer
+    \MA@setlayoutregions{\MA@contentpage@headerratio}{\MA@contentpage@bodyratio}{\MA@contentpage@footerratio}%
+    \setlength{\MA@footline@useddepth}{\MA@footline@depth}%
+    \setlength{\MA@footline@usedheight}{\dimexpr\MA@layout@footerheight-\MA@footline@useddepth\relax}%
+    \leavevmode
+    \begin{tikzpicture}[remember picture,overlay]
+      \draw[MA@softline,line width=0.45pt]
+        ([xshift=\MA@contentpage@footerleftmargin,yshift=\MA@layout@footerheight]current page.south west) --
+        ([xshift=-\MA@contentpage@footerrightmargin,yshift=\MA@layout@footerheight]current page.south east);
+      \draw[academicblue,line width=0.9pt]
+        ([xshift=\MA@contentpage@footerleftmargin,yshift=\MA@layout@footerheight]current page.south west) --
+        ([xshift=.18\paperwidth,yshift=\MA@layout@footerheight]current page.south west);
+    \end{tikzpicture}%
+    \begin{beamercolorbox}[
+        wd=\paperwidth,
+        ht=\MA@footline@usedheight,
+        dp=\MA@footline@useddepth
+      ]{footline}
+      \begin{academicfooter}
+        {\usebeamerfont{footline}\MA@displayauthor\hfill\MA@displaytitle\hfill
+        \usebeamercolor[fg]{page number in head/foot}\insertframenumber\,/\,\inserttotalframenumber\par}%
+      \end{academicfooter}%
+    \end{beamercolorbox}%
+  \fi
+}
+
+\AtBeginSection[]{%
+  \ifMA@sectionframe
+    \begin{frame}[plain,noframenumbering]
+      \MA@setlayoutregions{\MA@sectionpage@headerratio}{\MA@sectionpage@bodyratio}{\MA@sectionpage@footerratio}%
+      \MA@setlayoutcontentwidth{\MA@sectionpage@bodyleftmargin}{\MA@sectionpage@bodyrightmargin}%
+      \setlength{\MA@sectionrulex}{\dimexpr\MA@sectionpage@bodyleftmargin+.30\MA@layout@contentwidth\relax}%
+      \setlength{\MA@sectiontextx}{\dimexpr\MA@sectionrulex+8mm\relax}%
+      \setlength{\MA@sectiontextwidth}{\dimexpr\paperwidth-\MA@sectiontextx-\MA@sectionpage@bodyrightmargin\relax}%
+      \setlength{\MA@sectionliney}{.31\paperheight}%
+      \settowidth{\MA@sectiontitlewidth}{\sffamily\bfseries\fontsize{24}{28}\selectfont\insertsectionhead}%
+      \ifdim\MA@sectiontitlewidth>\MA@sectiontextwidth
+        \setlength{\MA@sectiontitlewidth}{\MA@sectiontextwidth}%
+      \fi
+      \begin{tikzpicture}[remember picture,overlay]
+        \fill[MA@canvas] (current page.south west) rectangle (current page.north east);
+        \fill[academicblue] (current page.north west) rectangle ([xshift=3.2mm]current page.south west);
+        \fill[academicblue!6] ([xshift=3.2mm]current page.south west) rectangle ([xshift=\MA@sectionrulex]current page.north west);
+        \draw[academicblue!20,line width=0.6pt]
+          ([xshift=\MA@sectionrulex]current page.south west) --
+          ([xshift=\MA@sectionrulex]current page.north west);
+        \node[anchor=south east,inner sep=0pt,outer sep=0pt]
+          at ([xshift={\dimexpr\MA@sectionrulex+0.6mm\relax}]current page.south west) {%
+            \scalebox{0.88}[1]{%
+              \ifXeTeX
+                \sffamily\mdseries
+              \else
+                \fontfamily{phv}\fontseries{m}\selectfont
+              \fi
+              \fontsize{220}{220}\selectfont\color{academicblue!95}\insertsectionnumber%
+            }%
+          };
+        \node[anchor=south west,inner sep=0pt,outer sep=0pt]
+          at ([xshift=\MA@sectiontextx,yshift=\dimexpr\MA@sectionliney+1.1em\relax]current page.south west) {%
+            \begin{minipage}{\MA@sectiontextwidth}
+              \raggedright
+              {\sffamily\bfseries\fontsize{24}{28}\selectfont\color{MA@ink}\insertsectionhead\par}
+            \end{minipage}%
+          };
+        \draw[academicblue,line width=1.2pt]
+          ([xshift=\MA@sectiontextx,yshift=\MA@sectionliney]current page.south west) --
+          ([xshift=\dimexpr\MA@sectiontextx+\MA@sectiontitlewidth\relax,yshift=\MA@sectionliney]current page.south west);
+        \node[anchor=north west,inner sep=0pt,outer sep=0pt]
+          at ([xshift=\MA@sectiontextx,yshift=\dimexpr\MA@sectionliney-0.65em\relax]current page.south west) {%
+            {\sffamily\bfseries\footnotesize\color{academicblue}\MakeUppercase{\MA@section@label}}%
+          };
+        \ifMA@sectionpage@header
+          \MA@setlayoutcontentwidth{\MA@sectionpage@headerleftmargin}{\MA@sectionpage@headerrightmargin}%
+          \draw[academicblue!18,line width=0.5pt]
+            ([xshift=\MA@sectionpage@headerleftmargin,yshift=-\MA@layout@headerheight]current page.north west) --
+            ([xshift=-\MA@sectionpage@headerrightmargin,yshift=-\MA@layout@headerheight]current page.north east);
+          \node[anchor=north west,inner sep=0pt]
+            at ([xshift=\MA@sectionpage@headerleftmargin]current page.north west) {%
+              \begin{minipage}[c][\MA@layout@headerheight][c]{\MA@layout@contentwidth}
+                {\usebeamerfont{footline}\bfseries\color{academicblue}\MA@displaytitle\par}%
+              \end{minipage}%
+            };
+        \fi
+        \ifMA@sectionpage@footer
+          \MA@setlayoutcontentwidth{\MA@sectionpage@footerleftmargin}{\MA@sectionpage@footerrightmargin}%
+          \draw[MA@softline,line width=0.45pt]
+            ([xshift=\MA@sectionpage@footerleftmargin,yshift=\MA@layout@footerheight]current page.south west) --
+            ([xshift=-\MA@sectionpage@footerrightmargin,yshift=\MA@layout@footerheight]current page.south east);
+          \node[anchor=south west,inner sep=0pt]
+            at ([xshift=\MA@sectionpage@footerleftmargin]current page.south west) {%
+              \begin{minipage}[c][\MA@layout@footerheight][c]{\MA@layout@contentwidth}
+                {\usebeamerfont{footline}\color{MA@muted}\MA@displayauthor\hfill\MA@displaytitle\par}%
+              \end{minipage}%
+            };
+        \fi
+      \end{tikzpicture}
+    \end{frame}
+  \fi
+}
+
+\newcommand{\tailpage}[2][]{%
+  \begin{frame}[plain,noframenumbering]
+    \MA@setlayoutregions{\MA@tailpage@headerratio}{\MA@tailpage@bodyratio}{\MA@tailpage@footerratio}%
+    \begin{tikzpicture}[remember picture,overlay]
+      \fill[MA@canvas] (current page.south west) rectangle (current page.north east);
+      \fill[academicblue] (current page.north west) rectangle ([xshift=3.2mm]current page.south west);
+      \ifMA@tailpage@header
+        \MA@setlayoutcontentwidth{\MA@tailpage@headerleftmargin}{\MA@tailpage@headerrightmargin}%
+        \draw[academicblue!18,line width=0.5pt]
+          ([xshift=\MA@tailpage@headerleftmargin,yshift=-\MA@layout@headerheight]current page.north west) --
+          ([xshift=-\MA@tailpage@headerrightmargin,yshift=-\MA@layout@headerheight]current page.north east);
+        \node[anchor=north west,inner sep=0pt]
+          at ([xshift=\MA@tailpage@headerleftmargin]current page.north west) {%
+            \begin{minipage}[c][\MA@layout@headerheight][c]{\MA@layout@contentwidth}
+              {\usebeamerfont{footline}\bfseries\color{academicblue}\MA@displaytitle\par}%
+            \end{minipage}%
+          };
+      \fi
+      \ifMA@tailpage@footer
+        \MA@setlayoutcontentwidth{\MA@tailpage@footerleftmargin}{\MA@tailpage@footerrightmargin}%
+        \draw[MA@softline,line width=0.45pt]
+          ([xshift=\MA@tailpage@footerleftmargin,yshift=\MA@layout@footerheight]current page.south west) --
+          ([xshift=-\MA@tailpage@footerrightmargin,yshift=\MA@layout@footerheight]current page.south east);
+        \node[anchor=south west,inner sep=0pt]
+          at ([xshift=\MA@tailpage@footerleftmargin]current page.south west) {%
+            \begin{minipage}[c][\MA@layout@footerheight][c]{\MA@layout@contentwidth}
+              {\usebeamerfont{footline}\color{MA@muted}\MA@displayauthor\hfill\MA@displaytitle\par}%
+            \end{minipage}%
+          };
+      \fi
+    \end{tikzpicture}
+    \vspace*{\MA@layout@headerheight}
+    \MA@setlayoutcontentwidth{\MA@tailpage@bodyleftmargin}{\MA@tailpage@bodyrightmargin}%
+    \hspace*{\MA@tailpage@bodyleftmargin}%
+    \begin{minipage}[c][\MA@layout@bodyheight][c]{\MA@layout@contentwidth}
+      \centering
+      \ifstrempty{#1}{}{%
+        {\usebeamerfont{title}\usebeamercolor[fg]{title}#1\par}%
+        \vspace{1.2em}%
+      }%
+      {\usebeamerfont{subtitle}\usebeamercolor[fg]{subtitle}#2\par}%
+    \end{minipage}
+  \end{frame}
+}
+
+\makeatother
+
+\mode<all>
+
+\endinput

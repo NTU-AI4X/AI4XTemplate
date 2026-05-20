@@ -26,6 +26,12 @@ English version:
 - 参考文献：`natbib` 与 `gbt7714-numerical`
 - 占位文本：`zhlipsum`
 
+## Beamer Support
+
+Beamer slide templates are available in `beamer/`. See `beamer/README.md` for slide-specific usage, layout controls, and compilation commands.
+
+Beamer 幻灯片模板位于 `beamer/` 目录。具体用法、页面区域控制和编译命令请见 `beamer/README.md`。
+
 ## Features
 
 Both class files provide the same core interface:

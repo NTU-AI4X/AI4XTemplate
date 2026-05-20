@@ -1,0 +1,428 @@
+% ModernAcademic-Beamer-EN Theme Showcase
+% A usage-oriented demonstration for beamerthemeModernAcademic-EN.sty.
+\documentclass[aspectratio=169,10pt]{beamer}
+
+\usetheme{ModernAcademic-EN}
+
+\usepackage{booktabs}
+
+% ============================================================================
+% PRESENTATION METADATA
+% ============================================================================
+
+\title{ModernAcademic-EN Beamer Theme}
+\subtitle{Supported commands and usage examples}
+\author{Alice Example, Bob Researcher, and Carol Writer}
+\shorttitle{ModernAcademic-EN Beamer}
+\shortauthor{Example et al.}
+\affiliation{NTU AI4X Research Group}
+\email{team@example.edu}
+\date{\today}
+
+% These commands are enabled by the theme defaults when ../assets/logo.png exists.
+% They are shown here as the explicit user-facing interface.
+\titlelogocontent{\includegraphics[height=2.4em]{../assets/logo.png}}
+\showlogointitle
+\hidelogoinheader
+
+\begin{document}
+
+\begin{frame}[plain,noframenumbering]
+  \titlepage
+\end{frame}
+
+\section{Quick Start}
+
+\begin{academicframe}[Load the theme and provide metadata]{Minimal Preamble}
+  \begin{block}{Theme and document metadata}
+    \scriptsize
+    \begin{tabular}{ll}
+      \toprule
+      Command & Example usage \\
+      \midrule
+      Load theme & \texttt{\textbackslash usetheme\{ModernAcademic-EN\}} \\
+      Title & \texttt{\textbackslash title\{ModernAcademic-EN Beamer Theme\}} \\
+      Subtitle & \texttt{\textbackslash subtitle\{Supported commands and usage examples\}} \\
+      Authors & \texttt{\textbackslash author\{Alice Example, Bob Researcher, and Carol Writer\}} \\
+      Short footer title & \texttt{\textbackslash shorttitle\{ModernAcademic-EN Beamer\}} \\
+      Short footer author & \texttt{\textbackslash shortauthor\{Example et al.\}} \\
+      Affiliation & \texttt{\textbackslash affiliation\{NTU AI4X Research Group\}} \\
+      Email & \texttt{\textbackslash email\{team@example.edu\}} \\
+      Date & \texttt{\textbackslash date\{\textbackslash today\}} \\
+      \bottomrule
+    \end{tabular}
+  \end{block}
+
+  \vspace{0.45em}
+  \begin{exampleblock}{Title slide}
+    \scriptsize
+    Use \texttt{\textbackslash begin\{frame\}[plain,noframenumbering]} and
+    \texttt{\textbackslash titlepage} for the opening slide.
+  \end{exampleblock}
+\end{academicframe}
+
+\begin{academicframe}[Ordinary slide construction]{Academic Frame}
+  \begin{columns}[T,onlytextwidth]
+    \begin{column}{0.48\textwidth}
+      \begin{block}{Frame environment}
+        \scriptsize
+        \begin{itemize}
+          \item With subtitle:
+            \texttt{\textbackslash begin\{academicframe\}[Subtitle]\{Title\}}
+          \item Without subtitle:
+            \texttt{\textbackslash begin\{academicframe\}\{Title\}}
+          \item Alias:
+            \texttt{\textbackslash begin\{modernacademicframe\}\{Title\}}
+        \end{itemize}
+      \end{block}
+    \end{column}
+    \begin{column}{0.48\textwidth}
+      \begin{exampleblock}{Standard Beamer content}
+        \scriptsize
+        Existing Beamer structures remain available: \texttt{columns},
+        \texttt{itemize}, \texttt{enumerate}, \texttt{block},
+        \texttt{exampleblock}, \texttt{alertblock}, \texttt{theorem},
+        \texttt{proof}, \texttt{table}, and math displays.
+      \end{exampleblock}
+    \end{column}
+  \end{columns}
+\end{academicframe}
+
+\begin{academicframe}[Core Beamer layout primitives inside this theme]{Columns and Widths}
+  \begin{columns}[T,onlytextwidth]
+    \begin{column}{0.47\textwidth}
+      \begin{block}{Two-column pattern}
+        \scriptsize
+        \begin{itemize}
+          \item Start with \texttt{\textbackslash begin\{columns\}[T,onlytextwidth]}.
+          \item Add panels with \texttt{\textbackslash begin\{column\}\{0.48\textbackslash textwidth\}}.
+          \item Keep column widths below \texttt{1.0\textbackslash textwidth} after gaps.
+          \item Use \texttt{T} to align column tops.
+        \end{itemize}
+      \end{block}
+    \end{column}
+    \begin{column}{0.47\textwidth}
+      \begin{exampleblock}{When to use columns}
+        \scriptsize
+        Use columns for method/result comparisons, figure-plus-explanation
+        slides, or side-by-side command examples. For small local alignment
+        inside one column, use \texttt{minipage}; for full slide structure, use
+        \texttt{columns}.
+      \end{exampleblock}
+    \end{column}
+  \end{columns}
+
+  \vspace{0.5em}
+  \begin{alertblock}{Practical rule}
+    \scriptsize
+    Prefer \texttt{onlytextwidth}; it keeps content aligned with the theme body
+    region instead of the full paper width.
+  \end{alertblock}
+\end{academicframe}
+
+\begin{academicframe}[Lists, overlays, graphics, and local spacing]{Beamer Basics}
+  \begin{columns}[T,onlytextwidth]
+    \begin{column}{0.32\textwidth}
+      \begin{block}{Lists}
+        \scriptsize
+        \begin{itemize}
+          \item \texttt{itemize}: bullets
+          \item \texttt{enumerate}: numbered steps
+          \item \texttt{description}: labeled terms
+        \end{itemize}
+      \end{block}
+    \end{column}
+    \begin{column}{0.32\textwidth}
+      \begin{exampleblock}{Overlays}
+        \scriptsize
+        \begin{itemize}
+          \item \texttt{\textbackslash pause}
+          \item \texttt{\textbackslash item<2->}
+          \item \texttt{\textbackslash only<3>\{...\}}
+          \item \texttt{\textbackslash alert\{...\}}
+        \end{itemize}
+      \end{exampleblock}
+    \end{column}
+    \begin{column}{0.32\textwidth}
+      \begin{alertblock}{Media and spacing}
+        \scriptsize
+        \begin{itemize}
+          \item \texttt{\textbackslash includegraphics}\\
+            \texttt{[width=.8\textbackslash linewidth]\{...\}}
+          \item \texttt{\textbackslash vspace\{0.5em\}}
+          \item \texttt{\textbackslash hfill}
+        \end{itemize}
+      \end{alertblock}
+    \end{column}
+  \end{columns}
+
+  \vspace{0.45em}
+  \begin{exampleblock}{Reading order}
+    \scriptsize
+    A good slide usually follows one dominant structure: title, one visual or
+    statement, then supporting bullets. Split dense material across frames
+    instead of shrinking all text.
+  \end{exampleblock}
+\end{academicframe}
+
+\section{Visual Setup}
+
+\begin{academicframe}[Theme color and hyperlink color commands]{Color Interface}
+  \begin{block}{Color commands}
+    \scriptsize
+    \begin{tabular}{ll}
+      \toprule
+      Command & Effect \\
+      \midrule
+      \texttt{\textbackslash setthemecolor\{1a2a6c\}} & Main accent for titles, rules, blocks, and structure \\
+      \texttt{\textbackslash setlinkcolor\{1a2a6c\}} & Internal links and Beamer navigation links \\
+      \texttt{\textbackslash setcitecolor\{2d5a27\}} & Citation link color \\
+      \texttt{\textbackslash seturlcolor\{5c3566\}} & URL link color \\
+      \bottomrule
+    \end{tabular}
+  \end{block}
+
+  \vspace{0.45em}
+  \begin{alertblock}{Input format}
+    \small
+    Color commands accept HTML hex values without the leading hash mark.
+  \end{alertblock}
+\end{academicframe}
+
+\begin{academicframe}[Preset first, override only when needed]{Layout Presets}
+  \begin{columns}[T,onlytextwidth]
+    \begin{column}{0.48\textwidth}
+      \begin{block}{Preset command}
+        \scriptsize
+        \texttt{\textbackslash usemodernacademiclayout\{standard\}}\\[0.6em]
+        Also supported:
+        \begin{itemize}
+          \item \texttt{compact}
+          \item \texttt{dense}
+          \item \texttt{spacious}
+        \end{itemize}
+      \end{block}
+    \end{column}
+    \begin{column}{0.48\textwidth}
+      \begin{exampleblock}{Alias and slide margins}
+        \scriptsize
+        \texttt{\textbackslash usebeamerlayoutpreset\{standard\}}\\[0.5em]
+        \texttt{\textbackslash setslidemargins\{9mm\}\{9mm\}}
+      \end{exampleblock}
+    \end{column}
+  \end{columns}
+\end{academicframe}
+
+\begin{academicframe}[Header, body, and footer proportions]{Page Region Layout}
+  \begin{block}{Region-ratio commands}
+    \scriptsize
+    \begin{itemize}
+      \item \texttt{\textbackslash settitlepageregionlayout\{0\}\{1\}\{0\}\{10mm\}\{10mm\}\{10mm\}\{10mm\}\{2.5mm\}\{2.5mm\}}
+      \item \texttt{\textbackslash setsectionpageregionlayout\{0.15\}\{0.75\}\{0.05\}\{10mm\}\{10mm\}\{10mm\}\{10mm\}\{2.5mm\}\{2.5mm\}}
+      \item \texttt{\textbackslash setcontentpageregionlayout\{0.1\}\{0.85\}\{0.05\}\{2.5mm\}\{2.5mm\}\{2.5mm\}\{2.5mm\}\{2.5mm\}\{2.5mm\}}
+      \item \texttt{\textbackslash settailpageregionlayout\{0\}\{1\}\{0\}\{10mm\}\{10mm\}\{10mm\}\{10mm\}\{2.5mm\}\{2.5mm\}}
+    \end{itemize}
+  \end{block}
+
+  \vspace{0.35em}
+  \begin{exampleblock}{Grouped alternatives}
+    \scriptsize
+    Use \texttt{\textbackslash setcontentpageregions\{...\}},
+    \texttt{\textbackslash setcontentpagemargins\{...\}}, or
+    \texttt{\textbackslash setcontentpagelayout\{...\}} when only one part of
+    the layout needs to change.
+  \end{exampleblock}
+\end{academicframe}
+
+\begin{academicframe}[Page-type switches and fine spacing]{Chrome Switches}
+  \begin{columns}[T,onlytextwidth]
+    \begin{column}{0.48\textwidth}
+      \begin{block}{Header and footer switches}
+        \scriptsize
+        \begin{itemize}
+          \item \texttt{\textbackslash hidetitlepageheader},
+            \texttt{\textbackslash hidetitlepagefooter}
+          \item \texttt{\textbackslash hidesectionpageheader},
+            \texttt{\textbackslash hidesectionpagefooter}
+          \item \texttt{\textbackslash showcontentpageheader},
+            \texttt{\textbackslash showcontentpagefooter}
+          \item \texttt{\textbackslash hidetailpageheader},
+            \texttt{\textbackslash hidetailpagefooter}
+        \end{itemize}
+      \end{block}
+    \end{column}
+    \begin{column}{0.48\textwidth}
+      \begin{exampleblock}{Spacing controls}
+        \scriptsize
+        \begin{itemize}
+          \item \texttt{\textbackslash setcontentheaderlayout\{...\}}
+          \item \texttt{\textbackslash setfooterlayout\{3.4ex\}\{1.2ex\}}
+          \item \texttt{\textbackslash setframeheaderlayout\{...\}} is a compatibility alias.
+        \end{itemize}
+      \end{exampleblock}
+    \end{column}
+  \end{columns}
+\end{academicframe}
+
+\section{Logo and Sections}
+
+\begin{academicframe}[One logo source, two optional placements]{Logo Commands}
+  \begin{block}{Title and content-page logo controls}
+    \scriptsize
+    \begin{itemize}
+      \item Define reusable logo content:
+        \texttt{\textbackslash titlelogocontent\{\textbackslash includegraphics[height=2.4em]\{../assets/logo.png\}\}}
+      \item Show it on the title page:
+        \texttt{\textbackslash showlogointitle}
+      \item Hide it on the title page:
+        \texttt{\textbackslash hidelogointitle}
+      \item Show or hide it in content-page headers:
+        \texttt{\textbackslash showlogoinheader},
+        \texttt{\textbackslash hidelogoinheader}
+    \end{itemize}
+  \end{block}
+
+  \vspace{0.35em}
+  \begin{exampleblock}{Metadata retained for custom title pages}
+    \scriptsize
+    \texttt{\textbackslash templatename\{ModernAcademic-EN\textbackslash\textbackslash Beamer Theme\}}
+    and \texttt{\textbackslash teamname\{Research Group\}} are available metadata
+    commands.
+  \end{exampleblock}
+\end{academicframe}
+
+\begin{academicframe}[Automatic divider slides and closing slides]{Section and Tail Pages}
+  \begin{columns}[T,onlytextwidth]
+    \begin{column}{0.48\textwidth}
+      \begin{block}{Section frames}
+        \scriptsize
+        \begin{itemize}
+          \item \texttt{\textbackslash setsectionname\{Section\}}
+          \item \texttt{\textbackslash showsectionframes}
+          \item \texttt{\textbackslash hidesectionframes}
+          \item \texttt{\textbackslash section\{Content\}} inserts a divider when section frames are shown.
+        \end{itemize}
+      \end{block}
+    \end{column}
+    \begin{column}{0.48\textwidth}
+      \begin{exampleblock}{Tail page}
+        \scriptsize
+        \texttt{\textbackslash tailpage[Thank You]\{Alice Example\textbackslash\textbackslash
+        \textbackslash texttt\{team@example.edu\}\}}\\[0.7em]
+        The optional argument is the tail-page title.
+      \end{exampleblock}
+    \end{column}
+  \end{columns}
+\end{academicframe}
+
+\section{Content Patterns}
+
+\begin{academicframe}[Native Beamer blocks use the theme styling]{Blocks and Lists}
+  \begin{columns}[T,onlytextwidth]
+    \begin{column}{0.32\textwidth}
+      \begin{block}{block}
+        \small
+        Use ordinary \texttt{block} for neutral statements and definitions.
+      \end{block}
+    \end{column}
+    \begin{column}{0.32\textwidth}
+      \begin{exampleblock}{exampleblock}
+        \small
+        Use \texttt{exampleblock} for positive examples, commands, or workflows.
+      \end{exampleblock}
+    \end{column}
+    \begin{column}{0.32\textwidth}
+      \begin{alertblock}{alertblock}
+        \small
+        Use \texttt{alertblock} for caveats, risks, or important constraints.
+      \end{alertblock}
+    \end{column}
+  \end{columns}
+\end{academicframe}
+
+\begin{academicframe}[Theorem and proof environments are numbered]{Mathematics}
+  \begin{theorem}[Rate-distortion objective]
+    Let $x$ be a source sample and $\hat{x}$ its reconstruction. A typical
+    learned compression objective can be written as
+    \[
+      \mathcal{L}(\theta)=
+      \mathbb{E}_{x\sim p_{\mathrm{data}}}
+      \left[R_{\theta}(x)+\lambda d(x,\hat{x})\right].
+    \]
+  \end{theorem}
+
+  \begin{proof}
+    The expression combines an expected bitrate term with a distortion penalty;
+    $\lambda$ selects the operating point on the rate-distortion curve.
+  \end{proof}
+\end{academicframe}
+
+\begin{academicframe}[Captions and compact tabular material]{Tables}
+  \begin{table}
+    \centering
+    \caption{Example results table using the theme caption style.}
+    \begin{tabular}{lccc}
+      \toprule
+      Method & Precision & Recall & F1 Score \\
+      \midrule
+      Baseline & 0.82 & 0.78 & 0.80 \\
+      Calibrated & 0.87 & 0.84 & 0.85 \\
+      Proposed & 0.91 & 0.88 & 0.89 \\
+      \bottomrule
+    \end{tabular}
+  \end{table}
+
+  \vspace{0.4em}
+  \begin{exampleblock}{Caption setup}
+    \small
+    The theme enables numbered captions with
+    \texttt{\textbackslash setbeamertemplate\{caption\}[numbered]}.
+  \end{exampleblock}
+\end{academicframe}
+
+\section{Reference}
+
+\begin{academicframe}[Common commands collected in one place]{Command Checklist}
+  \scriptsize
+  \begin{tabular}{lll}
+    \toprule
+    Category & Commands & Typical use \\
+    \midrule
+    Metadata &
+      \texttt{\textbackslash shorttitle}, \texttt{\textbackslash shortauthor}, \texttt{\textbackslash affiliation}, \texttt{\textbackslash email} &
+      Title page and footer text \\
+    Colors &
+      \texttt{\textbackslash setthemecolor}, \texttt{\textbackslash setlinkcolor}, \texttt{\textbackslash setcitecolor}, \texttt{\textbackslash seturlcolor} &
+      Theme and hyperlink palette \\
+    Layout &
+      \texttt{\textbackslash usemodernacademiclayout}, \texttt{\textbackslash setslidemargins} &
+      Global layout defaults \\
+    Regions &
+      \texttt{\textbackslash setcontentpageregionlayout}, \texttt{\textbackslash setcontentpagelayout} &
+      Header/body/footer geometry \\
+    Header &
+      \texttt{\textbackslash setcontentheaderlayout}, \texttt{\textbackslash setframeheaderlayout} &
+      Frame-title spacing \\
+    Footer &
+      \texttt{\textbackslash setfooterlayout}, \texttt{\textbackslash showcontentpagefooter}, \texttt{\textbackslash hidecontentpagefooter} &
+      Footer size and visibility \\
+    Logo &
+      \texttt{\textbackslash titlelogocontent}, \texttt{\textbackslash showlogointitle}, \texttt{\textbackslash showlogoinheader} &
+      Title and header logos \\
+    Sections &
+      \texttt{\textbackslash setsectionname}, \texttt{\textbackslash showsectionframes}, \texttt{\textbackslash hidesectionframes} &
+      Divider slides \\
+    Closing &
+      \texttt{\textbackslash tailpage[Title]\{...\}} &
+      Final contact slide \\
+    \bottomrule
+  \end{tabular}
+\end{academicframe}
+
+\tailpage[Thank You]{%
+  Alice Example\\
+  \texttt{team@example.edu}\\[0.8em]
+  NTU AI4X Research Group
+}
+
+\end{document}

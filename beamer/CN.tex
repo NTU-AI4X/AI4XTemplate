@@ -1,0 +1,427 @@
+% ModernAcademic-Beamer-CN Theme Showcase
+% A usage-oriented demonstration for beamerthemeModernAcademic-CN.sty.
+\documentclass[aspectratio=169,10pt]{ctexbeamer}
+
+\usetheme{ModernAcademic-CN}
+
+\usepackage{booktabs}
+
+% ============================================================================
+% PRESENTATION METADATA
+% ============================================================================
+
+\title{ModernAcademic-CN Beamer 主题}
+\subtitle{受支持命令与用法示例}
+\author{示例甲、研究员乙、撰稿人丙}
+\shorttitle{ModernAcademic-CN Beamer}
+\shortauthor{示例甲等}
+\affiliation{NTU AI4X 研究组}
+\email{team@example.edu}
+\date{\today}
+
+% 当 ../assets/logo.png 存在时，主题默认启用这些命令。
+% 这里显式写出，作为用户可直接使用的接口示例。
+\titlelogocontent{\includegraphics[height=2.4em]{../assets/logo.png}}
+\showlogointitle
+\hidelogoinheader
+
+\begin{document}
+
+\begin{frame}[plain,noframenumbering]
+  \titlepage
+\end{frame}
+
+\section{快速开始}
+
+\begin{academicframe}[加载主题并填写元信息]{最小导言区}
+  \begin{block}{主题与文档元信息}
+    \scriptsize
+    \begin{tabular}{ll}
+      \toprule
+      命令 & 示例用法 \\
+      \midrule
+      加载主题 & \texttt{\textbackslash usetheme\{ModernAcademic-CN\}} \\
+      标题 & \texttt{\textbackslash title\{ModernAcademic-CN Beamer 主题\}} \\
+      副标题 & \texttt{\textbackslash subtitle\{受支持命令与用法示例\}} \\
+      作者 & \texttt{\textbackslash author\{示例甲、研究员乙、撰稿人丙\}} \\
+      页脚短标题 & \texttt{\textbackslash shorttitle\{ModernAcademic-CN Beamer\}} \\
+      页脚短作者 & \texttt{\textbackslash shortauthor\{示例甲等\}} \\
+      单位 & \texttt{\textbackslash affiliation\{NTU AI4X 研究组\}} \\
+      邮箱 & \texttt{\textbackslash email\{team@example.edu\}} \\
+      日期 & \texttt{\textbackslash date\{\textbackslash today\}} \\
+      \bottomrule
+    \end{tabular}
+  \end{block}
+
+  \vspace{0.45em}
+  \begin{exampleblock}{标题页}
+    \scriptsize
+    使用 \texttt{\textbackslash begin\{frame\}[plain,noframenumbering]}
+    与 \texttt{\textbackslash titlepage} 创建开场页。
+  \end{exampleblock}
+\end{academicframe}
+
+\begin{academicframe}[普通页面构造方式]{Academic Frame}
+  \begin{columns}[T,onlytextwidth]
+    \begin{column}{0.48\textwidth}
+      \begin{block}{Frame 环境}
+        \scriptsize
+        \begin{itemize}
+          \item 带副标题：
+            \texttt{\textbackslash begin\{academicframe\}[副标题]\{标题\}}
+          \item 不带副标题：
+            \texttt{\textbackslash begin\{academicframe\}\{标题\}}
+          \item 别名：
+            \texttt{\textbackslash begin\{modernacademicframe\}\{标题\}}
+        \end{itemize}
+      \end{block}
+    \end{column}
+    \begin{column}{0.48\textwidth}
+      \begin{exampleblock}{标准 Beamer 内容}
+        \scriptsize
+        现有 Beamer 结构仍可直接使用：\texttt{columns}、
+        \texttt{itemize}、\texttt{enumerate}、\texttt{block}、
+        \texttt{exampleblock}、\texttt{alertblock}、\texttt{theorem}、
+        \texttt{proof}、\texttt{table} 与数学展示。
+      \end{exampleblock}
+    \end{column}
+  \end{columns}
+\end{academicframe}
+
+\begin{academicframe}[当前主题中的 Beamer 核心排版单元]{Columns 与宽度}
+  \begin{columns}[T,onlytextwidth]
+    \begin{column}{0.47\textwidth}
+      \begin{block}{双栏模式}
+        \scriptsize
+        \begin{itemize}
+          \item 用 \texttt{\textbackslash begin\{columns\}[T,onlytextwidth]} 开始。
+          \item 用 \texttt{\textbackslash begin\{column\}\{0.48\textbackslash textwidth\}} 添加栏。
+          \item 预留栏间距后，总宽度不要超过 \texttt{1.0\textbackslash textwidth}。
+          \item 选项 \texttt{T} 用于顶部对齐。
+        \end{itemize}
+      \end{block}
+    \end{column}
+    \begin{column}{0.47\textwidth}
+      \begin{exampleblock}{何时使用 columns}
+        \scriptsize
+        方法与结果对比、图文并排说明、左右两组命令示例，都适合使用
+        \texttt{columns}。如果只是在单栏内部做局部对齐，用
+        \texttt{minipage}；如果是整页结构，用 \texttt{columns}。
+      \end{exampleblock}
+    \end{column}
+  \end{columns}
+
+  \vspace{0.5em}
+  \begin{alertblock}{实用规则}
+    \scriptsize
+    优先使用 \texttt{onlytextwidth}，这样内容会与主题 body 区域对齐，
+    而不是按整张纸面宽度排版。
+  \end{alertblock}
+\end{academicframe}
+
+\begin{academicframe}[列表、覆盖层、图片与局部间距]{Beamer 基础}
+  \begin{columns}[T,onlytextwidth]
+    \begin{column}{0.32\textwidth}
+      \begin{block}{列表}
+        \scriptsize
+        \begin{itemize}
+          \item \texttt{itemize}：项目符号
+          \item \texttt{enumerate}：编号步骤
+          \item \texttt{description}：术语说明
+        \end{itemize}
+      \end{block}
+    \end{column}
+    \begin{column}{0.32\textwidth}
+      \begin{exampleblock}{覆盖层}
+        \scriptsize
+        \begin{itemize}
+          \item \texttt{\textbackslash pause}
+          \item \texttt{\textbackslash item<2->}
+          \item \texttt{\textbackslash only<3>\{...\}}
+          \item \texttt{\textbackslash alert\{...\}}
+        \end{itemize}
+      \end{exampleblock}
+    \end{column}
+    \begin{column}{0.32\textwidth}
+      \begin{alertblock}{图片与间距}
+        \scriptsize
+        \begin{itemize}
+          \item \texttt{\textbackslash includegraphics}\\
+            \texttt{[width=.8\textbackslash linewidth]\{...\}}
+          \item \texttt{\textbackslash vspace\{0.5em\}}
+          \item \texttt{\textbackslash hfill}
+        \end{itemize}
+      \end{alertblock}
+    \end{column}
+  \end{columns}
+
+  \vspace{0.45em}
+  \begin{exampleblock}{阅读顺序}
+    \scriptsize
+    一页幻灯片最好只有一个主结构：标题、一个核心图形或结论，然后是支撑要点。
+    内容太密时，优先拆成多页，而不是继续缩小字号。
+  \end{exampleblock}
+\end{academicframe}
+
+\section{视觉设置}
+
+\begin{academicframe}[主题色与链接颜色命令]{颜色接口}
+  \begin{block}{颜色命令}
+    \scriptsize
+    \begin{tabular}{ll}
+      \toprule
+      命令 & 效果 \\
+      \midrule
+      \texttt{\textbackslash setthemecolor\{1a2a6c\}} & 标题、线条、block 与结构元素的主强调色 \\
+      \texttt{\textbackslash setlinkcolor\{1a2a6c\}} & 内部链接与 Beamer 导航链接颜色 \\
+      \texttt{\textbackslash setcitecolor\{2d5a27\}} & 引用链接颜色 \\
+      \texttt{\textbackslash seturlcolor\{5c3566\}} & URL 链接颜色 \\
+      \bottomrule
+    \end{tabular}
+  \end{block}
+
+  \vspace{0.45em}
+  \begin{alertblock}{输入格式}
+    \small
+    颜色命令接受不带井号的 HTML 十六进制颜色值。
+  \end{alertblock}
+\end{academicframe}
+
+\begin{academicframe}[优先使用预设，需要时再覆盖]{布局预设}
+  \begin{columns}[T,onlytextwidth]
+    \begin{column}{0.48\textwidth}
+      \begin{block}{预设命令}
+        \scriptsize
+        \texttt{\textbackslash usemodernacademiclayout\{standard\}}\\[0.6em]
+        同时支持：
+        \begin{itemize}
+          \item \texttt{compact}
+          \item \texttt{dense}
+          \item \texttt{spacious}
+        \end{itemize}
+      \end{block}
+    \end{column}
+    \begin{column}{0.48\textwidth}
+      \begin{exampleblock}{别名与页面边距}
+        \scriptsize
+        \texttt{\textbackslash usebeamerlayoutpreset\{standard\}}\\[0.5em]
+        \texttt{\textbackslash setslidemargins\{9mm\}\{9mm\}}
+      \end{exampleblock}
+    \end{column}
+  \end{columns}
+\end{academicframe}
+
+\begin{academicframe}[Header、body 与 footer 的比例]{页面区域布局}
+  \begin{block}{区域比例命令}
+    \scriptsize
+    \begin{itemize}
+      \item \texttt{\textbackslash settitlepageregionlayout\{0\}\{1\}\{0\}\{10mm\}\{10mm\}\{10mm\}\{10mm\}\{2.5mm\}\{2.5mm\}}
+      \item \texttt{\textbackslash setsectionpageregionlayout\{0.15\}\{0.75\}\{0.05\}\{10mm\}\{10mm\}\{10mm\}\{10mm\}\{2.5mm\}\{2.5mm\}}
+      \item \texttt{\textbackslash setcontentpageregionlayout\{0.1\}\{0.85\}\{0.05\}\{2.5mm\}\{2.5mm\}\{2.5mm\}\{2.5mm\}\{2.5mm\}\{2.5mm\}}
+      \item \texttt{\textbackslash settailpageregionlayout\{0\}\{1\}\{0\}\{10mm\}\{10mm\}\{10mm\}\{10mm\}\{2.5mm\}\{2.5mm\}}
+    \end{itemize}
+  \end{block}
+
+  \vspace{0.35em}
+  \begin{exampleblock}{分组替代命令}
+    \scriptsize
+    当只需要修改局部布局时，可使用
+    \texttt{\textbackslash setcontentpageregions\{...\}}、
+    \texttt{\textbackslash setcontentpagemargins\{...\}} 或
+    \texttt{\textbackslash setcontentpagelayout\{...\}}。
+  \end{exampleblock}
+\end{academicframe}
+
+\begin{academicframe}[页面类型开关与细节间距]{页面装饰开关}
+  \begin{columns}[T,onlytextwidth]
+    \begin{column}{0.48\textwidth}
+      \begin{block}{Header 与 footer 开关}
+        \scriptsize
+        \begin{itemize}
+          \item \texttt{\textbackslash hidetitlepageheader},
+            \texttt{\textbackslash hidetitlepagefooter}
+          \item \texttt{\textbackslash hidesectionpageheader},
+            \texttt{\textbackslash hidesectionpagefooter}
+          \item \texttt{\textbackslash showcontentpageheader},
+            \texttt{\textbackslash showcontentpagefooter}
+          \item \texttt{\textbackslash hidetailpageheader},
+            \texttt{\textbackslash hidetailpagefooter}
+        \end{itemize}
+      \end{block}
+    \end{column}
+    \begin{column}{0.48\textwidth}
+      \begin{exampleblock}{间距控制}
+        \scriptsize
+        \begin{itemize}
+          \item \texttt{\textbackslash setcontentheaderlayout\{...\}}
+          \item \texttt{\textbackslash setfooterlayout\{3.4ex\}\{1.2ex\}}
+          \item \texttt{\textbackslash setframeheaderlayout\{...\}} 是兼容别名。
+        \end{itemize}
+      \end{exampleblock}
+    \end{column}
+  \end{columns}
+\end{academicframe}
+
+\section{Logo 与章节}
+
+\begin{academicframe}[一个 Logo 来源，两个可选位置]{Logo 命令}
+  \begin{block}{标题页与内容页 Logo 控制}
+    \scriptsize
+    \begin{itemize}
+      \item 定义可复用 Logo 内容：
+        \texttt{\textbackslash titlelogocontent\{\textbackslash includegraphics[height=2.4em]\{../assets/logo.png\}\}}
+      \item 在标题页显示：
+        \texttt{\textbackslash showlogointitle}
+      \item 在标题页隐藏：
+        \texttt{\textbackslash hidelogointitle}
+      \item 在内容页 header 显示或隐藏：
+        \texttt{\textbackslash showlogoinheader},
+        \texttt{\textbackslash hidelogoinheader}
+    \end{itemize}
+  \end{block}
+
+  \vspace{0.35em}
+  \begin{exampleblock}{保留给自定义标题页的元信息}
+    \scriptsize
+    \texttt{\textbackslash templatename\{ModernAcademic-CN\textbackslash\textbackslash Beamer Theme\}}
+    与 \texttt{\textbackslash teamname\{研究组\}} 也是可用的元信息命令。
+  \end{exampleblock}
+\end{academicframe}
+
+\begin{academicframe}[自动章节页与结束页]{章节页与 Tail Page}
+  \begin{columns}[T,onlytextwidth]
+    \begin{column}{0.48\textwidth}
+      \begin{block}{章节页}
+        \scriptsize
+        \begin{itemize}
+          \item \texttt{\textbackslash setsectionname\{章节\}}
+          \item \texttt{\textbackslash showsectionframes}
+          \item \texttt{\textbackslash hidesectionframes}
+          \item \texttt{\textbackslash section\{内容\}} 会在章节页开启时插入分隔页。
+        \end{itemize}
+      \end{block}
+    \end{column}
+    \begin{column}{0.48\textwidth}
+      \begin{exampleblock}{Tail page}
+        \scriptsize
+        \texttt{\textbackslash tailpage[谢谢]\{示例甲\textbackslash\textbackslash
+        \textbackslash texttt\{team@example.edu\}\}}\\[0.7em]
+        可选参数是结束页标题。
+      \end{exampleblock}
+    \end{column}
+  \end{columns}
+\end{academicframe}
+
+\section{内容模式}
+
+\begin{academicframe}[原生 Beamer block 使用主题样式]{Blocks 与列表}
+  \begin{columns}[T,onlytextwidth]
+    \begin{column}{0.32\textwidth}
+      \begin{block}{block}
+        \small
+        使用普通 \texttt{block} 展示中性陈述、定义或背景信息。
+      \end{block}
+    \end{column}
+    \begin{column}{0.32\textwidth}
+      \begin{exampleblock}{exampleblock}
+        \small
+        使用 \texttt{exampleblock} 展示正向示例、命令或工作流程。
+      \end{exampleblock}
+    \end{column}
+    \begin{column}{0.32\textwidth}
+      \begin{alertblock}{alertblock}
+        \small
+        使用 \texttt{alertblock} 展示注意事项、风险或重要约束。
+      \end{alertblock}
+    \end{column}
+  \end{columns}
+\end{academicframe}
+
+\begin{academicframe}[定理与 proof 环境会编号]{数学}
+  \begin{theorem}[率失真目标]
+    \normalfont
+    设 $x$ 为源样本，$\hat{x}$ 为其重建结果。学习式压缩中的典型
+    优化目标可写为
+    \[
+      \mathcal{L}(\theta)=
+      \mathbb{E}_{x\sim p_{\mathrm{data}}}
+      \left[R_{\theta}(x)+\lambda d(x,\hat{x})\right].
+    \]
+  \end{theorem}
+
+  \begin{proof}
+    \normalfont
+    该表达式结合了期望码率项与失真惩罚项；
+    $\lambda$ 用于选择率失真曲线上的工作点。
+  \end{proof}
+\end{academicframe}
+
+\begin{academicframe}[Caption 与紧凑表格内容]{表格}
+  \begin{table}
+    \centering
+    \caption{使用主题 caption 样式的示例结果表。}
+    \begin{tabular}{lccc}
+      \toprule
+      方法 & Precision & Recall & F1 Score \\
+      \midrule
+      Baseline & 0.82 & 0.78 & 0.80 \\
+      Calibrated & 0.87 & 0.84 & 0.85 \\
+      Proposed & 0.91 & 0.88 & 0.89 \\
+      \bottomrule
+    \end{tabular}
+  \end{table}
+
+  \vspace{0.4em}
+  \begin{exampleblock}{Caption 设置}
+    \small
+    主题启用带编号的 caption：
+    \texttt{\textbackslash setbeamertemplate\{caption\}[numbered]}。
+  \end{exampleblock}
+\end{academicframe}
+
+\section{参考}
+
+\begin{academicframe}[常用命令集中速查]{命令清单}
+  \scriptsize
+  \begin{tabular}{lll}
+    \toprule
+    类别 & 命令 & 常见用途 \\
+    \midrule
+    元信息 &
+      \texttt{\textbackslash shorttitle}, \texttt{\textbackslash shortauthor}, \texttt{\textbackslash affiliation}, \texttt{\textbackslash email} &
+      标题页与页脚文本 \\
+    颜色 &
+      \texttt{\textbackslash setthemecolor}, \texttt{\textbackslash setlinkcolor}, \texttt{\textbackslash setcitecolor}, \texttt{\textbackslash seturlcolor} &
+      主题与超链接配色 \\
+    布局 &
+      \texttt{\textbackslash usemodernacademiclayout}, \texttt{\textbackslash setslidemargins} &
+      全局布局默认值 \\
+    区域 &
+      \texttt{\textbackslash setcontentpageregionlayout}, \texttt{\textbackslash setcontentpagelayout} &
+      Header/body/footer 几何 \\
+    Header &
+      \texttt{\textbackslash setcontentheaderlayout}, \texttt{\textbackslash setframeheaderlayout} &
+      页面标题间距 \\
+    Footer &
+      \texttt{\textbackslash setfooterlayout}, \texttt{\textbackslash showcontentpagefooter}, \texttt{\textbackslash hidecontentpagefooter} &
+      页脚尺寸与可见性 \\
+    Logo &
+      \texttt{\textbackslash titlelogocontent}, \texttt{\textbackslash showlogointitle}, \texttt{\textbackslash showlogoinheader} &
+      标题页与 header Logo \\
+    章节 &
+      \texttt{\textbackslash setsectionname}, \texttt{\textbackslash showsectionframes}, \texttt{\textbackslash hidesectionframes} &
+      章节分隔页 \\
+    结束页 &
+      \texttt{\textbackslash tailpage[标题]\{...\}} &
+      末尾联系方式页 \\
+    \bottomrule
+  \end{tabular}
+\end{academicframe}
+
+\tailpage[谢谢]{%
+  示例甲\\
+  \texttt{team@example.edu}\\[0.8em]
+  NTU AI4X 研究组
+}
+
+\end{document}

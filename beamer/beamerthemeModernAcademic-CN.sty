@@ -1,0 +1,111 @@
+%% beamerthemeModernAcademic-CN.sty
+%% ModernAcademic Beamer theme for Chinese academic presentations.
+%% Designed for XeLaTeX compilation with ctexbeamer.
+%% License: MIT
+
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{beamerthemeModernAcademic-CN}[2026/05/18 v1.0 ModernAcademic Beamer Theme (Chinese)]
+
+%% ============================================================================
+%% 1. THEME ROLE
+%% ============================================================================
+
+% Chinese Beamer wrapper for the shared ModernAcademic presentation foundation.
+% This file mirrors the English wrapper defaults while keeping Chinese labels
+% and XeLaTeX/ctex-friendly font setup.
+
+%% ============================================================================
+%% 2. REQUIRED PACKAGES
+%% ============================================================================
+
+\RequirePackage{iftex}
+\ifXeTeX
+  \RequirePackage{fontspec}
+  \RequirePackage{amsmath}
+  \RequirePackage{amssymb}
+  \RequirePackage{newpxmath}
+  \RequirePackage[varqu,varl]{inconsolata}
+  \IfFontExistsTF{TeX Gyre Heros}{%
+    \setsansfont{TeX Gyre Heros}[Scale=MatchLowercase]%
+  }{}
+  \IfFontExistsTF{TeX Gyre Pagella}{%
+    \setmainfont{TeX Gyre Pagella}[Scale=MatchLowercase]%
+  }{}
+  \IfFontExistsTF{Inconsolatazi4}{%
+    \setmonofont{Inconsolatazi4}[Scale=MatchLowercase]%
+  }{}
+\else
+  \PackageWarningNoLine{beamerthemeModernAcademic-CN}{%
+    The Chinese theme is intended for XeLaTeX with ctexbeamer%
+  }%
+\fi
+
+%% ============================================================================
+%% 3. SHARED BEAMER THEME FOUNDATION
+%% ============================================================================
+
+\RequirePackage{beamerthemeModernAcademicBase}
+
+%% ============================================================================
+%% 4. TEMPLATE COLOR CONFIGURATION
+%% ============================================================================
+
+\setthemecolor{1a2a6c}
+\setlinkcolor{1a2a6c}
+\setcitecolor{2d5a27}
+\seturlcolor{5c3566}
+
+%% ============================================================================
+%% 5. TEMPLATE LAYOUT CONFIGURATION
+%% ============================================================================
+
+\usemodernacademiclayout{standard}
+
+\settitlepageregionlayout{0}{1}{0}{10mm}{10mm}{10mm}{10mm}{2.5mm}{2.5mm}
+\setsectionpageregionlayout{0.15}{0.75}{0.05}{10mm}{10mm}{10mm}{10mm}{2.5mm}{2.5mm}
+\setcontentpageregionlayout{0.1}{0.85}{0.05}{2.5mm}{2.5mm}{2.5mm}{2.5mm}{2.5mm}{2.5mm}
+\settailpageregionlayout{0}{1}{0}{10mm}{10mm}{10mm}{10mm}{2.5mm}{2.5mm}
+
+\hidetitlepageheader
+\hidetitlepagefooter
+\hidesectionpageheader
+\hidesectionpagefooter
+\showcontentpageheader
+\showcontentpagefooter
+\hidetailpageheader
+\hidetailpagefooter
+
+\settitlepageheaderlayout{3em}{3pt}{2pt}{3pt}
+\setcontentheaderlayout{3em}{1.5ex}{2em}{1ex}{0.8ex}{1.2mm}{3.2mm}
+\setfooterlayout{3.4ex}{1.2ex}
+
+%% ============================================================================
+%% 6. TITLE LOGO CONFIGURATION
+%% ============================================================================
+
+\templatename{ModernAcademic-CN\\Beamer Theme}
+
+\IfFileExists{../assets/logo.png}{%
+    \titlelogocontent{\includegraphics[height=2.4em]{../assets/logo.png}}%
+    \showlogointitle
+}{%
+    \hidelogointitle
+}
+\hidelogoinheader
+
+\settitlelogogap{1em}
+
+%% ============================================================================
+%% 7. SECTION DIVIDER CONFIGURATION
+%% ============================================================================
+
+\setsectionname{章节}
+\showsectionframes
+
+%% ============================================================================
+%% 8. CHINESE LABEL DEFAULTS
+%% ============================================================================
+
+\setabstractname{摘要}
+
+\endinput
